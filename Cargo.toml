@@ -1,7 +1,14 @@
 [package]
 name = "pugio"
+authors = ["Michael Yang"]
+description = "A command-line dependency binary size graph visualisation tool"
 version = "0.1.0"
 edition = "2024"
+license = "BSD-2-Clause-Patent"
+repository = "https://github.com/my4ng/pugio"
+keywords = ["bloat", "perf", "dot"]
+categories = ["command-line-utilities", "development-tools", "visualization"]
+rust-version = "1.88"
 
 [dependencies]
 anyhow = "1"

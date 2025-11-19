@@ -8,15 +8,15 @@ It is important to note that the sizes is and will always be only an *estimation
 
 `pugio --release --gradient blues -t 1024 -o pugio.svg`
 
-![pugio](pugio.svg)
+![pugio](images/pugio.svg)
 
 `pugio --bin rg --release --scheme dep-count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o ripgrep.svg`
 
-![ripgrep](ripgrep.svg)
+![ripgrep](images/ripgrep.svg)
 
 `pugio --release --gradient reds -t 1 --dark-mode --std -o hyperfine.svg`
 
-![hyperfine](hyperfine.svg)
+![hyperfine](images/hyperfine.svg)
 
 ## Dependencies
 

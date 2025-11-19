@@ -289,19 +289,13 @@ fn main() -> anyhow::Result<()> {
                 hsla[2] = 1.0 - hsla[2];
                 node_color = colorgrad::Color::from_hsla(hsla[0], hsla[1], hsla[2], hsla[3])
             }
+            let node_color = node_color.to_css_hex();
 
             format!(
-                r#"label = "{}" tooltip = "{}" width = {} fillcolor= "{}""#,
-                n,
-                tooltip,
-                width,
-                node_color.to_css_hex()
+                r#"label = "{n}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
             )
         } else {
-            format!(
-                r#"label = "{}" tooltip = "{}" width = {} "#,
-                n, tooltip, width
-            )
+            format!(r#"label = "{n}" tooltip = "{tooltip}" width = {width} "#,)
         }
     };
 
