@@ -8,6 +8,10 @@
 
 ![pugio](pugio.svg)
 
+`pugio --bin rg --release --gradient purples -t 4096 --gamma 0.3 -o ripgrep.svg`
+
+![ripgrep](ripgrep.svg)
+
 ## Dependencies
 
 - `cargo`: `cargo-tree` command is now part of the cargo binary

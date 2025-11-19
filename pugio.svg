@@ -6,14 +6,14 @@
 <!-- Pages: 1 -->
 <svg width="1184pt" height="672pt"
  viewBox="0.00 0.00 1184.00 672.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(72 599.67)">
-<polygon fill="white" stroke="none" points="-72,72 -72,-599.67 1111.5,-599.67 1111.5,72 -72,72"/>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(72 600.4)">
+<polygon fill="white" stroke="none" points="-72,72 -72,-600.4 1111.5,-600.4 1111.5,72 -72,72"/>
 <!-- 0 -->
 <g id="node1" class="node">
 <title>0</title>
-<g id="a_node1"><a xlink:title="45.35 KiB">
-<ellipse fill="#08306b" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="487.5" cy="-488.38" rx="39.28" ry="39.28"/>
-<text xml:space="preserve" text-anchor="middle" x="487.5" y="-483.13" font-family="monospace" font-size="15.00">pugio</text>
+<g id="a_node1"><a xlink:title="46.53 KiB">
+<ellipse fill="#08306b" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="487.5" cy="-488.75" rx="39.65" ry="39.65"/>
+<text xml:space="preserve" text-anchor="middle" x="487.5" y="-483.5" font-family="monospace" font-size="15.00">pugio</text>
 </a>
 </g>
 </g>
@@ -21,7 +21,7 @@
 <g id="node2" class="node">
 <title>1</title>
 <g id="a_node2"><a xlink:title="7.09 KiB">
-<ellipse fill="#a6cde4" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="214.5" cy="-373.46" rx="15.94" ry="15.94"/>
+<ellipse fill="#a5cce4" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="214.5" cy="-373.46" rx="15.94" ry="15.94"/>
 <text xml:space="preserve" text-anchor="middle" x="214.5" y="-368.21" font-family="monospace" font-size="15.00">anyhow</text>
 </a>
 </g>
@@ -30,8 +30,8 @@
 <g id="edge1" class="edge">
 <title>0&#45;&gt;1</title>
 <g id="a_edge1"><a xlink:title="pugio &#45;&gt; anyhow">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M450.98,-474.53C405.86,-458.32 327.05,-428.97 261.5,-399.1 253.18,-395.31 244.26,-390.76 236.44,-386.6"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="237.85,-384.18 229.48,-382.84 235.18,-389.1 237.85,-384.18"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M450.59,-474.68C405.41,-458.36 326.87,-428.94 261.5,-399.1 253.19,-395.3 244.26,-390.75 236.44,-386.59"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="237.85,-384.17 229.48,-382.83 235.19,-389.1 237.85,-384.17"/>
 </a>
 </g>
 </g>
@@ -39,7 +39,7 @@
 <g id="node3" class="node">
 <title>2</title>
 <g id="a_node3"><a xlink:title="0 B">
-<ellipse fill="#0a4b90" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="300.5" cy="-373.46" rx="0.36" ry="0.36"/>
+<ellipse fill="#0a488e" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="300.5" cy="-373.46" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="300.5" y="-368.21" font-family="monospace" font-size="15.00">clap</text>
 </a>
 </g>
@@ -48,8 +48,8 @@
 <g id="edge2" class="edge">
 <title>0&#45;&gt;2</title>
 <g id="a_edge2"><a xlink:title="pugio &#45;&gt; clap">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M454.14,-467.81C424.05,-450.08 378.64,-423.13 339.5,-399.1 328.79,-392.52 316.55,-384.75 308.69,-379.72"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="310.34,-377.45 302.09,-375.48 307.31,-382.16 310.34,-377.45"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M453.86,-467.91C423.77,-450.09 378.53,-423.11 339.5,-399.1 328.8,-392.51 316.56,-384.74 308.69,-379.71"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="310.34,-377.44 302.09,-375.48 307.31,-382.15 310.34,-377.44"/>
 </a>
 </g>
 </g>
@@ -57,7 +57,7 @@
 <g id="node7" class="node">
 <title>6</title>
 <g id="a_node7"><a xlink:title="15.28 KiB">
-<ellipse fill="#509bcb" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="400.5" cy="-373.46" rx="24.59" ry="24.59"/>
+<ellipse fill="#59a1cf" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="400.5" cy="-373.46" rx="24.59" ry="24.59"/>
 <text xml:space="preserve" text-anchor="middle" x="400.5" y="-368.21" font-family="monospace" font-size="15.00">colorgrad</text>
 </a>
 </g>
@@ -66,8 +66,8 @@
 <g id="edge6" class="edge">
 <title>0&#45;&gt;6</title>
 <g id="a_edge6"><a xlink:title="pugio &#45;&gt; colorgrad">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M464.19,-457.12C450.57,-439.44 433.56,-417.37 420.54,-400.47"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="423.08,-399.18 415.98,-394.55 418.65,-402.6 423.08,-399.18"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M463.96,-457.09C450.34,-439.36 433.4,-417.29 420.44,-400.42"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="423,-399.15 415.9,-394.51 418.55,-402.57 423,-399.15"/>
 </a>
 </g>
 </g>
@@ -75,7 +75,7 @@
 <g id="node11" class="node">
 <title>10</title>
 <g id="a_node11"><a xlink:title="1.23 KiB">
-<ellipse fill="#9cc8e1" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="487.5" cy="-98.32" rx="4.18" ry="4.18"/>
+<ellipse fill="#b4d3e9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="487.5" cy="-98.32" rx="4.18" ry="4.18"/>
 <text xml:space="preserve" text-anchor="middle" x="487.5" y="-93.07" font-family="monospace" font-size="15.00">humansize</text>
 </a>
 </g>
@@ -84,8 +84,8 @@
 <g id="edge11" class="edge">
 <title>0&#45;&gt;10</title>
 <g id="a_edge11"><a xlink:title="pugio &#45;&gt; humansize">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M487.5,-449.11C487.5,-364.32 487.5,-164.02 487.5,-111.9"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="490.3,-111.99 487.5,-103.99 484.7,-111.99 490.3,-111.99"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M487.5,-449.44C487.5,-364.57 487.5,-164.09 487.5,-111.91"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="490.3,-112 487.5,-104 484.7,-112 490.3,-112"/>
 </a>
 </g>
 </g>
@@ -93,7 +93,7 @@
 <g id="node12" class="node">
 <title>11</title>
 <g id="a_node12"><a xlink:title="2.40 KiB">
-<ellipse fill="#95c5e0" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="560.5" cy="-373.46" rx="7.35" ry="7.35"/>
+<ellipse fill="#9bc8e1" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="560.5" cy="-373.46" rx="7.35" ry="7.35"/>
 <text xml:space="preserve" text-anchor="middle" x="560.5" y="-368.21" font-family="monospace" font-size="15.00">open</text>
 </a>
 </g>
@@ -102,8 +102,8 @@
 <g id="edge13" class="edge">
 <title>0&#45;&gt;11</title>
 <g id="a_edge13"><a xlink:title="pugio &#45;&gt; open">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M508.22,-455.32C522.6,-433.08 541.02,-404.59 551.72,-388.04"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="554.06,-389.58 556.05,-381.34 549.35,-386.54 554.06,-389.58"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M508.42,-455.28C522.79,-432.98 541.12,-404.53 551.77,-388.01"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="554.09,-389.57 556.07,-381.33 549.38,-386.54 554.09,-389.57"/>
 </a>
 </g>
 </g>
@@ -111,7 +111,7 @@
 <g id="node17" class="node">
 <title>17</title>
 <g id="a_node17"><a xlink:title="5.79 KiB">
-<ellipse fill="#88bedc" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="782.5" cy="-373.46" rx="14" ry="14"/>
+<ellipse fill="#86bddc" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="782.5" cy="-373.46" rx="14" ry="14"/>
 <text xml:space="preserve" text-anchor="middle" x="782.5" y="-368.21" font-family="monospace" font-size="15.00">petgraph</text>
 </a>
 </g>
@@ -120,8 +120,8 @@
 <g id="edge19" class="edge">
 <title>0&#45;&gt;17</title>
 <g id="a_edge19"><a xlink:title="pugio &#45;&gt; petgraph">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M523.67,-473.53C585.7,-449.79 710.5,-402.02 760.78,-382.77"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="761.63,-385.44 768.1,-379.97 759.63,-380.21 761.63,-385.44"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M523.97,-473.74C586.11,-449.88 710.67,-402.04 760.83,-382.78"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="761.67,-385.46 768.14,-379.97 759.66,-380.23 761.67,-385.46"/>
 </a>
 </g>
 </g>
@@ -129,7 +129,7 @@
 <g id="node21" class="node">
 <title>24</title>
 <g id="a_node21"><a xlink:title="16.62 KiB">
-<ellipse fill="#7bb7d9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="954.5" cy="-373.46" rx="25.64" ry="25.64"/>
+<ellipse fill="#7ab6d9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="954.5" cy="-373.46" rx="25.64" ry="25.64"/>
 <text xml:space="preserve" text-anchor="middle" x="954.5" y="-368.21" font-family="monospace" font-size="15.00">serde_json</text>
 </a>
 </g>
@@ -138,8 +138,8 @@
 <g id="edge23" class="edge">
 <title>0&#45;&gt;24</title>
 <g id="a_edge23"><a xlink:title="pugio &#45;&gt; serde_json">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M525.32,-478.24C614.3,-456.72 835.76,-403.17 920.65,-382.64"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="921.19,-385.39 928.31,-380.79 919.87,-379.95 921.19,-385.39"/>
+<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M525.72,-478.48C614.88,-456.85 835.5,-403.33 920.42,-382.72"/>
+<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="920.98,-385.47 928.09,-380.86 919.66,-380.03 920.98,-385.47"/>
 </a>
 </g>
 </g>
@@ -147,7 +147,7 @@
 <g id="node4" class="node">
 <title>3</title>
 <g id="a_node4"><a xlink:title="310.64 KiB">
-<ellipse fill="#0a4b90" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="127.5" cy="-229.57" rx="68.25" ry="68.25"/>
+<ellipse fill="#0a488e" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="127.5" cy="-229.57" rx="68.25" ry="68.25"/>
 <text xml:space="preserve" text-anchor="middle" x="127.5" y="-224.32" font-family="monospace" font-size="15.00">clap_builder</text>
 </a>
 </g>
@@ -165,7 +165,7 @@
 <g id="node5" class="node">
 <title>4</title>
 <g id="a_node5"><a xlink:title="2.10 KiB">
-<ellipse fill="#c2daed" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="39.5" cy="-98.32" rx="6.61" ry="6.61"/>
+<ellipse fill="#c1daed" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="39.5" cy="-98.32" rx="6.61" ry="6.61"/>
 <text xml:space="preserve" text-anchor="middle" x="39.5" y="-93.07" font-family="monospace" font-size="15.00">anstyle</text>
 </a>
 </g>
@@ -183,7 +183,7 @@
 <g id="node6" class="node">
 <title>5</title>
 <g id="a_node6"><a xlink:title="3.94 KiB">
-<ellipse fill="#b5d4e9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="148.5" cy="-98.32" rx="10.73" ry="10.73"/>
+<ellipse fill="#b4d4e9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="148.5" cy="-98.32" rx="10.73" ry="10.73"/>
 <text xml:space="preserve" text-anchor="middle" x="148.5" y="-93.07" font-family="monospace" font-size="15.00">clap_lex</text>
 </a>
 </g>
@@ -201,7 +201,7 @@
 <g id="node8" class="node">
 <title>7</title>
 <g id="a_node8"><a xlink:title="24.18 KiB">
-<ellipse fill="#69acd4" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="291.5" cy="-229.57" rx="30.53" ry="30.53"/>
+<ellipse fill="#70b0d6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="291.5" cy="-229.57" rx="30.53" ry="30.53"/>
 <text xml:space="preserve" text-anchor="middle" x="291.5" y="-224.32" font-family="monospace" font-size="15.00">csscolorparser</text>
 </a>
 </g>
@@ -219,7 +219,7 @@
 <g id="node10" class="node">
 <title>9</title>
 <g id="a_node10"><a xlink:title="8.38 KiB">
-<ellipse fill="#a1cae3" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="400.5" cy="-17.66" rx="17.66" ry="17.66"/>
+<ellipse fill="#9fcae2" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="400.5" cy="-17.66" rx="17.66" ry="17.66"/>
 <text xml:space="preserve" text-anchor="middle" x="400.5" y="-12.41" font-family="monospace" font-size="15.00">libm</text>
 </a>
 </g>
@@ -237,7 +237,7 @@
 <g id="node9" class="node">
 <title>8</title>
 <g id="a_node9"><a xlink:title="0 B">
-<ellipse fill="#a1cae3" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="300.5" cy="-98.32" rx="0.36" ry="0.36"/>
+<ellipse fill="#bcd7eb" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="300.5" cy="-98.32" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="300.5" y="-93.07" font-family="monospace" font-size="15.00">num_traits</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <g id="node13" class="node">
 <title>12</title>
 <g id="a_node13"><a xlink:title="3.12 KiB">
-<ellipse fill="#a4cce4" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="560.5" cy="-229.57" rx="9.02" ry="9.02"/>
+<ellipse fill="#add0e6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="560.5" cy="-229.57" rx="9.02" ry="9.02"/>
 <text xml:space="preserve" text-anchor="middle" x="560.5" y="-224.32" font-family="monospace" font-size="15.00">is_wsl</text>
 </a>
 </g>
@@ -291,7 +291,7 @@
 <g id="node16" class="node">
 <title>16</title>
 <g id="a_node16"><a xlink:title="1.72 KiB">
-<ellipse fill="#c5dcef" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="664.5" cy="-229.57" rx="5.59" ry="5.59"/>
+<ellipse fill="#c4dbee" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="664.5" cy="-229.57" rx="5.59" ry="5.59"/>
 <text xml:space="preserve" text-anchor="middle" x="664.5" y="-224.32" font-family="monospace" font-size="15.00">pathdiff</text>
 </a>
 </g>
@@ -309,7 +309,7 @@
 <g id="node14" class="node">
 <title>13</title>
 <g id="a_node14"><a xlink:title="39 B">
-<ellipse fill="#c1daed" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="609.5" cy="-98.32" rx="0.36" ry="0.36"/>
+<ellipse fill="#cadff0" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="609.5" cy="-98.32" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="609.5" y="-93.07" font-family="monospace" font-size="15.00">is_docker</text>
 </a>
 </g>
@@ -327,7 +327,7 @@
 <g id="node15" class="node">
 <title>14</title>
 <g id="a_node15"><a xlink:title="2.16 KiB">
-<ellipse fill="#c1daed" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="652.5" cy="-17.66" rx="6.75" ry="6.75"/>
+<ellipse fill="#c1d9ed" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="652.5" cy="-17.66" rx="6.75" ry="6.75"/>
 <text xml:space="preserve" text-anchor="middle" x="652.5" y="-12.41" font-family="monospace" font-size="15.00">once_cell</text>
 </a>
 </g>
@@ -354,7 +354,7 @@
 <g id="node18" class="node">
 <title>19</title>
 <g id="a_node18"><a xlink:title="5.18 KiB">
-<ellipse fill="#afd1e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="782.5" cy="-229.57" rx="12.98" ry="12.98"/>
+<ellipse fill="#aed0e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="782.5" cy="-229.57" rx="12.98" ry="12.98"/>
 <text xml:space="preserve" text-anchor="middle" x="782.5" y="-224.32" font-family="monospace" font-size="15.00">hashbrown</text>
 </a>
 </g>
@@ -372,7 +372,7 @@
 <g id="node19" class="node">
 <title>21</title>
 <g id="a_node19"><a xlink:title="0 B">
-<ellipse fill="#afd1e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="900.5" cy="-229.57" rx="0.36" ry="0.36"/>
+<ellipse fill="#aed0e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="900.5" cy="-229.57" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="900.5" y="-224.32" font-family="monospace" font-size="15.00">indexmap</text>
 </a>
 </g>
@@ -390,7 +390,7 @@
 <g id="node20" class="node">
 <title>23</title>
 <g id="a_node20"><a xlink:title="5.18 KiB">
-<ellipse fill="#afd1e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="900.5" cy="-98.32" rx="12.98" ry="12.98"/>
+<ellipse fill="#aed0e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="900.5" cy="-98.32" rx="12.98" ry="12.98"/>
 <text xml:space="preserve" text-anchor="middle" x="900.5" y="-93.07" font-family="monospace" font-size="15.00">hashbrown</text>
 </a>
 </g>
@@ -408,7 +408,7 @@
 <g id="node22" class="node">
 <title>26</title>
 <g id="a_node22"><a xlink:title="5.31 KiB">
-<ellipse fill="#aed1e7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="1004.5" cy="-229.57" rx="13.21" ry="13.21"/>
+<ellipse fill="#add0e6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="1004.5" cy="-229.57" rx="13.21" ry="13.21"/>
 <text xml:space="preserve" text-anchor="middle" x="1004.5" y="-224.32" font-family="monospace" font-size="15.00">memchr</text>
 </a>
 </g>
