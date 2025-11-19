@@ -10,6 +10,7 @@ pub fn cum_sums(
     graph: &StableGraph<String, ()>,
     map: &HashMap<String, usize>,
 ) -> (Vec<usize>, f32) {
+    // TODO: currently the same size is used for all nodes with the same name, change?
     let mut cum_sums: Vec<_> = graph
         .node_weights()
         .map(|n| map.get(n).copied().unwrap_or_default())

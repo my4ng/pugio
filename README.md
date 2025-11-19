@@ -4,13 +4,17 @@
 
 ## Example
 
-`pugio --release --gradient blues -t 1024 --dark-mode -o pugio.svg`
+`pugio --release --gradient blues -t 1024 -o pugio.svg`
 
 ![pugio](pugio.svg)
 
 `pugio --bin rg --release --scheme dep_count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o ripgrep.svg`
 
 ![ripgrep](ripgrep.svg)
+
+`pugio --release --gradient reds -t 1 --dark-mode --std -o hyperfine.svg`
+
+![hyperfine](hyperfine.svg)
 
 ## Dependencies
 
