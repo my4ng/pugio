@@ -184,6 +184,7 @@ struct Args {
     /// Do not open output svg file
     #[arg(long)]
     no_open: bool,
+    // TODO: Add filter option
 }
 
 fn output_svg(
@@ -196,6 +197,7 @@ fn output_svg(
     let font_size = node_count_factor * 3.0 + 15.0;
     let arrow_size = node_count_factor * 0.2 + 0.8;
     let edge_width = node_count_factor * 0.4 + 1.2;
+    let node_border_width = edge_width * 0.75;
 
     // TODO: Customise style
     let mut child = Command::new("dot")
@@ -205,6 +207,7 @@ fn output_svg(
         .arg("-Gpad=1.0")
         .arg("-Nshape=circle")
         .arg("-Ncolor=#0000009F")
+        .arg(format!("-Npenwidth={node_border_width}"))
         .arg("-Nstyle=filled")
         .arg("-Nfixedsize=shape")
         .arg("-Nfontname=monospace")
