@@ -30,8 +30,11 @@ fn cum_sums(graph: &StableGraph<String, ()>, map: &HashMap<String, usize>) -> (V
     nodes.reverse();
 
     for node in nodes {
-        for child in graph.neighbors(node) {
-            cum_sums[node.index()] += cum_sums[child.index()];
+        let sources: Vec<_> = graph
+            .neighbors_directed(node, petgraph::Direction::Incoming)
+            .collect();
+        for source in &sources {
+            cum_sums[source.index()] += cum_sums[node.index()] / sources.len();
         }
     }
 
@@ -45,8 +48,8 @@ fn dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
     nodes.reverse();
 
     for node in nodes {
-        for child in graph.neighbors(node) {
-            dep_counts[node.index()] += dep_counts[child.index()] + 1;
+        for target in graph.neighbors(node) {
+            dep_counts[node.index()] += dep_counts[target.index()] + 1;
         }
     }
 
@@ -57,8 +60,8 @@ fn rev_dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
     let mut rev_dep_counts: Vec<_> = vec![0; graph.node_count()];
 
     for node in Topo::new(&graph).iter(&graph) {
-        for child in graph.neighbors(node) {
-            rev_dep_counts[child.index()] += 1;
+        for target in graph.neighbors(node) {
+            rev_dep_counts[target.index()] += 1;
         }
     }
 
@@ -250,7 +253,7 @@ fn main() -> anyhow::Result<()> {
 
     let options = CargoOptions {
         package: args.package,
-        binary: args.binary,
+        binary: args.binary.clone(),
         features: args.features,
         all_features: args.all_features,
         no_default_features: args.no_default_features,
@@ -295,7 +298,12 @@ fn main() -> anyhow::Result<()> {
     }
 
     let binding = |_, (i, n): (NodeIndex, &String)| {
-        let size = size_map.get(n).copied().unwrap_or_default();
+        let mut size = size_map.get(n).copied().unwrap_or_default();
+        if let Some(bin) = args.binary.as_ref()
+            && i.index() == 0
+        {
+            size += size_map.get(bin).copied().unwrap_or_default();
+        }
         let width = (size as f32 / 4096.0 + 1.0).log10();
         let tooltip = humansize::format_size(size, humansize::BINARY);
 
