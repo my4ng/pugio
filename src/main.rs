@@ -83,8 +83,7 @@ enum NodeColoring {
     None,
 }
 
-#[derive(Default, Clone, Copy, strum::EnumString)]
-#[strum(serialize_all = "snake_case")]
+#[derive(Default, Clone)]
 enum NodeColoringGradient {
     #[default]
     Reds,
@@ -92,6 +91,25 @@ enum NodeColoringGradient {
     Purples,
     Greens,
     Blues,
+    Custom(BasisGradient),
+}
+
+impl std::str::FromStr for NodeColoringGradient {
+    type Err = colorgrad::GradientBuilderError;
+
+    fn from_str(s: &str) -> Result<NodeColoringGradient, Self::Err> {
+        match s {
+            "reds" => Ok(Self::Reds),
+            "oranges" => Ok(Self::Oranges),
+            "purples" => Ok(Self::Purples),
+            "greens" => Ok(Self::Greens),
+            "blues" => Ok(Self::Blues),
+            _ => colorgrad::GradientBuilder::new()
+                .css(s)
+                .build()
+                .map(Self::Custom),
+        }
+    }
 }
 
 impl From<NodeColoringGradient> for BasisGradient {
@@ -103,6 +121,7 @@ impl From<NodeColoringGradient> for BasisGradient {
             NodeColoringGradient::Purples => purples(),
             NodeColoringGradient::Greens => greens(),
             NodeColoringGradient::Blues => blues(),
+            NodeColoringGradient::Custom(gradient) => gradient,
         }
     }
 }
