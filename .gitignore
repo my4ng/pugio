@@ -1,3 +1,3 @@
 /target
-*.gv
-*.svg
+output.gv
+output.svg
