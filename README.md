@@ -8,7 +8,7 @@
 
 ![pugio](pugio.svg)
 
-`pugio --bin rg --release --scheme dep_count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o ripgrep.svg`
+`pugio --bin rg --release --scheme dep-count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o ripgrep.svg`
 
 ![ripgrep](ripgrep.svg)
 

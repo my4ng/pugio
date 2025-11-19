@@ -22,7 +22,7 @@ use crate::{
 };
 
 #[derive(Default, Clone, Copy, strum::EnumString)]
-#[strum(serialize_all = "snake_case")]
+#[strum(serialize_all = "kebab-case")]
 enum NodeColoringScheme {
     #[default]
     CumSum,
@@ -106,14 +106,19 @@ struct Args {
     has_std: bool,
 
     /// Color scheme of nodes
-    #[arg(short, long)]
+    ///  - "cum-sum": cumulative sum of the size of a node and its dependencies
+    ///  - "dep-count": dependency count; number of transitive dependency relations from a node
+    ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
+    #[arg(short, long, verbatim_doc_comment)]
     scheme: Option<NodeColoringScheme>,
 
     /// Color gradient of nodes
-    #[arg(short, long)]
+    ///  - "reds", "oranges", "purples", "greens", "blues"
+    ///  - custom CSS gradient format, e.g. "#fff, 75%, #00f"
+    #[arg(short, long, verbatim_doc_comment)]
     gradient: Option<NodeColoringGradient>,
 
-    /// Color gamma of nodes
+    /// Color gamma of nodes, between 0.0 and 1.0
     #[arg(long)]
     gamma: Option<f32>,
 
@@ -237,7 +242,7 @@ fn main() -> anyhow::Result<()> {
             };
 
             if let Some(gamma_) = args.gamma {
-                gamma = gamma_;
+                gamma = gamma_.clamp(0.0, 1.0);
             }
 
             let max = values.iter().copied().max().unwrap();
