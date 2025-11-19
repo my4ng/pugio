@@ -7,13 +7,13 @@
 <svg width="1400pt" height="1304pt"
  viewBox="0.00 0.00 1400.00 1304.00" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
 <g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(72 1232.37)">
-<polygon fill="white" stroke="none" points="-72,72 -72,-1232.37 1327.51,-1232.37 1327.51,72 -72,72"/>
+<polygon fill="#000000" stroke="none" points="-72,72 -72,-1232.37 1327.51,-1232.37 1327.51,72 -72,72"/>
 <!-- 0 -->
 <g id="node1" class="node">
 <title>0</title>
 <g id="a_node1"><a xlink:title="182.16 KiB">
-<ellipse fill="#3f007d" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="647" cy="-1100.33" rx="60.04" ry="60.04"/>
-<text xml:space="preserve" text-anchor="middle" x="647" y="-1095.08" font-family="monospace" font-size="15.00">ripgrep</text>
+<ellipse fill="#c182ff" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="647" cy="-1100.33" rx="60.04" ry="60.04"/>
+<text xml:space="preserve" text-anchor="middle" x="647" y="-1095.08" font-family="monospace" font-size="15.00" fill="#ffffff">ripgrep</text>
 </a>
 </g>
 </g>
@@ -21,8 +21,8 @@
 <g id="node2" class="node">
 <title>1</title>
 <g id="a_node2"><a xlink:title="17.31 KiB">
-<ellipse fill="#d9d9ea" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="179" cy="-964.13" rx="26.16" ry="26.16"/>
-<text xml:space="preserve" text-anchor="middle" x="179" y="-958.88" font-family="monospace" font-size="15.00">anyhow</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="179" cy="-964.13" rx="26.16" ry="26.16"/>
+<text xml:space="preserve" text-anchor="middle" x="179" y="-958.88" font-family="monospace" font-size="15.00" fill="#ffffff">anyhow</text>
 </a>
 </g>
 </g>
@@ -30,8 +30,8 @@
 <g id="edge1" class="edge">
 <title>0&#45;&gt;1</title>
 <g id="a_edge1"><a xlink:title="ripgrep &#45;&gt; anyhow">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M588.4,-1087.36C507.27,-1070.01 356.73,-1035 233,-990.29 225.61,-987.62 217.86,-984.32 210.6,-981"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="211.82,-978.48 203.39,-977.6 209.43,-983.55 211.82,-978.48"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M588.4,-1087.36C507.27,-1070.01 356.73,-1035 233,-990.29 225.61,-987.62 217.86,-984.32 210.6,-981"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="211.82,-978.48 203.39,-977.6 209.43,-983.55 211.82,-978.48"/>
 </a>
 </g>
 </g>
@@ -39,8 +39,8 @@
 <g id="node3" class="node">
 <title>2</title>
 <g id="a_node3"><a xlink:title="27.02 KiB">
-<ellipse fill="#9b98c7" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="693" cy="-515.85" rx="32.02" ry="32.02"/>
-<text xml:space="preserve" text-anchor="middle" x="693" y="-510.6" font-family="monospace" font-size="15.00">bstr</text>
+<ellipse fill="#11101d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="693" cy="-515.85" rx="32.02" ry="32.02"/>
+<text xml:space="preserve" text-anchor="middle" x="693" y="-510.6" font-family="monospace" font-size="15.00" fill="#ffffff">bstr</text>
 </a>
 </g>
 </g>
@@ -48,8 +48,8 @@
 <g id="edge2" class="edge">
 <title>0&#45;&gt;2</title>
 <g id="a_edge2"><a xlink:title="ripgrep &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M667.54,-1044.19C682.09,-1002.08 700.33,-942.24 708,-887.98 724.91,-768.4 709.05,-625.15 699.32,-556.86"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="702.12,-556.65 698.19,-549.14 696.57,-557.46 702.12,-556.65"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M667.54,-1044.19C682.09,-1002.08 700.33,-942.24 708,-887.98 724.91,-768.4 709.05,-625.15 699.32,-556.86"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="702.12,-556.65 698.19,-549.14 696.57,-557.46 702.12,-556.65"/>
 </a>
 </g>
 </g>
@@ -57,8 +57,8 @@
 <g id="node8" class="node">
 <title>7</title>
 <g id="a_node8"><a xlink:title="0 B">
-<ellipse fill="#562b91" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="554" cy="-964.13" rx="0.36" ry="0.36"/>
-<text xml:space="preserve" text-anchor="middle" x="554" y="-958.88" font-family="monospace" font-size="15.00">grep</text>
+<ellipse fill="#8c67c6" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="554" cy="-964.13" rx="0.36" ry="0.36"/>
+<text xml:space="preserve" text-anchor="middle" x="554" y="-958.88" font-family="monospace" font-size="15.00" fill="#ffffff">grep</text>
 </a>
 </g>
 </g>
@@ -66,8 +66,8 @@
 <g id="edge9" class="edge">
 <title>0&#45;&gt;7</title>
 <g id="a_edge9"><a xlink:title="ripgrep &#45;&gt; grep">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M613.42,-1050.88C593.47,-1022.08 570.05,-988.3 559.57,-973.17"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="561.99,-971.74 555.13,-966.76 557.38,-974.93 561.99,-971.74"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M613.42,-1050.88C593.47,-1022.08 570.05,-988.3 559.57,-973.17"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="561.99,-971.74 555.13,-966.76 557.38,-974.93 561.99,-971.74"/>
 </a>
 </g>
 </g>
@@ -75,8 +75,8 @@
 <g id="node11" class="node">
 <title>12</title>
 <g id="a_node11"><a xlink:title="12.81 KiB">
-<ellipse fill="#dddcec" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="266" cy="-658.6" rx="22.45" ry="22.45"/>
-<text xml:space="preserve" text-anchor="middle" x="266" y="-653.35" font-family="monospace" font-size="15.00">termcolor</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="266" cy="-658.6" rx="22.45" ry="22.45"/>
+<text xml:space="preserve" text-anchor="middle" x="266" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">termcolor</text>
 </a>
 </g>
 </g>
@@ -84,8 +84,8 @@
 <g id="edge46" class="edge">
 <title>0&#45;&gt;12</title>
 <g id="a_edge46"><a xlink:title="ripgrep &#45;&gt; termcolor">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M591.53,-1077.42C519.78,-1046.21 395.96,-982.1 328,-887.98 284.2,-827.31 271.34,-737.37 267.57,-690.52"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="270.37,-690.52 267,-682.74 264.79,-690.92 270.37,-690.52"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M591.53,-1077.42C519.78,-1046.21 395.96,-982.1 328,-887.98 284.2,-827.31 271.34,-737.37 267.57,-690.52"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="270.37,-690.52 267,-682.74 264.79,-690.92 270.37,-690.52"/>
 </a>
 </g>
 </g>
@@ -93,8 +93,8 @@
 <g id="node18" class="node">
 <title>22</title>
 <g id="a_node18"><a xlink:title="10.96 KiB">
-<ellipse fill="#d0d0e6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="53" cy="-658.6" rx="20.62" ry="20.62"/>
-<text xml:space="preserve" text-anchor="middle" x="53" y="-653.35" font-family="monospace" font-size="15.00">serde_json</text>
+<ellipse fill="#0e0d18" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="53" cy="-658.6" rx="20.62" ry="20.62"/>
+<text xml:space="preserve" text-anchor="middle" x="53" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">serde_json</text>
 </a>
 </g>
 </g>
@@ -102,8 +102,8 @@
 <g id="edge45" class="edge">
 <title>0&#45;&gt;22</title>
 <g id="a_edge45"><a xlink:title="ripgrep &#45;&gt; serde_json">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M589.38,-1084.43C531.02,-1067.6 439.79,-1036.41 371,-990.29 235.78,-899.64 113.78,-742.95 70.08,-683.45"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="72.48,-682 65.51,-677.19 67.96,-685.3 72.48,-682"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M589.38,-1084.43C531.02,-1067.6 439.79,-1036.41 371,-990.29 235.78,-899.64 113.78,-742.95 70.08,-683.45"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="72.48,-682 65.51,-677.19 67.96,-685.3 72.48,-682"/>
 </a>
 </g>
 </g>
@@ -111,8 +111,8 @@
 <g id="node20" class="node">
 <title>26</title>
 <g id="a_node20"><a xlink:title="173.81 KiB">
-<ellipse fill="#705ca9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="973" cy="-828.65" rx="59.32" ry="59.32"/>
-<text xml:space="preserve" text-anchor="middle" x="973" y="-823.4" font-family="monospace" font-size="15.00">ignore</text>
+<ellipse fill="#302f56" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="973" cy="-828.65" rx="59.32" ry="59.32"/>
+<text xml:space="preserve" text-anchor="middle" x="973" y="-823.4" font-family="monospace" font-size="15.00" fill="#ffffff">ignore</text>
 </a>
 </g>
 </g>
@@ -120,8 +120,8 @@
 <g id="edge37" class="edge">
 <title>0&#45;&gt;26</title>
 <g id="a_edge37"><a xlink:title="ripgrep &#45;&gt; ignore">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M690.21,-1058.72C737.26,-1014.59 807.62,-948.87 821,-937.98 851.43,-913.2 887.09,-887.62 916.22,-867.54"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="917.74,-869.89 922.75,-863.06 914.57,-865.28 917.74,-869.89"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M690.21,-1058.72C737.26,-1014.59 807.62,-948.87 821,-937.98 851.43,-913.2 887.09,-887.62 916.22,-867.54"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="917.74,-869.89 922.75,-863.06 914.57,-865.28 917.74,-869.89"/>
 </a>
 </g>
 </g>
@@ -129,8 +129,8 @@
 <g id="node24" class="node">
 <title>32</title>
 <g id="a_node24"><a xlink:title="4.10 KiB">
-<ellipse fill="#e8e7f2" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="868" cy="-964.13" rx="11.03" ry="11.03"/>
-<text xml:space="preserve" text-anchor="middle" x="868" y="-958.88" font-family="monospace" font-size="15.00">lexopt</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="868" cy="-964.13" rx="11.03" ry="11.03"/>
+<text xml:space="preserve" text-anchor="middle" x="868" y="-958.88" font-family="monospace" font-size="15.00" fill="#ffffff">lexopt</text>
 </a>
 </g>
 </g>
@@ -138,8 +138,8 @@
 <g id="edge44" class="edge">
 <title>0&#45;&gt;32</title>
 <g id="a_edge44"><a xlink:title="ripgrep &#45;&gt; lexopt">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M697.7,-1068.54C746.86,-1038.7 818.61,-995.13 851.01,-975.45"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="852.11,-978.06 857.5,-971.51 849.21,-973.27 852.11,-978.06"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M697.7,-1068.54C746.86,-1038.7 818.61,-995.13 851.01,-975.45"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="852.11,-978.06 857.5,-971.51 849.21,-973.27 852.11,-978.06"/>
 </a>
 </g>
 </g>
@@ -147,8 +147,8 @@
 <g id="node25" class="node">
 <title>33</title>
 <g id="a_node25"><a xlink:title="17.30 KiB">
-<ellipse fill="#d9d9ea" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="972" cy="-964.13" rx="26.15" ry="26.15"/>
-<text xml:space="preserve" text-anchor="middle" x="972" y="-958.88" font-family="monospace" font-size="15.00">textwrap</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="972" cy="-964.13" rx="26.15" ry="26.15"/>
+<text xml:space="preserve" text-anchor="middle" x="972" y="-958.88" font-family="monospace" font-size="15.00" fill="#ffffff">textwrap</text>
 </a>
 </g>
 </g>
@@ -156,8 +156,8 @@
 <g id="edge47" class="edge">
 <title>0&#45;&gt;33</title>
 <g id="a_edge47"><a xlink:title="ripgrep &#45;&gt; textwrap">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M702.37,-1077.58C756.93,-1055.99 842.55,-1021.66 916,-990.29 923.75,-986.98 932.05,-983.32 939.83,-979.83"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="940.85,-982.44 947,-976.6 938.55,-977.34 940.85,-982.44"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M702.37,-1077.58C756.93,-1055.99 842.55,-1021.66 916,-990.29 923.75,-986.98 932.05,-983.32 939.83,-979.83"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="940.85,-982.44 947,-976.6 938.55,-977.34 940.85,-982.44"/>
 </a>
 </g>
 </g>
@@ -165,8 +165,8 @@
 <g id="node4" class="node">
 <title>3</title>
 <g id="a_node4"><a xlink:title="20.91 KiB">
-<ellipse fill="#d6d6e9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="682" cy="-28.59" rx="28.59" ry="28.59"/>
-<text xml:space="preserve" text-anchor="middle" x="682" y="-23.34" font-family="monospace" font-size="15.00">memchr</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="682" cy="-28.59" rx="28.59" ry="28.59"/>
+<text xml:space="preserve" text-anchor="middle" x="682" y="-23.34" font-family="monospace" font-size="15.00" fill="#ffffff">memchr</text>
 </a>
 </g>
 </g>
@@ -174,8 +174,8 @@
 <g id="edge3" class="edge">
 <title>2&#45;&gt;3</title>
 <g id="a_edge3"><a xlink:title="bstr &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M680.64,-486.53C659.66,-436.76 617.91,-329.84 603,-234.7 594.23,-178.71 581.08,-159.45 603,-107.18 612.83,-83.76 633.55,-63.85 651.31,-50.06"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="652.52,-52.66 657.24,-45.62 649.16,-48.17 652.52,-52.66"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M680.64,-486.53C659.66,-436.76 617.91,-329.84 603,-234.7 594.23,-178.71 581.08,-159.45 603,-107.18 612.83,-83.76 633.55,-63.85 651.31,-50.06"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="652.52,-52.66 657.24,-45.62 649.16,-48.17 652.52,-52.66"/>
 </a>
 </g>
 </g>
@@ -183,8 +183,8 @@
 <g id="node5" class="node">
 <title>4</title>
 <g id="a_node5"><a xlink:title="467.22 KiB">
-<ellipse fill="#6c55a5" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="836" cy="-359.27" rx="74.56" ry="74.56"/>
-<text xml:space="preserve" text-anchor="middle" x="836" y="-354.02" font-family="monospace" font-size="15.00">regex_automata</text>
+<ellipse fill="#0e0d18" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="836" cy="-359.27" rx="74.56" ry="74.56"/>
+<text xml:space="preserve" text-anchor="middle" x="836" y="-354.02" font-family="monospace" font-size="15.00" fill="#ffffff">regex_automata</text>
 </a>
 </g>
 </g>
@@ -192,8 +192,8 @@
 <g id="edge4" class="edge">
 <title>2&#45;&gt;4</title>
 <g id="a_edge4"><a xlink:title="bstr &#45;&gt; regex_automata">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M714.1,-492.04C731.36,-473.39 756.58,-446.12 779.62,-421.22"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="781.43,-423.38 784.81,-415.6 777.32,-419.57 781.43,-423.38"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M714.1,-492.04C731.36,-473.39 756.58,-446.12 779.62,-421.22"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="781.43,-423.38 784.81,-415.6 777.32,-419.57 781.43,-423.38"/>
 </a>
 </g>
 </g>
@@ -201,8 +201,8 @@
 <g id="edge7" class="edge">
 <title>4&#45;&gt;3</title>
 <g id="a_edge7"><a xlink:title="regex_automata &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M816.89,-287.34C799.27,-224.45 773.17,-137.95 755,-107.18 743.2,-87.2 725.43,-68.17 710.38,-53.95"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="712.36,-51.97 704.58,-48.61 708.57,-56.09 712.36,-51.97"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M816.89,-287.34C799.27,-224.45 773.17,-137.95 755,-107.18 743.2,-87.2 725.43,-68.17 710.38,-53.95"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="712.36,-51.97 704.58,-48.61 708.57,-56.09 712.36,-51.97"/>
 </a>
 </g>
 </g>
@@ -210,8 +210,8 @@
 <g id="node6" class="node">
 <title>5</title>
 <g id="a_node6"><a xlink:title="201.90 KiB">
-<ellipse fill="#9995c6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="881" cy="-170.94" rx="61.62" ry="61.62"/>
-<text xml:space="preserve" text-anchor="middle" x="881" y="-165.69" font-family="monospace" font-size="15.00">aho_corasick</text>
+<ellipse fill="#09070d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="881" cy="-170.94" rx="61.62" ry="61.62"/>
+<text xml:space="preserve" text-anchor="middle" x="881" y="-165.69" font-family="monospace" font-size="15.00" fill="#ffffff">aho_corasick</text>
 </a>
 </g>
 </g>
@@ -219,8 +219,8 @@
 <g id="edge5" class="edge">
 <title>4&#45;&gt;5</title>
 <g id="a_edge5"><a xlink:title="regex_automata &#45;&gt; aho_corasick">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M853.27,-286.76C856.96,-271.46 860.86,-255.34 864.52,-240.17"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="867.19,-241.06 866.34,-232.63 861.74,-239.75 867.19,-241.06"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M853.27,-286.76C856.96,-271.46 860.86,-255.34 864.52,-240.17"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="867.19,-241.06 866.34,-232.63 861.74,-239.75 867.19,-241.06"/>
 </a>
 </g>
 </g>
@@ -228,8 +228,8 @@
 <g id="node7" class="node">
 <title>6</title>
 <g id="a_node7"><a xlink:title="232.14 KiB">
-<ellipse fill="#9490c3" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="679" cy="-170.94" rx="63.76" ry="63.76"/>
-<text xml:space="preserve" text-anchor="middle" x="679" y="-165.69" font-family="monospace" font-size="15.00">regex_syntax</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="679" cy="-170.94" rx="63.76" ry="63.76"/>
+<text xml:space="preserve" text-anchor="middle" x="679" y="-165.69" font-family="monospace" font-size="15.00" fill="#ffffff">regex_syntax</text>
 </a>
 </g>
 </g>
@@ -237,8 +237,8 @@
 <g id="edge8" class="edge">
 <title>4&#45;&gt;6</title>
 <g id="a_edge8"><a xlink:title="regex_automata &#45;&gt; regex_syntax">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M788.47,-301.86C768.6,-278.28 745.57,-250.95 725.78,-227.46"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="727.95,-225.69 720.65,-221.37 723.66,-229.29 727.95,-225.69"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M788.47,-301.86C768.6,-278.28 745.57,-250.95 725.78,-227.46"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="727.95,-225.69 720.65,-221.37 723.66,-229.29 727.95,-225.69"/>
 </a>
 </g>
 </g>
@@ -246,8 +246,8 @@
 <g id="edge6" class="edge">
 <title>5&#45;&gt;3</title>
 <g id="a_edge6"><a xlink:title="aho_corasick &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M833.49,-132.15C822.61,-123.77 811,-115.05 800,-107.18 771.27,-86.66 737.52,-64.67 713.49,-49.36"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="715.21,-47.13 706.95,-45.21 712.21,-51.86 715.21,-47.13"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M833.49,-132.15C822.61,-123.77 811,-115.05 800,-107.18 771.27,-86.66 737.52,-64.67 713.49,-49.36"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="715.21,-47.13 706.95,-45.21 712.21,-51.86 715.21,-47.13"/>
 </a>
 </g>
 </g>
@@ -255,8 +255,8 @@
 <g id="node9" class="node">
 <title>8</title>
 <g id="a_node9"><a xlink:title="24.62 KiB">
-<ellipse fill="#8b87bf" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="651" cy="-828.65" rx="30.77" ry="30.77"/>
-<text xml:space="preserve" text-anchor="middle" x="651" y="-823.4" font-family="monospace" font-size="15.00">grep_cli</text>
+<ellipse fill="#2b2a4e" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="651" cy="-828.65" rx="30.77" ry="30.77"/>
+<text xml:space="preserve" text-anchor="middle" x="651" y="-823.4" font-family="monospace" font-size="15.00" fill="#ffffff">grep_cli</text>
 </a>
 </g>
 </g>
@@ -264,8 +264,8 @@
 <g id="edge10" class="edge">
 <title>7&#45;&gt;8</title>
 <g id="a_edge10"><a xlink:title="grep &#45;&gt; grep_cli">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M554.07,-963.04C556.06,-960.3 599.71,-900.23 627.75,-861.64"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="629.97,-863.35 632.41,-855.23 625.44,-860.06 629.97,-863.35"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M554.07,-963.04C556.06,-960.3 599.71,-900.23 627.75,-861.64"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="629.97,-863.35 632.41,-855.23 625.44,-860.06 629.97,-863.35"/>
 </a>
 </g>
 </g>
@@ -273,8 +273,8 @@
 <g id="node12" class="node">
 <title>14</title>
 <g id="a_node12"><a xlink:title="150.06 KiB">
-<ellipse fill="#847eba" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="403" cy="-828.65" rx="57.08" ry="57.08"/>
-<text xml:space="preserve" text-anchor="middle" x="403" y="-823.4" font-family="monospace" font-size="15.00">grep_printer</text>
+<ellipse fill="#373561" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="403" cy="-828.65" rx="57.08" ry="57.08"/>
+<text xml:space="preserve" text-anchor="middle" x="403" y="-823.4" font-family="monospace" font-size="15.00" fill="#ffffff">grep_printer</text>
 </a>
 </g>
 </g>
@@ -282,8 +282,8 @@
 <g id="edge18" class="edge">
 <title>7&#45;&gt;14</title>
 <g id="a_edge18"><a xlink:title="grep &#45;&gt; grep_printer">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M553.89,-963.04C551.1,-960.57 495.36,-911.3 452.44,-873.36"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="454.34,-871.3 446.49,-868.1 450.63,-875.5 454.34,-871.3"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M553.89,-963.04C551.1,-960.57 495.36,-911.3 452.44,-873.36"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="454.34,-871.3 446.49,-868.1 450.63,-875.5 454.34,-871.3"/>
 </a>
 </g>
 </g>
@@ -291,8 +291,8 @@
 <g id="node13" class="node">
 <title>15</title>
 <g id="a_node13"><a xlink:title="190.51 KiB">
-<ellipse fill="#8e8ac0" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="406" cy="-658.6" rx="60.73" ry="60.73"/>
-<text xml:space="preserve" text-anchor="middle" x="406" y="-653.35" font-family="monospace" font-size="15.00">grep_searcher</text>
+<ellipse fill="#1f203b" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="406" cy="-658.6" rx="60.73" ry="60.73"/>
+<text xml:space="preserve" text-anchor="middle" x="406" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">grep_searcher</text>
 </a>
 </g>
 </g>
@@ -300,8 +300,8 @@
 <g id="edge36" class="edge">
 <title>7&#45;&gt;15</title>
 <g id="a_edge36"><a xlink:title="grep &#45;&gt; grep_searcher">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M553.97,-963.05C552.92,-959.66 518.83,-850.41 477,-769.33 467.84,-751.57 456.57,-733.04 445.74,-716.37"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="448.2,-715.02 441.47,-709.87 443.52,-718.09 448.2,-715.02"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M553.97,-963.05C552.92,-959.66 518.83,-850.41 477,-769.33 467.84,-751.57 456.57,-733.04 445.74,-716.37"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="448.2,-715.02 441.47,-709.87 443.52,-718.09 448.2,-715.02"/>
 </a>
 </g>
 </g>
@@ -309,8 +309,8 @@
 <g id="node19" class="node">
 <title>25</title>
 <g id="a_node19"><a xlink:title="51.96 KiB">
-<ellipse fill="#8781bc" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="551" cy="-658.6" rx="41.25" ry="41.25"/>
-<text xml:space="preserve" text-anchor="middle" x="551" y="-653.35" font-family="monospace" font-size="15.00">grep_regex</text>
+<ellipse fill="#1d1d36" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="551" cy="-658.6" rx="41.25" ry="41.25"/>
+<text xml:space="preserve" text-anchor="middle" x="551" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">grep_regex</text>
 </a>
 </g>
 </g>
@@ -318,8 +318,8 @@
 <g id="edge32" class="edge">
 <title>7&#45;&gt;25</title>
 <g id="a_edge32"><a xlink:title="grep &#45;&gt; grep_regex">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M554,-963.08C553.97,-959.62 552.33,-794.58 551.49,-709.38"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="554.29,-709.44 551.41,-701.46 548.69,-709.49 554.29,-709.44"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M554,-963.08C553.97,-959.62 552.33,-794.58 551.49,-709.38"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="554.29,-709.44 551.41,-701.46 548.69,-709.49 554.29,-709.44"/>
 </a>
 </g>
 </g>
@@ -327,8 +327,8 @@
 <g id="edge11" class="edge">
 <title>8&#45;&gt;2</title>
 <g id="a_edge11"><a xlink:title="grep_cli &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M654.95,-798.42C662.51,-742.47 679.03,-620.23 687.6,-556.81"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="690.37,-557.26 688.66,-548.95 684.82,-556.51 690.37,-557.26"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M654.95,-798.42C662.51,-742.47 679.03,-620.23 687.6,-556.81"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="690.37,-557.26 688.66,-548.95 684.82,-556.51 690.37,-557.26"/>
 </a>
 </g>
 </g>
@@ -336,8 +336,8 @@
 <g id="node10" class="node">
 <title>9</title>
 <g id="a_node10"><a xlink:title="81.89 KiB">
-<ellipse fill="#796eb2" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="830" cy="-658.6" rx="47.95" ry="47.95"/>
-<text xml:space="preserve" text-anchor="middle" x="830" y="-653.35" font-family="monospace" font-size="15.00">globset</text>
+<ellipse fill="#1d1d36" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="830" cy="-658.6" rx="47.95" ry="47.95"/>
+<text xml:space="preserve" text-anchor="middle" x="830" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">globset</text>
 </a>
 </g>
 </g>
@@ -345,8 +345,8 @@
 <g id="edge12" class="edge">
 <title>8&#45;&gt;9</title>
 <g id="a_edge12"><a xlink:title="grep_cli &#45;&gt; globset">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M672.59,-807.38C701.27,-780.46 752.52,-732.34 788.74,-698.34"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="790.53,-700.5 794.45,-692.98 786.7,-696.41 790.53,-700.5"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M672.59,-807.38C701.27,-780.46 752.52,-732.34 788.74,-698.34"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="790.53,-700.5 794.45,-692.98 786.7,-696.41 790.53,-700.5"/>
 </a>
 </g>
 </g>
@@ -354,8 +354,8 @@
 <g id="edge17" class="edge">
 <title>8&#45;&gt;12</title>
 <g id="a_edge17"><a xlink:title="grep_cli &#45;&gt; termcolor">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M622.37,-818.04C587.89,-806.47 528.22,-786.45 477,-769.33 410.35,-747.05 386.97,-755.96 327,-719.33 311.5,-709.86 296.86,-695.77 285.81,-683.65"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="288.01,-681.92 280.62,-677.78 283.82,-685.63 288.01,-681.92"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M622.37,-818.04C587.89,-806.47 528.22,-786.45 477,-769.33 410.35,-747.05 386.97,-755.96 327,-719.33 311.5,-709.86 296.86,-695.77 285.81,-683.65"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="288.01,-681.92 280.62,-677.78 283.82,-685.63 288.01,-681.92"/>
 </a>
 </g>
 </g>
@@ -363,8 +363,8 @@
 <g id="edge14" class="edge">
 <title>9&#45;&gt;2</title>
 <g id="a_edge14"><a xlink:title="globset &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M797.19,-623.89C774.04,-600.11 743.36,-568.59 721.29,-545.92"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="723.3,-543.97 715.72,-540.19 719.29,-547.88 723.3,-543.97"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M797.19,-623.89C774.04,-600.11 743.36,-568.59 721.29,-545.92"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="723.3,-543.97 715.72,-540.19 719.29,-547.88 723.3,-543.97"/>
 </a>
 </g>
 </g>
@@ -372,8 +372,8 @@
 <g id="edge15" class="edge">
 <title>9&#45;&gt;4</title>
 <g id="a_edge15"><a xlink:title="globset &#45;&gt; regex_automata">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M830.94,-610.82C831.85,-566 833.23,-497.38 834.32,-443.28"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="837.12,-443.57 834.48,-435.51 831.52,-443.45 837.12,-443.57"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M830.94,-610.82C831.85,-566 833.23,-497.38 834.32,-443.28"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="837.12,-443.57 834.48,-435.51 831.52,-443.45 837.12,-443.57"/>
 </a>
 </g>
 </g>
@@ -381,8 +381,8 @@
 <g id="edge13" class="edge">
 <title>9&#45;&gt;5</title>
 <g id="a_edge13"><a xlink:title="globset &#45;&gt; aho_corasick">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M852.8,-616.69C875.76,-572.97 909.62,-500.87 923,-433.83 935.97,-368.83 934.75,-349.93 923,-284.7 920.09,-268.55 915.01,-251.69 909.36,-236.08"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="912.05,-235.26 906.62,-228.74 906.8,-237.22 912.05,-235.26"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M852.8,-616.69C875.76,-572.97 909.62,-500.87 923,-433.83 935.97,-368.83 934.75,-349.93 923,-284.7 920.09,-268.55 915.01,-251.69 909.36,-236.08"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="912.05,-235.26 906.62,-228.74 906.8,-237.22 912.05,-235.26"/>
 </a>
 </g>
 </g>
@@ -390,8 +390,8 @@
 <g id="edge16" class="edge">
 <title>9&#45;&gt;6</title>
 <g id="a_edge16"><a xlink:title="globset &#45;&gt; regex_syntax">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M812.89,-613.83C795.66,-568.99 768.87,-497.1 749,-433.83 728.82,-369.55 709.32,-295.27 696.05,-242.27"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="698.82,-241.81 694.17,-234.72 693.39,-243.16 698.82,-241.81"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M812.89,-613.83C795.66,-568.99 768.87,-497.1 749,-433.83 728.82,-369.55 709.32,-295.27 696.05,-242.27"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="698.82,-241.81 694.17,-234.72 693.39,-243.16 698.82,-241.81"/>
 </a>
 </g>
 </g>
@@ -399,8 +399,8 @@
 <g id="edge19" class="edge">
 <title>14&#45;&gt;2</title>
 <g id="a_edge19"><a xlink:title="grep_printer &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M457.68,-812.7C505.81,-796.91 574.66,-767.49 617,-719.33 654.81,-676.33 639.64,-651.4 660,-597.88 665.49,-583.44 671.83,-567.68 677.48,-553.93"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="679.91,-555.36 680.38,-546.9 674.74,-553.23 679.91,-555.36"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M457.68,-812.7C505.81,-796.91 574.66,-767.49 617,-719.33 654.81,-676.33 639.64,-651.4 660,-597.88 665.49,-583.44 671.83,-567.68 677.48,-553.93"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="679.91,-555.36 680.38,-546.9 674.74,-553.23 679.91,-555.36"/>
 </a>
 </g>
 </g>
@@ -408,8 +408,8 @@
 <g id="edge31" class="edge">
 <title>14&#45;&gt;12</title>
 <g id="a_edge31"><a xlink:title="grep_printer &#45;&gt; termcolor">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M367.72,-784.38C341.71,-752.47 307.27,-710.23 285.88,-683.99"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="288.06,-682.23 280.83,-677.8 283.72,-685.77 288.06,-682.23"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M367.72,-784.38C341.71,-752.47 307.27,-710.23 285.88,-683.99"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="288.06,-682.23 280.83,-677.8 283.72,-685.77 288.06,-682.23"/>
 </a>
 </g>
 </g>
@@ -417,8 +417,8 @@
 <g id="edge20" class="edge">
 <title>14&#45;&gt;15</title>
 <g id="a_edge20"><a xlink:title="grep_printer &#45;&gt; grep_searcher">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M404,-771.7C404.24,-757.96 404.51,-743.1 404.76,-728.83"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="407.56,-728.93 404.91,-720.88 401.96,-728.83 407.56,-728.93"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M404,-771.7C404.24,-757.96 404.51,-743.1 404.76,-728.83"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="407.56,-728.93 404.91,-720.88 401.96,-728.83 407.56,-728.93"/>
 </a>
 </g>
 </g>
@@ -426,8 +426,8 @@
 <g id="node16" class="node">
 <title>20</title>
 <g id="a_node16"><a xlink:title="0 B">
-<ellipse fill="#dedded" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="162" cy="-658.6" rx="0.36" ry="0.36"/>
-<text xml:space="preserve" text-anchor="middle" x="162" y="-653.35" font-family="monospace" font-size="15.00">serde</text>
+<ellipse fill="#09070d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="162" cy="-658.6" rx="0.36" ry="0.36"/>
+<text xml:space="preserve" text-anchor="middle" x="162" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">serde</text>
 </a>
 </g>
 </g>
@@ -435,8 +435,8 @@
 <g id="edge26" class="edge">
 <title>14&#45;&gt;20</title>
 <g id="a_edge26"><a xlink:title="grep_printer &#45;&gt; serde">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M350.65,-806.78C308.24,-788.14 248.6,-757.86 205,-719.33 187.75,-704.09 173.48,-680.71 166.54,-668.2"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="169.12,-667.08 162.9,-661.32 164.16,-669.7 169.12,-667.08"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M350.65,-806.78C308.24,-788.14 248.6,-757.86 205,-719.33 187.75,-704.09 173.48,-680.71 166.54,-668.2"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="169.12,-667.08 162.9,-661.32 164.16,-669.7 169.12,-667.08"/>
 </a>
 </g>
 </g>
@@ -444,8 +444,8 @@
 <g id="edge28" class="edge">
 <title>14&#45;&gt;22</title>
 <g id="a_edge28"><a xlink:title="grep_printer &#45;&gt; serde_json">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M351.77,-803.62C327.52,-792.6 298.01,-779.71 271,-769.33 204.62,-743.82 180.48,-755.08 119,-719.33 101.69,-709.27 85,-694.09 72.73,-681.55"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="74.84,-679.71 67.3,-675.85 70.79,-683.57 74.84,-679.71"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M351.77,-803.62C327.52,-792.6 298.01,-779.71 271,-769.33 204.62,-743.82 180.48,-755.08 119,-719.33 101.69,-709.27 85,-694.09 72.73,-681.55"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="74.84,-679.71 67.3,-675.85 70.79,-683.57 74.84,-679.71"/>
 </a>
 </g>
 </g>
@@ -453,8 +453,8 @@
 <g id="edge21" class="edge">
 <title>15&#45;&gt;2</title>
 <g id="a_edge21"><a xlink:title="grep_searcher &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M452.17,-619.37C462.6,-611.69 473.89,-604.08 485,-597.88 540.52,-566.86 610.32,-542.32 653.29,-528.69"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="654.03,-531.39 660.82,-526.33 652.35,-526.05 654.03,-531.39"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M452.17,-619.37C462.6,-611.69 473.89,-604.08 485,-597.88 540.52,-566.86 610.32,-542.32 653.29,-528.69"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="654.03,-531.39 660.82,-526.33 652.35,-526.05 654.03,-531.39"/>
 </a>
 </g>
 </g>
@@ -462,8 +462,8 @@
 <g id="edge25" class="edge">
 <title>15&#45;&gt;3</title>
 <g id="a_edge25"><a xlink:title="grep_searcher &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M377.69,-604.92C341.52,-529.89 289.5,-389.73 342,-284.7 407.18,-154.3 574.23,-73.24 647.12,-43.02"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="647.9,-45.73 654.25,-40.11 645.79,-40.54 647.9,-45.73"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M377.69,-604.92C341.52,-529.89 289.5,-389.73 342,-284.7 407.18,-154.3 574.23,-73.24 647.12,-43.02"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="647.9,-45.73 654.25,-40.11 645.79,-40.54 647.9,-45.73"/>
 </a>
 </g>
 </g>
@@ -471,8 +471,8 @@
 <g id="node14" class="node">
 <title>16</title>
 <g id="a_node14"><a xlink:title="32.26 KiB">
-<ellipse fill="#cecee5" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="412" cy="-359.27" rx="34.46" ry="34.46"/>
-<text xml:space="preserve" text-anchor="middle" x="412" y="-354.02" font-family="monospace" font-size="15.00">encoding_rs</text>
+<ellipse fill="#09070d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="412" cy="-359.27" rx="34.46" ry="34.46"/>
+<text xml:space="preserve" text-anchor="middle" x="412" y="-354.02" font-family="monospace" font-size="15.00" fill="#ffffff">encoding_rs</text>
 </a>
 </g>
 </g>
@@ -480,8 +480,8 @@
 <g id="edge22" class="edge">
 <title>15&#45;&gt;16</title>
 <g id="a_edge22"><a xlink:title="grep_searcher &#45;&gt; encoding_rs">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M389.13,-600.29C384.96,-583.54 381.09,-565.11 379,-547.88 375.57,-519.62 375.3,-512.05 379,-483.83 382.7,-455.65 390.95,-424.75 398.27,-400.91"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="400.86,-402.01 400.59,-393.54 395.52,-400.34 400.86,-402.01"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M389.13,-600.29C384.96,-583.54 381.09,-565.11 379,-547.88 375.57,-519.62 375.3,-512.05 379,-483.83 382.7,-455.65 390.95,-424.75 398.27,-400.91"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="400.86,-402.01 400.59,-393.54 395.52,-400.34 400.86,-402.01"/>
 </a>
 </g>
 </g>
@@ -489,8 +489,8 @@
 <g id="node15" class="node">
 <title>18</title>
 <g id="a_node15"><a xlink:title="12.02 KiB">
-<ellipse fill="#d0d1e6" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="463" cy="-515.85" rx="21.69" ry="21.69"/>
-<text xml:space="preserve" text-anchor="middle" x="463" y="-510.6" font-family="monospace" font-size="15.00">encoding_rs_io</text>
+<ellipse fill="#0b0a11" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="463" cy="-515.85" rx="21.69" ry="21.69"/>
+<text xml:space="preserve" text-anchor="middle" x="463" y="-510.6" font-family="monospace" font-size="15.00" fill="#ffffff">encoding_rs_io</text>
 </a>
 </g>
 </g>
@@ -498,8 +498,8 @@
 <g id="edge23" class="edge">
 <title>15&#45;&gt;18</title>
 <g id="a_edge23"><a xlink:title="grep_searcher &#45;&gt; encoding_rs_io">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M428.36,-602.38C436.34,-582.68 444.99,-561.31 451.65,-544.87"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="454.24,-545.95 454.64,-537.48 449.05,-543.85 454.24,-545.95"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M428.36,-602.38C436.34,-582.68 444.99,-561.31 451.65,-544.87"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="454.24,-545.95 454.64,-537.48 449.05,-543.85 454.24,-545.95"/>
 </a>
 </g>
 </g>
@@ -507,8 +507,8 @@
 <g id="edge24" class="edge">
 <title>18&#45;&gt;16</title>
 <g id="a_edge24"><a xlink:title="encoding_rs_io &#45;&gt; encoding_rs">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M456.54,-495.27C448.77,-471.71 435.51,-431.53 425.48,-401.11"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="428.21,-400.46 423.04,-393.74 422.89,-402.21 428.21,-400.46"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M456.54,-495.27C448.77,-471.71 435.51,-431.53 425.48,-401.11"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="428.21,-400.46 423.04,-393.74 422.89,-402.21 428.21,-400.46"/>
 </a>
 </g>
 </g>
@@ -516,8 +516,8 @@
 <g id="node17" class="node">
 <title>21</title>
 <g id="a_node17"><a xlink:title="24.12 KiB">
-<ellipse fill="#d3d3e8" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="158" cy="-515.85" rx="30.49" ry="30.49"/>
-<text xml:space="preserve" text-anchor="middle" x="158" y="-510.6" font-family="monospace" font-size="15.00">serde_core</text>
+<ellipse fill="#030204" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="158" cy="-515.85" rx="30.49" ry="30.49"/>
+<text xml:space="preserve" text-anchor="middle" x="158" y="-510.6" font-family="monospace" font-size="15.00" fill="#ffffff">serde_core</text>
 </a>
 </g>
 </g>
@@ -525,8 +525,8 @@
 <g id="edge27" class="edge">
 <title>20&#45;&gt;21</title>
 <g id="a_edge27"><a xlink:title="serde &#45;&gt; serde_core">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M162,-657.5C161.92,-654.74 160.26,-596.54 159.11,-555.88"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="161.91,-555.96 158.89,-548.04 156.31,-556.12 161.91,-555.96"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M162,-657.5C161.92,-654.74 160.26,-596.54 159.11,-555.88"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="161.91,-555.96 158.89,-548.04 156.31,-556.12 161.91,-555.96"/>
 </a>
 </g>
 </g>
@@ -534,8 +534,8 @@
 <g id="edge29" class="edge">
 <title>22&#45;&gt;3</title>
 <g id="a_edge29"><a xlink:title="serde_json &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M54.71,-638.26C58.19,-605.27 67.92,-536.57 92,-483.83 178.41,-294.56 197.04,-222.83 370,-107.18 456.33,-49.47 581.96,-34.66 644.18,-30.88"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="643.96,-33.69 651.79,-30.46 643.65,-28.1 643.96,-33.69"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M54.71,-638.26C58.19,-605.27 67.92,-536.57 92,-483.83 178.41,-294.56 197.04,-222.83 370,-107.18 456.33,-49.47 581.96,-34.66 644.18,-30.88"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="643.96,-33.69 651.79,-30.46 643.65,-28.1 643.96,-33.69"/>
 </a>
 </g>
 </g>
@@ -543,8 +543,8 @@
 <g id="edge30" class="edge">
 <title>22&#45;&gt;21</title>
 <g id="a_edge30"><a xlink:title="serde_json &#45;&gt; serde_core">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M64.84,-641.73C81.66,-619.19 112.81,-577.43 134.44,-548.44"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="136.64,-550.17 139.18,-542.08 132.15,-546.82 136.64,-550.17"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M64.84,-641.73C81.66,-619.19 112.81,-577.43 134.44,-548.44"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="136.64,-550.17 139.18,-542.08 132.15,-546.82 136.64,-550.17"/>
 </a>
 </g>
 </g>
@@ -552,8 +552,8 @@
 <g id="edge33" class="edge">
 <title>25&#45;&gt;2</title>
 <g id="a_edge33"><a xlink:title="grep_regex &#45;&gt; bstr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M579.74,-629.12C604.22,-604.85 639.26,-570.12 663.86,-545.73"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="665.82,-547.73 669.53,-540.11 661.88,-543.76 665.82,-547.73"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M579.74,-629.12C604.22,-604.85 639.26,-570.12 663.86,-545.73"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="665.82,-547.73 669.53,-540.11 661.88,-543.76 665.82,-547.73"/>
 </a>
 </g>
 </g>
@@ -561,8 +561,8 @@
 <g id="edge34" class="edge">
 <title>25&#45;&gt;4</title>
 <g id="a_edge34"><a xlink:title="grep_regex &#45;&gt; regex_automata">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M565.66,-620.05C581.69,-582.43 610.23,-524.43 648,-483.83 680.27,-449.13 724.18,-419.57 761.45,-398.07"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="762.63,-400.62 768.2,-394.23 759.86,-395.75 762.63,-400.62"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M565.66,-620.05C581.69,-582.43 610.23,-524.43 648,-483.83 680.27,-449.13 724.18,-419.57 761.45,-398.07"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="762.63,-400.62 768.2,-394.23 759.86,-395.75 762.63,-400.62"/>
 </a>
 </g>
 </g>
@@ -570,8 +570,8 @@
 <g id="edge35" class="edge">
 <title>25&#45;&gt;6</title>
 <g id="a_edge35"><a xlink:title="grep_regex &#45;&gt; regex_syntax">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M561.26,-618.68C582.83,-536.83 633.16,-345.89 660.51,-242.11"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="663.21,-242.86 662.54,-234.41 657.79,-241.43 663.21,-242.86"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M561.26,-618.68C582.83,-536.83 633.16,-345.89 660.51,-242.11"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="663.21,-242.86 662.54,-234.41 657.79,-241.43 663.21,-242.86"/>
 </a>
 </g>
 </g>
@@ -579,8 +579,8 @@
 <g id="edge41" class="edge">
 <title>26&#45;&gt;3</title>
 <g id="a_edge41"><a xlink:title="ignore &#45;&gt; memchr">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M1031.32,-819.1C1089.42,-807.31 1176.35,-780.12 1222,-719.33 1276.48,-646.78 1248,-607.58 1248,-516.85 1248,-516.85 1248,-516.85 1248,-358.27 1248,-113.21 846.33,-47.78 719.73,-33.25"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="720.13,-30.48 711.87,-32.38 719.52,-36.04 720.13,-30.48"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M1031.32,-819.1C1089.42,-807.31 1176.35,-780.12 1222,-719.33 1276.48,-646.78 1248,-607.58 1248,-516.85 1248,-516.85 1248,-516.85 1248,-358.27 1248,-113.21 846.33,-47.78 719.73,-33.25"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="720.13,-30.48 711.87,-32.38 719.52,-36.04 720.13,-30.48"/>
 </a>
 </g>
 </g>
@@ -588,8 +588,8 @@
 <g id="edge42" class="edge">
 <title>26&#45;&gt;4</title>
 <g id="a_edge42"><a xlink:title="ignore &#45;&gt; regex_automata">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M956.61,-771.74C932.42,-689.2 887.02,-534.34 859.35,-439.94"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="862.1,-439.35 857.16,-432.46 856.72,-440.92 862.1,-439.35"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M956.61,-771.74C932.42,-689.2 887.02,-534.34 859.35,-439.94"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="862.1,-439.35 857.16,-432.46 856.72,-440.92 862.1,-439.35"/>
 </a>
 </g>
 </g>
@@ -597,8 +597,8 @@
 <g id="edge40" class="edge">
 <title>26&#45;&gt;9</title>
 <g id="a_edge40"><a xlink:title="ignore &#45;&gt; globset">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M935.05,-783.06C913.91,-758.21 887.7,-727.41 866.75,-702.79"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="868.92,-701.02 861.6,-696.74 864.66,-704.65 868.92,-701.02"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M935.05,-783.06C913.91,-758.21 887.7,-727.41 866.75,-702.79"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="868.92,-701.02 861.6,-696.74 864.66,-704.65 868.92,-701.02"/>
 </a>
 </g>
 </g>
@@ -606,8 +606,8 @@
 <g id="node21" class="node">
 <title>27</title>
 <g id="a_node21"><a xlink:title="0 B">
-<ellipse fill="#e7e5f1" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="1030" cy="-658.6" rx="0.36" ry="0.36"/>
-<text xml:space="preserve" text-anchor="middle" x="1030" y="-653.35" font-family="monospace" font-size="15.00">crossbeam_deque</text>
+<ellipse fill="#0d0b15" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="1030" cy="-658.6" rx="0.36" ry="0.36"/>
+<text xml:space="preserve" text-anchor="middle" x="1030" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">crossbeam_deque</text>
 </a>
 </g>
 </g>
@@ -615,8 +615,8 @@
 <g id="edge38" class="edge">
 <title>26&#45;&gt;27</title>
 <g id="a_edge38"><a xlink:title="ignore &#45;&gt; crossbeam_deque">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M991.66,-772.63C1004.45,-734.94 1020.24,-688.37 1026.86,-668.87"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="1029.48,-669.84 1029.4,-661.37 1024.18,-668.05 1029.48,-669.84"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M991.66,-772.63C1004.45,-734.94 1020.24,-688.37 1026.86,-668.87"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="1029.48,-669.84 1029.4,-661.37 1024.18,-668.05 1029.48,-669.84"/>
 </a>
 </g>
 </g>
@@ -624,8 +624,8 @@
 <g id="node23" class="node">
 <title>31</title>
 <g id="a_node23"><a xlink:title="19.49 KiB">
-<ellipse fill="#d7d7e9" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="1170" cy="-658.6" rx="27.68" ry="27.68"/>
-<text xml:space="preserve" text-anchor="middle" x="1170" y="-653.35" font-family="monospace" font-size="15.00">walkdir</text>
+<ellipse fill="#09070d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="1170" cy="-658.6" rx="27.68" ry="27.68"/>
+<text xml:space="preserve" text-anchor="middle" x="1170" y="-653.35" font-family="monospace" font-size="15.00" fill="#ffffff">walkdir</text>
 </a>
 </g>
 </g>
@@ -633,8 +633,8 @@
 <g id="edge43" class="edge">
 <title>26&#45;&gt;31</title>
 <g id="a_edge43"><a xlink:title="ignore &#45;&gt; walkdir">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M1021.7,-795.19C1050.85,-774.83 1087.94,-747.22 1118,-719.33 1128.3,-709.77 1138.66,-698.33 1147.4,-688.03"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="1149.31,-690.1 1152.28,-682.16 1145.01,-686.52 1149.31,-690.1"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M1021.7,-795.19C1050.85,-774.83 1087.94,-747.22 1118,-719.33 1128.3,-709.77 1138.66,-698.33 1147.4,-688.03"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="1149.31,-690.1 1152.28,-682.16 1145.01,-686.52 1149.31,-690.1"/>
 </a>
 </g>
 </g>
@@ -642,8 +642,8 @@
 <g id="node22" class="node">
 <title>28</title>
 <g id="a_node22"><a xlink:title="5.09 KiB">
-<ellipse fill="#e7e5f1" stroke="#000000" stroke-width="0.9" stroke-opacity="0.623529" cx="1075" cy="-515.85" rx="12.84" ry="12.84"/>
-<text xml:space="preserve" text-anchor="middle" x="1075" y="-510.6" font-family="monospace" font-size="15.00">crossbeam_epoch</text>
+<ellipse fill="#09070d" stroke="#ffffff" stroke-width="0.9" stroke-opacity="0.623529" cx="1075" cy="-515.85" rx="12.84" ry="12.84"/>
+<text xml:space="preserve" text-anchor="middle" x="1075" y="-510.6" font-family="monospace" font-size="15.00" fill="#ffffff">crossbeam_epoch</text>
 </a>
 </g>
 </g>
@@ -651,8 +651,8 @@
 <g id="edge39" class="edge">
 <title>27&#45;&gt;28</title>
 <g id="a_edge39"><a xlink:title="crossbeam_deque &#45;&gt; crossbeam_epoch">
-<path fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" d="M1030.03,-657.5C1031.06,-654.28 1056.28,-575.42 1068.49,-537.22"/>
-<polygon fill="none" stroke="#000000" stroke-width="1.2" stroke-opacity="0.623529" points="1071.1,-538.24 1070.87,-529.77 1065.77,-536.53 1071.1,-538.24"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" d="M1030.03,-657.5C1031.06,-654.28 1056.28,-575.42 1068.49,-537.22"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.2" stroke-opacity="0.623529" points="1071.1,-538.24 1070.87,-529.77 1065.77,-536.53 1071.1,-538.24"/>
 </a>
 </g>
 </g>

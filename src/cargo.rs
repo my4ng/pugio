@@ -19,8 +19,8 @@ pub struct CargoOptions {
 
 // TODO: Add features support
 pub fn cargo_tree_output(options: &CargoOptions) -> anyhow::Result<String> {
-    let mut child = Command::new("cargo");
-    child
+    let mut command = Command::new("cargo");
+    command
         .stdout(Stdio::piped())
         .arg("tree")
         .arg("--edges=no-build,no-proc-macro,no-dev")
@@ -28,22 +28,22 @@ pub fn cargo_tree_output(options: &CargoOptions) -> anyhow::Result<String> {
         .arg("--color=never");
 
     if let Some(package) = &options.package {
-        child.arg(format!("--package={package}"));
+        command.arg(format!("--package={package}"));
     }
 
     if let Some(features) = &options.features {
-        child.arg(format!("--features={features}"));
+        command.arg(format!("--features={features}"));
     }
 
     if options.all_features {
-        child.arg("--all-features");
+        command.arg("--all-features");
     }
 
     if options.no_default_features {
-        child.arg("--no-default-features");
+        command.arg("--no-default-features");
     }
 
-    child
+    command
         .spawn()
         .context("failed to execute cargo-tree")?
         .wait_with_output()
@@ -52,8 +52,8 @@ pub fn cargo_tree_output(options: &CargoOptions) -> anyhow::Result<String> {
 }
 
 pub fn cargo_bloat_output(options: &CargoOptions) -> anyhow::Result<String> {
-    let mut child = Command::new("cargo");
-    child
+    let mut command = Command::new("cargo");
+    command
         .stdout(Stdio::piped())
         .arg("bloat")
         .arg("-n0")
@@ -61,30 +61,30 @@ pub fn cargo_bloat_output(options: &CargoOptions) -> anyhow::Result<String> {
         .arg("--crates");
 
     if let Some(package) = &options.package {
-        child.arg(format!("--package={package}"));
+        command.arg(format!("--package={package}"));
     }
 
     if let Some(binary) = &options.binary {
-        child.arg(format!("--bin={binary}"));
+        command.arg(format!("--bin={binary}"));
     }
 
     if let Some(features) = &options.features {
-        child.arg(format!("--features={features}"));
+        command.arg(format!("--features={features}"));
     }
 
     if options.all_features {
-        child.arg("--all-features");
+        command.arg("--all-features");
     }
 
     if options.no_default_features {
-        child.arg("--no-default-features");
+        command.arg("--no-default-features");
     }
 
     if options.release {
-        child.arg("--release");
+        command.arg("--release");
     }
 
-    child
+    command
         .spawn()
         .context("failed to execute cargo-bloat")?
         .wait_with_output()

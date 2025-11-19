@@ -1,7 +1,7 @@
 mod cargo;
+mod graph;
 
 use std::{
-    collections::HashMap,
     io::Write,
     process::{Command, Stdio},
 };
@@ -13,72 +13,17 @@ use petgraph::{
     dot::{Config, Dot},
     graph::NodeIndex,
     prelude::StableGraph,
-    visit::{EdgeRef, Topo, Walker},
+    visit::EdgeRef,
 };
 
-use crate::cargo::{
-    CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map,
+use crate::{
+    cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
+    graph::{cum_sums, dep_counts, remove_small_deps, rev_dep_counts},
 };
-
-fn cum_sums(graph: &StableGraph<String, ()>, map: &HashMap<String, usize>) -> (Vec<usize>, f32) {
-    let mut cum_sums: Vec<_> = graph
-        .node_weights()
-        .map(|n| map.get(n).copied().unwrap_or_default())
-        .collect();
-
-    let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
-    nodes.reverse();
-
-    for node in nodes {
-        let sources: Vec<_> = graph
-            .neighbors_directed(node, petgraph::Direction::Incoming)
-            .collect();
-        for source in &sources {
-            cum_sums[source.index()] += cum_sums[node.index()] / sources.len();
-        }
-    }
-
-    (cum_sums, 0.25)
-}
-
-fn dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
-    let mut dep_counts: Vec<_> = vec![0; graph.node_count()];
-
-    let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
-    nodes.reverse();
-
-    for node in nodes {
-        for target in graph.neighbors(node) {
-            dep_counts[node.index()] += dep_counts[target.index()] + 1;
-        }
-    }
-
-    (dep_counts, 0.25)
-}
-
-fn rev_dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
-    let mut rev_dep_counts: Vec<_> = vec![0; graph.node_count()];
-
-    for node in Topo::new(&graph).iter(&graph) {
-        for target in graph.neighbors(node) {
-            rev_dep_counts[target.index()] += 1;
-        }
-    }
-
-    (rev_dep_counts, 0.5)
-}
-
-fn remove_small_deps(graph: &mut StableGraph<String, ()>, cum_sums: &[usize], threshold: usize) {
-    for (idx, sum) in cum_sums.iter().enumerate() {
-        if *sum < threshold {
-            graph.remove_node(NodeIndex::new(idx));
-        }
-    }
-}
 
 #[derive(Default, Clone, Copy, strum::EnumString)]
 #[strum(serialize_all = "snake_case")]
-enum NodeColoring {
+enum NodeColoringScheme {
     #[default]
     CumSum,
     DepCount,
@@ -157,12 +102,12 @@ struct Args {
     release: bool,
 
     /// Add std standalone node
-    #[arg(long)]
-    std: bool,
+    #[arg(long = "std")]
+    has_std: bool,
 
     /// Color scheme of nodes
     #[arg(short, long)]
-    coloring: Option<NodeColoring>,
+    scheme: Option<NodeColoringScheme>,
 
     /// Color gradient of nodes
     #[arg(short, long)]
@@ -176,13 +121,17 @@ struct Args {
     #[arg(short, long)]
     threshold: Option<usize>,
 
-    /// Invert color gradient
+    /// Inverse color gradient
     #[arg(long)]
-    inverse: bool,
+    inverse_gradient: bool,
+
+    /// Dark mode for output svg file
+    #[arg(long)]
+    dark_mode: bool,
 
     /// Dot output file only
-    #[arg(short, long)]
-    dot: bool,
+    #[arg(long)]
+    dot_only: bool,
 
     /// Output filename, default is output.*
     #[arg(short, long)]
@@ -198,6 +147,7 @@ fn output_svg(
     dot_output: &str,
     graph: &StableGraph<String, ()>,
     output_filename: &str,
+    dark_mode: bool,
     no_open: bool,
 ) -> anyhow::Result<()> {
     let node_count_factor = (graph.node_count() as f32 / 32.0).floor();
@@ -207,13 +157,13 @@ fn output_svg(
     let node_border_width = edge_width * 0.75;
 
     // TODO: Customise style
-    let mut child = Command::new("dot")
+    let mut command = Command::new("dot");
+    command
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .arg("-Tsvg")
         .arg("-Gpad=1.0")
         .arg("-Nshape=circle")
-        .arg("-Ncolor=#0000009F")
         .arg(format!("-Npenwidth={node_border_width}"))
         .arg("-Nstyle=filled")
         .arg("-Nfixedsize=shape")
@@ -221,12 +171,21 @@ fn output_svg(
         .arg(format!("-Nfontsize={font_size}"))
         .arg(format!("-Earrowsize={arrow_size}"))
         .arg("-Earrowhead=onormal")
-        .arg("-Ecolor=#0000009F")
         .arg(format!("-Epenwidth={edge_width}"))
         .arg("-Gnodesep=0.35")
-        .arg("-Granksep=0.7")
-        .spawn()
-        .context("failed to execute dot")?;
+        .arg("-Granksep=0.7");
+
+    if dark_mode {
+        command
+            .arg("-Ncolor=#FFFFFF9F")
+            .arg("-Ecolor=#FFFFFF9F")
+            .arg("-Gbgcolor=#000000")
+            .arg("-Nfontcolor=#FFFFFF");
+    } else {
+        command.arg("-Ncolor=#0000009F").arg("-Ecolor=#0000009F");
+    }
+
+    let mut child = command.spawn().context("failed to execute dot")?;
 
     let stdin = child.stdin.as_mut().context("failed to get stdin")?;
     stdin
@@ -261,19 +220,19 @@ fn main() -> anyhow::Result<()> {
     };
 
     let tree_output = cargo_tree_output(&options)?;
-    let mut graph = get_dep_graph(&tree_output, args.std);
+    let mut graph = get_dep_graph(&tree_output, args.has_std);
 
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output)?;
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
-    let node_colouring_values = match args.coloring.unwrap_or_default() {
-        NodeColoring::None => None,
-        coloring => {
-            let (values, mut gamma) = match coloring {
-                NodeColoring::CumSum => cum_sums_vec.clone(),
-                NodeColoring::DepCount => dep_counts(&graph),
-                NodeColoring::RevDepCount => rev_dep_counts(&graph),
+    let node_colouring_values = match args.scheme.unwrap_or_default() {
+        NodeColoringScheme::None => None,
+        scheme => {
+            let (values, mut gamma) = match scheme {
+                NodeColoringScheme::CumSum => cum_sums_vec.clone(),
+                NodeColoringScheme::DepCount => dep_counts(&graph),
+                NodeColoringScheme::RevDepCount => rev_dep_counts(&graph),
                 _ => unreachable!(),
             };
 
@@ -315,13 +274,23 @@ fn main() -> anyhow::Result<()> {
         }) = &node_colouring_values
         {
             let mut t = (values[i.index()] as f32 / *max as f32).powf(*gamma);
-            if args.inverse {
+            if args.inverse_gradient {
                 t = 1.0 - t;
             }
-            let node_color = gradient.at(t).to_css_hex();
+
+            let mut node_color = gradient.at(t);
+            if args.dark_mode {
+                let mut hsla = node_color.to_hsla();
+                hsla[2] = 1.0 - hsla[2];
+                node_color = colorgrad::Color::from_hsla(hsla[0], hsla[1], hsla[2], hsla[3])
+            }
+
             format!(
                 r#"label = "{}" tooltip = "{}" width = {} fillcolor= "{}""#,
-                n, tooltip, width, node_color
+                n,
+                tooltip,
+                width,
+                node_color.to_css_hex()
             )
         } else {
             format!(
@@ -345,7 +314,7 @@ fn main() -> anyhow::Result<()> {
     let dot_output = format!("{dot:?}");
     let output_filename = args.output.as_deref();
 
-    if args.dot {
+    if args.dot_only {
         std::fs::write(output_filename.unwrap_or("output.gv"), dot_output)
             .context("failed to write output dot file")?;
     } else {
@@ -353,6 +322,7 @@ fn main() -> anyhow::Result<()> {
             &dot_output,
             &graph,
             output_filename.unwrap_or("output.svg"),
+            args.dark_mode,
             args.no_open,
         )?;
     }
