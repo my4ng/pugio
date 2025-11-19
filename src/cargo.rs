@@ -17,13 +17,15 @@ pub struct CargoOptions {
     pub release: bool,
 }
 
+// TODO: Add features support
 pub fn cargo_tree_output(options: &CargoOptions) -> anyhow::Result<String> {
     let mut child = Command::new("cargo");
     child
         .stdout(Stdio::piped())
         .arg("tree")
         .arg("--edges=no-build,no-proc-macro,no-dev")
-        .arg("--prefix=depth");
+        .arg("--prefix=depth")
+        .arg("--color=never");
 
     if let Some(package) = &options.package {
         child.arg(format!("--package={package}"));
