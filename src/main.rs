@@ -137,7 +137,7 @@ struct Args {
     #[arg(long = "bin")]
     binary: Option<String>,
 
-    /// Comma separated list of features to activat
+    /// Space or comma separated list of features to activate
     #[arg(short = 'F', long)]
     features: Option<String>,
 
