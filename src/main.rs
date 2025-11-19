@@ -153,6 +153,10 @@ struct Args {
     #[arg(long)]
     release: bool,
 
+    /// Add std standalone node
+    #[arg(long)]
+    std: bool,
+
     /// Color scheme of nodes
     #[arg(short, long)]
     coloring: Option<NodeColoring>,
@@ -254,7 +258,7 @@ fn main() -> anyhow::Result<()> {
     };
 
     let tree_output = cargo_tree_output(&options)?;
-    let mut graph = get_dep_graph(&tree_output);
+    let mut graph = get_dep_graph(&tree_output, args.std);
 
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output)?;
