@@ -24,9 +24,18 @@ It is important to note that the sizes is and will always be only an *estimation
 - [`cargo-bloat`](https://crates.io/crates/cargo-bloat)
 - [`dot`](https://graphviz.org/): part of the `graphviz` package; optional, needed for SVG image generation (disabled via the `--dot-only` option)
 
+## Planned Features
+
+- Filter options
+- Edge label by dependency features
+- Additional style customisation
+- Interactive SVG support (function breakdown)
+
 ## Usage
 
 ```plain
+A command-line dependency binary size graph visualisation tool
+
 Usage: pugio [OPTIONS]
 
 Options:
@@ -38,8 +47,13 @@ Options:
       --release                Build artifacts in release mode, with optimizations
       --std                    Add std standalone node
   -s, --scheme <SCHEME>        Color scheme of nodes
+                                - "cum-sum": cumulative sum of the size of a node and its dependencies
+                                - "dep-count": dependency count; number of transitive dependency relations from a node
+                                - "rev-dep-count": reverse dependency count; number of paths from the root to a node
   -g, --gradient <GRADIENT>    Color gradient of nodes
-      --gamma <GAMMA>          Color gamma of nodes
+                                - "reds", "oranges", "purples", "greens", "blues"
+                                - custom CSS gradient format, e.g. "#fff, 75%, #00f"
+      --gamma <GAMMA>          Color gamma of nodes, between 0.0 and 1.0
   -t, --threshold <THRESHOLD>  Remove nodes that have cumulative sum below threshold
       --inverse-gradient       Inverse color gradient
       --dark-mode              Dark mode for output svg file
