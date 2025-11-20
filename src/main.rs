@@ -123,7 +123,8 @@ struct Args {
     gamma: Option<f32>,
 
     /// Remove nodes that have cumulative sum below threshold
-    #[arg(short, long)]
+    ///  support human readable byte format, e.g. "21KiB", "69 KB"
+    #[arg(short, long, value_parser = |s: &str| parse_size::parse_size(s).map(|b| b as usize), verbatim_doc_comment)]
     threshold: Option<usize>,
 
     /// Remove nodes that are more than max depth deep

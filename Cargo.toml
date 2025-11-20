@@ -22,6 +22,7 @@ clap = { version = "4.5", features = [
 colorgrad = { version = "0.8", features = ["preset"], default-features = false }
 humansize = "2.1"
 open = "5"
+parse-size = "1.1"
 petgraph = { version = "0.8", features = [
     "std",
     "stable_graph",
