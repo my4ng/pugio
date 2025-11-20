@@ -225,7 +225,8 @@ fn main() -> anyhow::Result<()> {
     };
 
     let tree_output = cargo_tree_output(&options)?;
-    let mut graph = get_dep_graph(&tree_output, args.has_std);
+    let mut graph =
+        get_dep_graph(&tree_output, args.has_std).context("failed to parse cargo-tree")?;
 
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output)?;

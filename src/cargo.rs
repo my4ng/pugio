@@ -3,7 +3,7 @@ use std::{
     process::{Command, Stdio},
 };
 
-use anyhow::Context;
+use anyhow::{Context, bail};
 use petgraph::{graph::NodeIndex, prelude::StableGraph};
 use serde_json::Value;
 
@@ -106,7 +106,7 @@ pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
     Ok(map)
 }
 
-pub fn get_dep_graph(output: &str, has_std: bool) -> StableGraph<String, ()> {
+pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<String, ()>> {
     let mut graph = StableGraph::new();
     let mut map: HashMap<&str, NodeIndex> = HashMap::new();
 
@@ -114,6 +114,9 @@ pub fn get_dep_graph(output: &str, has_std: bool) -> StableGraph<String, ()> {
     let mut last = NodeIndex::new(0);
 
     for line in output.lines() {
+        if line.is_empty() {
+            bail!("one and only one package must be specified");
+        }
         // "2is-wsl v0.4.0 (*)"
         let split_at = line.find(char::is_alphabetic).unwrap();
         // ("2", "is-wsl v0.4.0 (*)")
@@ -146,5 +149,5 @@ pub fn get_dep_graph(output: &str, has_std: bool) -> StableGraph<String, ()> {
         graph.add_node("std".to_owned());
     }
 
-    graph
+    Ok(graph)
 }
