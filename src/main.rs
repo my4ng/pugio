@@ -18,7 +18,10 @@ use petgraph::{
 
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
-    graph::{cum_sums, dep_counts, remove_deep_deps, remove_small_deps, rev_dep_counts},
+    graph::{
+        NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_small_deps,
+        rev_dep_counts,
+    },
 };
 
 #[derive(Default, Clone, Copy, strum::EnumString)]
@@ -101,25 +104,32 @@ struct Args {
     #[arg(long)]
     release: bool,
 
+    /// Change root to the specified dependency name
+    ///  unique prefix is supported
+    #[arg(long, verbatim_doc_comment)]
+    root: Option<String>,
+
     /// Add std standalone node
     #[arg(long = "std")]
     has_std: bool,
 
     /// Color scheme of nodes
-    ///  - "cum-sum": cumulative sum of the size of a node and its dependencies
+    ///  - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
     ///  - "dep-count": dependency count; number of transitive dependency relations from a node
     ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
+    ///  - "none"
     #[arg(short, long, verbatim_doc_comment)]
     scheme: Option<NodeColoringScheme>,
 
     /// Color gradient of nodes
-    ///  - "reds", "oranges", "purples", "greens", "blues"
+    ///  - "reds" (default), "oranges", "purples", "greens", "blues"
     ///  - custom CSS gradient format, e.g. "#fff, 75%, #00f"
     #[arg(short, long, verbatim_doc_comment)]
     gradient: Option<NodeColoringGradient>,
 
     /// Color gamma of nodes, between 0.0 and 1.0
-    #[arg(long)]
+    ///  default is scheme-specific
+    #[arg(long, verbatim_doc_comment)]
     gamma: Option<f32>,
 
     /// Remove nodes that have cumulative sum below threshold
@@ -155,7 +165,7 @@ struct Args {
 
 fn output_svg(
     dot_output: &str,
-    graph: &StableGraph<String, ()>,
+    graph: &StableGraph<NodeWeight, ()>,
     output_filename: &str,
     dark_mode: bool,
     no_open: bool,
@@ -235,6 +245,13 @@ fn main() -> anyhow::Result<()> {
 
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
+
+    let mut root_idx = NodeIndex::new(0);
+
+    if let Some(root) = args.root {
+        root_idx = change_root(&mut graph, &root)?;
+    }
+
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
     let node_colouring_values = match args.scheme.unwrap_or_default() {
@@ -268,20 +285,23 @@ fn main() -> anyhow::Result<()> {
     }
 
     if let Some(max_depth) = args.max_depth {
-        remove_deep_deps(&mut graph, max_depth);
+        remove_deep_deps(&mut graph, root_idx, max_depth);
     }
 
-    let binding = |_, (i, n): (NodeIndex, &String)| {
-        let mut size = size_map.get(n).copied().unwrap_or_default();
+    let binding = |_, (i, n): (NodeIndex, &NodeWeight)| {
+        let short_name = n.short_name();
+        let mut size = size_map.get(short_name).copied().unwrap_or_default();
         if let Some(bin) = args.binary.as_ref()
             && i.index() == 0
         {
             size += size_map.get(bin).copied().unwrap_or_default();
         }
         let width = (size as f32 / 4096.0 + 1.0).log10();
-        let tooltip = humansize::format_size(size, humansize::BINARY);
 
-        if let Some(NodeColoringValues {
+        let human_size = humansize::format_size(size, humansize::BINARY);
+        let tooltip = format!("{}\n{human_size}", n.name);
+
+        let node_color = if let Some(NodeColoringValues {
             values,
             gamma,
             max,
@@ -299,22 +319,23 @@ fn main() -> anyhow::Result<()> {
                 hsla[2] = 1.0 - hsla[2];
                 node_color = colorgrad::Color::from_hsla(hsla[0], hsla[1], hsla[2], hsla[3])
             }
-            let node_color = node_color.to_css_hex();
-
-            format!(
-                r#"label = "{n}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
-            )
+            node_color
         } else {
-            format!(r#"label = "{n}" tooltip = "{tooltip}" width = {width} "#,)
-        }
+            colorgrad::Color::new(1.0, 1.0, 1.0, 1.0)
+        };
+
+        let node_color = node_color.to_css_hex();
+        format!(
+            r#"label = "{short_name}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
+        )
     };
 
     let dot = Dot::with_attr_getters(
         &graph,
         &[Config::EdgeNoLabel, Config::NodeNoLabel],
         &|g, e| {
-            let source = g.node_weight(e.source()).unwrap();
-            let target = g.node_weight(e.target()).unwrap();
+            let source = g.node_weight(e.source()).unwrap().short_name();
+            let target = g.node_weight(e.target()).unwrap().short_name();
             format!(r#"edgetooltip = "{source} -> {target}""#)
         },
         &binding,

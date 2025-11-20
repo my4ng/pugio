@@ -7,6 +7,8 @@ use anyhow::{Context, bail};
 use petgraph::{graph::NodeIndex, prelude::StableGraph};
 use serde_json::Value;
 
+use crate::graph::NodeWeight;
+
 #[derive(Debug, Default)]
 pub struct CargoOptions {
     pub package: Option<String>,
@@ -106,7 +108,7 @@ pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
     Ok(map)
 }
 
-pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<String, ()>> {
+pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<NodeWeight, ()>> {
     let mut graph = StableGraph::new();
     let mut map: HashMap<&str, NodeIndex> = HashMap::new();
 
@@ -126,9 +128,11 @@ pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<
         let lib = lib.trim_end_matches(" (*)");
 
         let node_index = map.get(lib).copied().unwrap_or_else(|| {
-            let node_index =
-                // "is_wsl"
-                graph.add_node(lib.split_whitespace().next().unwrap().replace('-', "_"));
+            let short_end = lib.find(' ').unwrap();
+            let (short, extra) = lib.split_at(short_end);
+            let name = short.replace('-', "_") + extra;
+
+            let node_index = graph.add_node(NodeWeight { name, short_end });
             map.insert(lib, node_index);
             node_index
         });
@@ -146,7 +150,10 @@ pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<
     }
 
     if has_std {
-        graph.add_node("std".to_owned());
+        graph.add_node(NodeWeight {
+            name: "std".to_string(),
+            short_end: 3,
+        });
     }
 
     Ok(graph)

@@ -1,20 +1,42 @@
-use std::collections::{HashMap, HashSet, VecDeque};
+use std::collections::{HashMap, VecDeque};
 
+use anyhow::bail;
 use petgraph::{
     graph::NodeIndex,
     prelude::StableGraph,
-    visit::{Topo, Walker},
+    visit::{Dfs, Topo, Walker},
 };
 
+pub struct NodeWeight {
+    pub name: String,
+    pub short_end: usize,
+}
+
+impl std::fmt::Debug for NodeWeight {
+    fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
+        self.name.fmt(f)
+    }
+}
+
+impl NodeWeight {
+    pub fn short_name(&self) -> &str {
+        &self.name[..self.short_end]
+    }
+}
+
 pub fn cum_sums(
-    graph: &StableGraph<String, ()>,
+    graph: &StableGraph<NodeWeight, ()>,
     map: &HashMap<String, usize>,
 ) -> (Vec<usize>, f32) {
     // TODO: currently the same size is used for all nodes with the same name, change?
-    let mut cum_sums: Vec<_> = graph
-        .node_weights()
-        .map(|n| map.get(n).copied().unwrap_or_default())
-        .collect();
+    let mut cum_sums = vec![0; graph.capacity().0];
+
+    for (idx, size) in graph.node_indices().filter_map(|i| {
+        let short_name = graph.node_weight(i).unwrap().short_name();
+        map.get(short_name).copied().map(|s| (i.index(), s))
+    }) {
+        cum_sums[idx] = size;
+    }
 
     let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
     nodes.reverse();
@@ -31,8 +53,8 @@ pub fn cum_sums(
     (cum_sums, 0.25)
 }
 
-pub fn dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
-    let mut dep_counts: Vec<_> = vec![0; graph.node_count()];
+pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
+    let mut dep_counts = vec![0; graph.capacity().0];
 
     let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
     nodes.reverse();
@@ -46,8 +68,8 @@ pub fn dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
     (dep_counts, 0.25)
 }
 
-pub fn rev_dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
-    let mut rev_dep_counts: Vec<_> = vec![0; graph.node_count()];
+pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
+    let mut rev_dep_counts = vec![0; graph.capacity().0];
 
     for node in Topo::new(&graph).iter(&graph) {
         for target in graph.neighbors(node) {
@@ -59,7 +81,7 @@ pub fn rev_dep_counts(graph: &StableGraph<String, ()>) -> (Vec<usize>, f32) {
 }
 
 pub fn remove_small_deps(
-    graph: &mut StableGraph<String, ()>,
+    graph: &mut StableGraph<NodeWeight, ()>,
     cum_sums: &[usize],
     threshold: usize,
 ) {
@@ -70,25 +92,72 @@ pub fn remove_small_deps(
     }
 }
 
-pub fn remove_deep_deps(graph: &mut StableGraph<String, ()>, max_depth: usize) {
+pub fn remove_deep_deps(
+    graph: &mut StableGraph<NodeWeight, ()>,
+    root_idx: NodeIndex,
+    max_depth: usize,
+) {
     // TODO: use petgraph#868 once merged
-    let mut queue = VecDeque::from([(NodeIndex::new(0), 0)]);
-    let mut visited = HashSet::from([NodeIndex::new(0)]);
+    let mut queue = VecDeque::from([(root_idx, 0)]);
+    let mut has_visited = vec![false; graph.capacity().0];
+    has_visited[root_idx.index()] = true;
 
     while let Some((node, depth)) = queue.pop_front()
         && depth < max_depth
     {
         for target in graph.neighbors(node) {
-            if !visited.contains(&target) {
+            if !has_visited[target.index()] {
                 queue.push_back((target, depth + 1));
-                visited.insert(target);
+                has_visited[target.index()] = true;
             }
         }
     }
 
-    for node in graph.node_indices().collect::<Vec<_>>() {
-        if !visited.contains(&node) {
-            graph.remove_node(node);
-        }
+    for idx in has_visited
+        .iter()
+        .enumerate()
+        .filter_map(|(i, b)| if !b { Some(i) } else { None })
+    {
+        graph.remove_node(NodeIndex::new(idx));
     }
+}
+
+pub fn change_root(
+    graph: &mut StableGraph<NodeWeight, ()>,
+    new_root: &str,
+) -> anyhow::Result<NodeIndex> {
+    let new_roots = graph
+        .node_indices()
+        .filter(|i| graph.node_weight(*i).unwrap().name.starts_with(new_root))
+        .collect::<Vec<_>>();
+
+    let new_root = if new_roots.is_empty() {
+        bail!("new root name not found");
+    } else if new_roots.len() > 1 {
+        bail!(
+            "new root name not unique, possible full names: {}",
+            new_roots
+                .iter()
+                .map(|n| format!(r#""{}""#, graph.node_weight(*n).unwrap().name))
+                .collect::<Vec<_>>()
+                .join(", ")
+        )
+    } else {
+        new_roots[0]
+    };
+
+    let mut is_reachable = vec![false; graph.capacity().0];
+    for node_idx in Dfs::new(&*graph, new_root).iter(&*graph) {
+        is_reachable[node_idx.index()] = true;
+    }
+
+    for idx in is_reachable
+        .iter()
+        .enumerate()
+        .filter_map(|(i, b)| if !b { Some(i) } else { None })
+    {
+        graph.remove_node(NodeIndex::new(idx));
+    }
+
+    Ok(new_root)
 }
