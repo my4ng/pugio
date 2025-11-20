@@ -18,7 +18,7 @@ use petgraph::{
 
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
-    graph::{cum_sums, dep_counts, remove_small_deps, rev_dep_counts},
+    graph::{cum_sums, dep_counts, remove_deep_deps, remove_small_deps, rev_dep_counts},
 };
 
 #[derive(Default, Clone, Copy, strum::EnumString)]
@@ -126,6 +126,10 @@ struct Args {
     #[arg(short, long)]
     threshold: Option<usize>,
 
+    /// Remove nodes that are more than max depth deep
+    #[arg(short = 'd', long)]
+    max_depth: Option<usize>,
+
     /// Inverse color gradient
     #[arg(long)]
     inverse_gradient: bool,
@@ -226,10 +230,10 @@ fn main() -> anyhow::Result<()> {
 
     let tree_output = cargo_tree_output(&options)?;
     let mut graph =
-        get_dep_graph(&tree_output, args.has_std).context("failed to parse cargo-tree")?;
+        get_dep_graph(&tree_output, args.has_std).context("failed to parse cargo-tree output")?;
 
     let bloat_output = cargo_bloat_output(&options)?;
-    let size_map = get_size_map(&bloat_output)?;
+    let size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
     let node_colouring_values = match args.scheme.unwrap_or_default() {
@@ -260,6 +264,10 @@ fn main() -> anyhow::Result<()> {
 
     if let Some(threshold) = args.threshold {
         remove_small_deps(&mut graph, &cum_sums_vec.0, threshold);
+    }
+
+    if let Some(max_depth) = args.max_depth {
+        remove_deep_deps(&mut graph, max_depth);
     }
 
     let binding = |_, (i, n): (NodeIndex, &String)| {

@@ -1,4 +1,4 @@
-use std::collections::HashMap;
+use std::collections::{HashMap, HashSet, VecDeque};
 
 use petgraph::{
     graph::NodeIndex,
@@ -66,6 +66,29 @@ pub fn remove_small_deps(
     for (idx, sum) in cum_sums.iter().enumerate() {
         if *sum < threshold {
             graph.remove_node(NodeIndex::new(idx));
+        }
+    }
+}
+
+pub fn remove_deep_deps(graph: &mut StableGraph<String, ()>, max_depth: usize) {
+    // TODO: use petgraph#868 once merged
+    let mut queue = VecDeque::from([(NodeIndex::new(0), 0)]);
+    let mut visited = HashSet::from([NodeIndex::new(0)]);
+
+    while let Some((node, depth)) = queue.pop_front()
+        && depth < max_depth
+    {
+        for target in graph.neighbors(node) {
+            if !visited.contains(&target) {
+                queue.push_back((target, depth + 1));
+                visited.insert(target);
+            }
+        }
+    }
+
+    for node in graph.node_indices().collect::<Vec<_>>() {
+        if !visited.contains(&node) {
+            graph.remove_node(node);
         }
     }
 }
