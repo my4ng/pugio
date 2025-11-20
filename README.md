@@ -4,17 +4,17 @@
 
 It is important to note that the sizes is and will always be only an *estimation*. Some information is irrevocably lost during compilation and linkage. In addition, calls to the standard library is not included in the caller's size (although the total size of the standard library can be shown with the `--std` flag). Multiple versions of a dependency is also not distinguishable in the final binary.
 
-## Example
+## Examples
 
-`pugio --release --gradient blues -t 1024 -o pugio.svg`
+`pugio --release --gradient blues -t 1KiB -o images/pugio.svg`
 
 ![pugio](images/pugio.svg)
 
-`pugio --bin rg --release --scheme dep-count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o ripgrep.svg`
+`pugio --bin rg --release --scheme dep-count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o images/ripgrep.svg`
 
 ![ripgrep](images/ripgrep.svg)
 
-`pugio --release --gradient reds -t 1 --dark-mode --std -o hyperfine.svg`
+`pugio --release --gradient reds -t 1 --dark-mode --std -o images/hyperfine.svg`
 
 ![hyperfine](images/hyperfine.svg)
 
@@ -55,6 +55,8 @@ Options:
                                 - custom CSS gradient format, e.g. "#fff, 75%, #00f"
       --gamma <GAMMA>          Color gamma of nodes, between 0.0 and 1.0
   -t, --threshold <THRESHOLD>  Remove nodes that have cumulative sum below threshold
+                                support human readable byte format, e.g. "21KiB", "69 KB"
+  -d, --max-depth <MAX_DEPTH>  Remove nodes that are more than max depth deep
       --inverse-gradient       Inverse color gradient
       --dark-mode              Dark mode for output svg file
       --dot-only               Dot output file only
