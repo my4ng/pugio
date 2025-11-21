@@ -7,7 +7,7 @@ use anyhow::{Context, bail};
 use petgraph::{graph::NodeIndex, prelude::StableGraph};
 use serde_json::Value;
 
-use crate::graph::NodeWeight;
+use crate::{Args, graph::NodeWeight};
 
 #[derive(Debug, Default)]
 pub struct CargoOptions {
@@ -17,6 +17,19 @@ pub struct CargoOptions {
     pub all_features: bool,
     pub no_default_features: bool,
     pub release: bool,
+}
+
+impl From<&Args> for CargoOptions {
+    fn from(value: &Args) -> Self {
+        Self {
+            package: value.package.clone(),
+            binary: value.binary.clone(),
+            features: value.features.clone(),
+            all_features: value.all_features,
+            no_default_features: value.no_default_features,
+            release: value.release,
+        }
+    }
 }
 
 // TODO: Add features support

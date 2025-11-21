@@ -1,28 +1,18 @@
 mod cargo;
+mod dot;
 mod graph;
-
-use std::{
-    io::Write,
-    process::{Command, Stdio},
-};
-
-use anyhow::Context;
-use clap::Parser;
-use colorgrad::{BasisGradient, Gradient};
-use petgraph::{
-    dot::{Config, Dot},
-    graph::NodeIndex,
-    prelude::StableGraph,
-    visit::EdgeRef,
-};
 
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
+    dot::{output_dot, output_svg},
     graph::{
         NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_small_deps,
         rev_dep_counts,
     },
 };
+use anyhow::Context;
+use clap::Parser;
+use colorgrad::BasisGradient;
 
 #[derive(Default, Clone, Copy, strum::EnumString)]
 #[strum(serialize_all = "kebab-case")]
@@ -172,63 +162,6 @@ fn parse_threshold(t: &str) -> Result<usize, parse_size::Error> {
     }
 }
 
-fn output_svg(
-    dot_output: &str,
-    graph: &StableGraph<NodeWeight, ()>,
-    output_filename: &str,
-    dark_mode: bool,
-    no_open: bool,
-) -> anyhow::Result<()> {
-    let node_count_factor = (graph.node_count() as f32 / 32.0).floor();
-    let font_size = node_count_factor * 3.0 + 15.0;
-    let arrow_size = node_count_factor * 0.2 + 0.8;
-    let edge_width = node_count_factor * 0.4 + 1.2;
-    let node_border_width = edge_width * 0.75;
-
-    // TODO: Customise style
-    let mut command = Command::new("dot");
-    command
-        .stdin(Stdio::piped())
-        .stdout(Stdio::piped())
-        .arg("-Tsvg")
-        .arg("-Gpad=1.0")
-        .arg("-Nshape=circle")
-        .arg(format!("-Npenwidth={node_border_width}"))
-        .arg("-Nstyle=filled")
-        .arg("-Nfixedsize=shape")
-        .arg("-Nfontname=monospace")
-        .arg(format!("-Nfontsize={font_size}"))
-        .arg(format!("-Earrowsize={arrow_size}"))
-        .arg("-Earrowhead=onormal")
-        .arg(format!("-Epenwidth={edge_width}"))
-        .arg("-Gnodesep=0.35")
-        .arg("-Granksep=0.7");
-
-    if dark_mode {
-        command
-            .arg("-Ncolor=#FFFFFF9F")
-            .arg("-Ecolor=#FFFFFF9F")
-            .arg("-Gbgcolor=#000000")
-            .arg("-Nfontcolor=#FFFFFF");
-    } else {
-        command.arg("-Ncolor=#0000009F").arg("-Ecolor=#0000009F");
-    }
-
-    let mut child = command.spawn().context("failed to execute dot")?;
-
-    let stdin = child.stdin.as_mut().context("failed to get stdin")?;
-    stdin
-        .write_all(dot_output.as_bytes())
-        .context("failed to write into stdin")?;
-
-    let output = child.wait_with_output().context("failed to wait on dot")?;
-    std::fs::write(output_filename, output.stdout).context("failed to write output svg file")?;
-    if !no_open {
-        open::that_detached(output_filename).context("failed to open output svg")?;
-    }
-    Ok(())
-}
-
 struct NodeColoringValues {
     values: Vec<usize>,
     gamma: f32,
@@ -239,14 +172,7 @@ struct NodeColoringValues {
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
-    let options = CargoOptions {
-        package: args.package,
-        binary: args.binary.clone(),
-        features: args.features,
-        all_features: args.all_features,
-        no_default_features: args.no_default_features,
-        release: args.release,
-    };
+    let options = CargoOptions::from(&args);
 
     let tree_output = cargo_tree_output(&options)?;
     let mut graph = get_dep_graph(&tree_output).context("failed to parse cargo-tree output")?;
@@ -254,10 +180,10 @@ fn main() -> anyhow::Result<()> {
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
 
-    let mut root_idx = NodeIndex::new(0);
+    let mut root_idx = petgraph::graph::NodeIndex::new(0);
 
-    if let Some(root) = args.root {
-        root_idx = change_root(&mut graph, &root)?;
+    if let Some(root) = &args.root {
+        root_idx = change_root(&mut graph, root)?;
     }
 
     let std_idx = if args.std {
@@ -286,7 +212,7 @@ fn main() -> anyhow::Result<()> {
             }
 
             let max = values.iter().copied().max().unwrap();
-            let gradient = args.gradient.unwrap_or_default().into();
+            let gradient = args.gradient.clone().unwrap_or_default().into();
 
             Some(NodeColoringValues {
                 values,
@@ -305,68 +231,15 @@ fn main() -> anyhow::Result<()> {
         remove_deep_deps(&mut graph, root_idx, max_depth, std_idx);
     }
 
-    let binding = |_, (i, n): (NodeIndex, &NodeWeight)| {
-        let short_name = n.short_name();
-        let mut size = size_map.get(short_name).copied().unwrap_or_default();
-        if let Some(bin) = args.binary.as_ref()
-            && i.index() == 0
-        {
-            size += size_map.get(bin).copied().unwrap_or_default();
-        }
-        let width = (size as f32 / 4096.0 + 1.0).log10();
-
-        let human_size = humansize::format_size(size, humansize::BINARY);
-        let tooltip = format!("{}\n{human_size}", n.name);
-
-        let node_color = if let Some(NodeColoringValues {
-            values,
-            gamma,
-            max,
-            gradient,
-        }) = &node_colouring_values
-        {
-            let mut t = (values[i.index()] as f32 / *max as f32).powf(*gamma);
-            if args.inverse_gradient {
-                t = 1.0 - t;
-            }
-
-            let mut node_color = gradient.at(t);
-            if args.dark_mode {
-                let mut hsla = node_color.to_hsla();
-                hsla[2] = 1.0 - hsla[2];
-                node_color = colorgrad::Color::from_hsla(hsla[0], hsla[1], hsla[2], hsla[3])
-            }
-            node_color
-        } else {
-            colorgrad::Color::new(1.0, 1.0, 1.0, 1.0)
-        };
-
-        let node_color = node_color.to_css_hex();
-        format!(
-            r#"label = "{short_name}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
-        )
-    };
-
-    let dot = Dot::with_attr_getters(
-        &graph,
-        &[Config::EdgeNoLabel, Config::NodeNoLabel],
-        &|g, e| {
-            let source = g.node_weight(e.source()).unwrap().short_name();
-            let target = g.node_weight(e.target()).unwrap().short_name();
-            format!(r#"edgetooltip = "{source} -> {target}""#)
-        },
-        &binding,
-    );
-
-    let dot_output = format!("{dot:?}");
     let output_filename = args.output.as_deref();
+    let dot = output_dot(&graph, &size_map, &args, node_colouring_values);
 
     if args.dot_only {
-        std::fs::write(output_filename.unwrap_or("output.gv"), dot_output)
+        std::fs::write(output_filename.unwrap_or("output.gv"), dot)
             .context("failed to write output dot file")?;
     } else {
         output_svg(
-            &dot_output,
+            &dot,
             &graph,
             output_filename.unwrap_or("output.svg"),
             args.dark_mode,
