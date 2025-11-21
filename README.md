@@ -6,11 +6,11 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ## Examples
 
-`pugio --release --gradient blues -t 1KiB -o images/pugio.svg`
+`pugio --release --gradient blues -t non-zero -o images/pugio.svg`
 
 ![pugio](images/pugio.svg)
 
-`pugio --bin rg --release --scheme dep-count --gradient purples -t 4096 --gamma 0.5 --dark-mode -o images/ripgrep.svg`
+`pugio --bin rg --release --scheme dep-count --gradient purples -R "grep v0.4.1" -d 2 -t 1KiB --gamma 0.5 --dark-mode --std -o images/ripgrep.svg`
 
 ![ripgrep](images/ripgrep.svg)
 
@@ -45,17 +45,22 @@ Options:
       --all-features           Activate all available features
       --no-default-features    Do not activate the `default` feature
       --release                Build artifacts in release mode, with optimizations
+  -R, --root <ROOT>            Change root to the specified dependency name
+                                unique prefix is supported
       --std                    Add std standalone node
   -s, --scheme <SCHEME>        Color scheme of nodes
-                                - "cum-sum": cumulative sum of the size of a node and its dependencies
+                                - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
                                 - "dep-count": dependency count; number of transitive dependency relations from a node
                                 - "rev-dep-count": reverse dependency count; number of paths from the root to a node
+                                - "none"
   -g, --gradient <GRADIENT>    Color gradient of nodes
-                                - "reds", "oranges", "purples", "greens", "blues"
+                                - "reds" (default), "oranges", "purples", "greens", "blues"
                                 - custom CSS gradient format, e.g. "#fff, 75%, #00f"
       --gamma <GAMMA>          Color gamma of nodes, between 0.0 and 1.0
+                                default is scheme-specific
   -t, --threshold <THRESHOLD>  Remove nodes that have cumulative sum below threshold
-                                support human readable byte format, e.g. "21KiB", "69 KB"
+                                - human readable byte format, e.g. "21KiB", "69 KB"
+                                - "non-zero"
   -d, --max-depth <MAX_DEPTH>  Remove nodes that are more than max depth deep
       --inverse-gradient       Inverse color gradient
       --dark-mode              Dark mode for output svg file

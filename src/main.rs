@@ -106,12 +106,12 @@ struct Args {
 
     /// Change root to the specified dependency name
     ///  unique prefix is supported
-    #[arg(long, verbatim_doc_comment)]
+    #[arg(short = 'R', long, verbatim_doc_comment)]
     root: Option<String>,
 
     /// Add std standalone node
-    #[arg(long = "std")]
-    has_std: bool,
+    #[arg(long)]
+    std: bool,
 
     /// Color scheme of nodes
     ///  - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
@@ -133,8 +133,9 @@ struct Args {
     gamma: Option<f32>,
 
     /// Remove nodes that have cumulative sum below threshold
-    ///  support human readable byte format, e.g. "21KiB", "69 KB"
-    #[arg(short, long, value_parser = |s: &str| parse_size::parse_size(s).map(|b| b as usize), verbatim_doc_comment)]
+    ///  - human readable byte format, e.g. "21KiB", "69 KB"
+    ///  - "non-zero"
+    #[arg(short, long, value_parser = parse_threshold, verbatim_doc_comment)]
     threshold: Option<usize>,
 
     /// Remove nodes that are more than max depth deep
@@ -161,6 +162,14 @@ struct Args {
     #[arg(long)]
     no_open: bool,
     // TODO: Add filter option
+}
+
+fn parse_threshold(t: &str) -> Result<usize, parse_size::Error> {
+    if t == "non-zero" {
+        Ok(1)
+    } else {
+        parse_size::parse_size(t).map(|b| b as usize)
+    }
 }
 
 fn output_svg(
@@ -240,8 +249,7 @@ fn main() -> anyhow::Result<()> {
     };
 
     let tree_output = cargo_tree_output(&options)?;
-    let mut graph =
-        get_dep_graph(&tree_output, args.has_std).context("failed to parse cargo-tree output")?;
+    let mut graph = get_dep_graph(&tree_output).context("failed to parse cargo-tree output")?;
 
     let bloat_output = cargo_bloat_output(&options)?;
     let size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
@@ -251,6 +259,15 @@ fn main() -> anyhow::Result<()> {
     if let Some(root) = args.root {
         root_idx = change_root(&mut graph, &root)?;
     }
+
+    let std_idx = if args.std {
+        Some(graph.add_node(NodeWeight {
+            name: "std".to_string(),
+            short_end: 3,
+        }))
+    } else {
+        None
+    };
 
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
@@ -281,11 +298,11 @@ fn main() -> anyhow::Result<()> {
     };
 
     if let Some(threshold) = args.threshold {
-        remove_small_deps(&mut graph, &cum_sums_vec.0, threshold);
+        remove_small_deps(&mut graph, &cum_sums_vec.0, threshold, std_idx);
     }
 
     if let Some(max_depth) = args.max_depth {
-        remove_deep_deps(&mut graph, root_idx, max_depth);
+        remove_deep_deps(&mut graph, root_idx, max_depth, std_idx);
     }
 
     let binding = |_, (i, n): (NodeIndex, &NodeWeight)| {

@@ -84,9 +84,10 @@ pub fn remove_small_deps(
     graph: &mut StableGraph<NodeWeight, ()>,
     cum_sums: &[usize],
     threshold: usize,
+    std_idx: Option<NodeIndex>,
 ) {
     for (idx, sum) in cum_sums.iter().enumerate() {
-        if *sum < threshold {
+        if *sum < threshold && Some(NodeIndex::new(idx)) != std_idx {
             graph.remove_node(NodeIndex::new(idx));
         }
     }
@@ -96,6 +97,7 @@ pub fn remove_deep_deps(
     graph: &mut StableGraph<NodeWeight, ()>,
     root_idx: NodeIndex,
     max_depth: usize,
+    std_idx: Option<NodeIndex>,
 ) {
     // TODO: use petgraph#868 once merged
     let mut queue = VecDeque::from([(root_idx, 0)]);
@@ -113,11 +115,13 @@ pub fn remove_deep_deps(
         }
     }
 
-    for idx in has_visited
-        .iter()
-        .enumerate()
-        .filter_map(|(i, b)| if !b { Some(i) } else { None })
-    {
+    for idx in has_visited.iter().enumerate().filter_map(|(i, b)| {
+        if !b && Some(NodeIndex::new(i)) != std_idx {
+            Some(i)
+        } else {
+            None
+        }
+    }) {
         graph.remove_node(NodeIndex::new(idx));
     }
 }

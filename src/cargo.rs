@@ -108,7 +108,7 @@ pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
     Ok(map)
 }
 
-pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<NodeWeight, ()>> {
+pub fn get_dep_graph(output: &str) -> anyhow::Result<StableGraph<NodeWeight, ()>> {
     let mut graph = StableGraph::new();
     let mut map: HashMap<&str, NodeIndex> = HashMap::new();
 
@@ -148,13 +148,5 @@ pub fn get_dep_graph(output: &str, has_std: bool) -> anyhow::Result<StableGraph<
         }
         last = node_index;
     }
-
-    if has_std {
-        graph.add_node(NodeWeight {
-            name: "std".to_string(),
-            short_end: 3,
-        });
-    }
-
     Ok(graph)
 }
