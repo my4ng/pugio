@@ -1,5 +1,7 @@
 # Pugio
 
+[![Crates.io Version](https://img.shields.io/crates/v/pugio)](https://crates.io/crates/pugio) ![Crates.io MSRV](https://img.shields.io/crates/msrv/pugio) [![GitHub License](https://img.shields.io/github/license/my4ng/pugio)](https://github.com/my4ng/pugio/blob/main/LICENSE)
+
 *Pugio* is a graph visualisation tool for Rust to estimate and present the binary size contributions of a crate and its dependencies. It uses `cargo-tree` and `cargo-bloat` to build the dependency graph where the diameter of each crate node is logarithmic to its size. The resulting graph can then be either exported with `graphviz` and opened as an SVG file, or as a DOT graph file for additional processing.
 
 It is important to note that the sizes is and will always be only an *estimation*. Some information is irrevocably lost during compilation and linkage. In addition, calls to the standard library is not included in the caller's size (although the total size of the standard library can be shown with the `--std` flag). Multiple versions of a dependency is also not distinguishable in the final binary.
@@ -18,11 +20,19 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ![hyperfine](images/hyperfine.svg)
 
+## Installation
+
+`cargo install --locked pugio`
+
 ## Dependencies
 
 - `cargo`: `cargo-tree` command is now part of the cargo binary
 - [`cargo-bloat`](https://crates.io/crates/cargo-bloat)
+  - `cargo install cargo-bloat --no-default-features`
 - [`dot`](https://graphviz.org/): part of the `graphviz` package; optional, needed for SVG image generation (disabled via the `--dot-only` option)
+  - Debian, Ubuntu: `sudo apt install graphviz`
+  - Fedora, RHEL-compatible: `sudo dnf install graphviz`
+  - Others: [graphviz download](https://graphviz.org/download/)
 
 ## Planned Features
 
@@ -73,6 +83,6 @@ Options:
 
 ## License
 
-Pugio is licensed under the BSD+Patent license, see [LICENSE](LICENSE) for more details.
+Pugio is licensed under the BSD-2-Clause Plus Patent license, see [LICENSE](LICENSE) for more details.
 
 *Note: This license is designed to provide: a) a simple permissive license; b) that is compatible with the GNU General Public License (GPL), version 2; and c) which also has an express patent grant included.*
