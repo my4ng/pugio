@@ -1,0 +1,80 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "[0-9]+.[0-9]+.[0-9]+"
+
+permissions:
+  contents: write
+
+jobs:
+  build:
+    env:
+      RUSTFLAGS: "-D warnings"
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-gnu
+          - os: ubuntu-latest
+            target: x86_64-unknown-linux-musl
+          - os: macos-latest
+            target: aarch64-apple-darwin
+          - os: windows-latest
+            target: x86_64-pc-windows-msvc
+    name: Build ${{ matrix.target }}
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v6
+      - uses: actions-rust-lang/setup-rust-toolchain@v1
+        with:
+          target: ${{ matrix.target }}
+      - name: build
+        run: cargo build --release --locked --target ${{ matrix.target }}
+
+      - name: archive
+        if: matrix.os == 'windows-latest'
+        run: |
+          copy target\${{ matrix.target }}\release\pugio.exe pugio.exe
+          7z a pugio-${{ github.ref_name }}-${{ matrix.target }}.zip pugio.exe README.md LICENSE
+
+      - name: archive
+        if: matrix.os != 'windows-latest'
+        run: |
+          cp target/${{ matrix.target }}/release/pugio pugio
+          tar czvf pugio-${{ github.ref_name }}-${{ matrix.target }}.tar.gz pugio README.md LICENSE
+
+      - name: upload artifact
+        if: matrix.os == 'windows-latest'
+        uses: actions/upload-artifact@v5
+        with:
+          name: pugio-${{ github.ref_name }}-${{ matrix.target }}.zip
+          path: pugio-${{ github.ref_name }}-${{ matrix.target }}.zip
+          if-no-files-found: error
+
+      - name: upload artifact
+        if: matrix.os != 'windows-latest'
+        uses: actions/upload-artifact@v5
+        with:
+          name: pugio-${{ github.ref_name }}-${{ matrix.target }}.tar.gz
+          path: pugio-${{ github.ref_name }}-${{ matrix.target }}.tar.gz
+          if-no-files-found: error
+
+  release:
+    needs: build
+    name: Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: download artifacts
+        uses: actions/download-artifact@v6
+        with:
+          merge-multiple: true
+
+      - name: upload release
+        uses: softprops/action-gh-release@v2
+        with:
+          draft: true
+          files: pugio-*
+          fail_on_unmatched_files: true
