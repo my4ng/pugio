@@ -112,6 +112,23 @@ Options:
           Print version
 ```
 
+## Template values
+
+### Node
+
+```plain
+{short}, {extra}, {full}
+{size}, {size_binary}, {size_decimal}
+{value}, {value_binary}, {value_decimal}
+{scheme}
+```
+
+### Edge
+
+```plain
+{source}, {target}
+```
+
 ## License
 
 Pugio is licensed under the BSD-2-Clause Plus Patent license, see [LICENSE](LICENSE) for more details.
