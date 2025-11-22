@@ -21,14 +21,16 @@ clap = { version = "4.5", features = [
 ], default-features = false }
 colorgrad = { version = "0.8", features = ["preset"], default-features = false }
 humansize = "2.1"
-open = "5"
+open = "5.3"
 parse-size = "1.1"
 petgraph = { version = "0.8", features = [
     "std",
     "stable_graph",
 ], default-features = false }
-serde_json = "1.0"
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
 strum = { version = "0.27", features = ["derive"] }
+tinytemplate = "1.2"
 
 [profile.release]
 lto = "thin"

@@ -19,8 +19,16 @@ impl std::fmt::Debug for NodeWeight {
 }
 
 impl NodeWeight {
-    pub fn short_name(&self) -> &str {
+    pub fn short(&self) -> &str {
         &self.name[..self.short_end]
+    }
+
+    pub fn extra(&self) -> &str {
+        &self.name[self.short_end + 1..]
+    }
+
+    pub fn full(&self) -> &str {
+        &self.name
     }
 }
 
@@ -32,7 +40,7 @@ pub fn cum_sums(
     let mut cum_sums = vec![0; graph.capacity().0];
 
     for (idx, size) in graph.node_indices().filter_map(|i| {
-        let short_name = graph.node_weight(i).unwrap().short_name();
+        let short_name = graph.node_weight(i).unwrap().short();
         map.get(short_name).copied().map(|s| (i.index(), s))
     }) {
         cum_sums[idx] = size;

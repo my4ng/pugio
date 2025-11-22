@@ -1,6 +1,11 @@
+#![forbid(unsafe_code)]
+
 mod cargo;
 mod dot;
 mod graph;
+mod template;
+
+use std::str::FromStr;
 
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
@@ -9,19 +14,28 @@ use crate::{
         NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_small_deps,
         rev_dep_counts,
     },
+    template::get_templates,
 };
 use anyhow::Context;
 use clap::Parser;
 use colorgrad::BasisGradient;
 
-#[derive(Default, Clone, Copy, strum::EnumString)]
+#[derive(Clone, Copy, strum::EnumString)]
 #[strum(serialize_all = "kebab-case")]
 enum NodeColoringScheme {
-    #[default]
     CumSum,
     DepCount,
     RevDepCount,
-    None,
+}
+
+impl From<NodeColoringScheme> for &'static str {
+    fn from(value: NodeColoringScheme) -> Self {
+        match value {
+            NodeColoringScheme::CumSum => "cumulative sum",
+            NodeColoringScheme::DepCount => "dependency count",
+            NodeColoringScheme::RevDepCount => "reverse dependency count",
+        }
+    }
 }
 
 #[derive(Default, Clone)]
@@ -67,6 +81,8 @@ impl From<NodeColoringGradient> for BasisGradient {
     }
 }
 
+type OptScheme = Option<NodeColoringScheme>;
+
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Args {
@@ -108,8 +124,8 @@ struct Args {
     ///  - "dep-count": dependency count; number of transitive dependency relations from a node
     ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
     ///  - "none"
-    #[arg(short, long, verbatim_doc_comment)]
-    scheme: Option<NodeColoringScheme>,
+    #[arg(short, long, default_value = "cum-sum", value_parser = parse_scheme, verbatim_doc_comment)]
+    scheme: OptScheme,
 
     /// Color gradient of nodes
     ///  - "reds" (default), "oranges", "purples", "greens", "blues"
@@ -140,6 +156,25 @@ struct Args {
     #[arg(long)]
     dark_mode: bool,
 
+    /// Custom node label formatting template
+    ///  default: "{short}"
+    #[arg(long, verbatim_doc_comment)]
+    node_label_template: Option<String>,
+
+    /// Custom node tooltip formatting template
+    ///  default: "{full}\n{size_binary}"
+    #[arg(long, verbatim_doc_comment)]
+    node_tooltip_template: Option<String>,
+
+    /// Custom edge label formatting template
+    #[arg(long)]
+    edge_label_template: Option<String>,
+
+    /// Custom edge tooltip formatting template
+    ///  default: "{source} -> {target}"
+    #[arg(long)]
+    edge_tooltip_template: Option<String>,
+
     /// Dot output file only
     #[arg(long)]
     dot_only: bool,
@@ -152,6 +187,13 @@ struct Args {
     #[arg(long)]
     no_open: bool,
     // TODO: Add filter option
+}
+
+fn parse_scheme(s: &str) -> Result<Option<NodeColoringScheme>, strum::ParseError> {
+    match s {
+        "none" => Ok(None),
+        _ => Ok(Some(NodeColoringScheme::from_str(s)?)),
+    }
 }
 
 fn parse_threshold(t: &str) -> Result<usize, parse_size::Error> {
@@ -188,7 +230,7 @@ fn main() -> anyhow::Result<()> {
 
     let std_idx = if args.std {
         Some(graph.add_node(NodeWeight {
-            name: "std".to_string(),
+            name: "std ".to_string(),
             short_end: 3,
         }))
     } else {
@@ -197,14 +239,13 @@ fn main() -> anyhow::Result<()> {
 
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
-    let node_colouring_values = match args.scheme.unwrap_or_default() {
-        NodeColoringScheme::None => None,
-        scheme => {
+    let node_colouring_values = match args.scheme {
+        None => None,
+        Some(scheme) => {
             let (values, mut gamma) = match scheme {
                 NodeColoringScheme::CumSum => cum_sums_vec.clone(),
                 NodeColoringScheme::DepCount => dep_counts(&graph),
                 NodeColoringScheme::RevDepCount => rev_dep_counts(&graph),
-                _ => unreachable!(),
             };
 
             if let Some(gamma_) = args.gamma {
@@ -232,19 +273,14 @@ fn main() -> anyhow::Result<()> {
     }
 
     let output_filename = args.output.as_deref();
-    let dot = output_dot(&graph, &size_map, &args, node_colouring_values);
+    let templates = get_templates(&args).context("failed to parse templates")?;
+    let dot = output_dot(&graph, &size_map, &args, &templates, node_colouring_values);
 
     if args.dot_only {
         std::fs::write(output_filename.unwrap_or("output.gv"), dot)
             .context("failed to write output dot file")?;
     } else {
-        output_svg(
-            &dot,
-            &graph,
-            output_filename.unwrap_or("output.svg"),
-            args.dark_mode,
-            args.no_open,
-        )?;
+        output_svg(&dot, &graph, output_filename.unwrap_or("output.svg"), &args)?;
     }
 
     Ok(())
