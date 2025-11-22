@@ -124,7 +124,7 @@ struct Args {
     ///  - "dep-count": dependency count; number of transitive dependency relations from a node
     ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
     ///  - "none"
-    #[arg(short, long, default_value = "cum-sum", value_parser = parse_scheme, verbatim_doc_comment)]
+    #[arg(short, long, default_value = "cum-sum", hide_default_value = true, value_parser = parse_scheme, verbatim_doc_comment)]
     scheme: OptScheme,
 
     /// Color gradient of nodes
