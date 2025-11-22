@@ -36,3 +36,6 @@ tinytemplate = "1.2"
 lto = "thin"
 strip = "debuginfo"
 codegen-units = 1
+
+[lints.rust]
+unsafe_code = "forbid"
