@@ -21,8 +21,8 @@ pub struct Config {
     pub package: Option<String>,
 
     /// Binary to inspect
-    #[arg(long = "bin")]
-    pub binary: Option<String>,
+    #[arg(long)]
+    pub bin: Option<String>,
 
     /// Space or comma separated list of features to activate
     #[arg(short = 'F', long)]
@@ -100,8 +100,8 @@ pub struct Config {
     pub threshold: Option<usize>,
 
     /// Remove nodes that are more than max depth deep
-    #[arg(short = 'd', long)]
-    pub max_depth: Option<usize>,
+    #[arg(short = 'd', long = "depth")]
+    pub depth: Option<usize>,
 
     /// Inverse color gradient
     #[arg(long)]

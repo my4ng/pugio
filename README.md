@@ -100,7 +100,7 @@ Options:
           Remove nodes that have cumulative sum below threshold
            - human readable byte format, e.g. "21KiB", "69 KB"
            - "non-zero"
-  -d, --max-depth <MAX_DEPTH>
+  -d, --depth <MAX_DEPTH>
           Remove nodes that are more than max depth deep
       --inverse-gradient
           Inverse color gradient

@@ -119,7 +119,7 @@ pub fn output_dot(
 
     let node_binding = |_, (i, n): (NodeIndex, &NodeWeight)| {
         let mut size = size_map.get(n.short()).copied().unwrap_or_default();
-        if let Some(bin) = config.binary.as_ref()
+        if let Some(bin) = config.bin.as_ref()
             && i.index() == 0
         {
             size += size_map.get(bin).copied().unwrap_or_default();

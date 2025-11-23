@@ -12,7 +12,7 @@ use crate::{config::Config, graph::NodeWeight};
 #[derive(Debug, Default)]
 pub struct CargoOptions {
     pub package: Option<String>,
-    pub binary: Option<String>,
+    pub bin: Option<String>,
     pub features: Option<String>,
     pub all_features: bool,
     pub no_default_features: bool,
@@ -23,7 +23,7 @@ impl From<&Config> for CargoOptions {
     fn from(value: &Config) -> Self {
         Self {
             package: value.package.clone(),
-            binary: value.binary.clone(),
+            bin: value.bin.clone(),
             features: value.features.clone(),
             all_features: value.all_features,
             no_default_features: value.no_default_features,
@@ -79,7 +79,7 @@ pub fn cargo_bloat_output(options: &CargoOptions) -> anyhow::Result<String> {
         command.arg(format!("--package={package}"));
     }
 
-    if let Some(binary) = &options.binary {
+    if let Some(binary) = &options.bin {
         command.arg(format!("--bin={binary}"));
     }
 

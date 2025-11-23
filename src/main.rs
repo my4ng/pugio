@@ -113,8 +113,8 @@ fn main() -> anyhow::Result<()> {
             .context("failed to exclude dependencies")?;
     }
 
-    if let Some(max_depth) = config.max_depth {
-        remove_deep_deps(&mut graph, root_idx, max_depth, std_idx);
+    if let Some(depth) = config.depth {
+        remove_deep_deps(&mut graph, root_idx, depth, std_idx);
     }
 
     let output_filename = config.output.as_deref();
