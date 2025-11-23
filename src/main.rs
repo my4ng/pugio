@@ -9,8 +9,8 @@ use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
     dot::{output_dot, output_svg},
     graph::{
-        NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_small_deps,
-        rev_dep_counts,
+        NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_excluded_deps,
+        remove_small_deps, rev_dep_counts,
     },
     template::get_templates,
 };
@@ -108,9 +108,24 @@ struct Args {
     #[arg(long)]
     release: bool,
 
-    /// Change root to the specified dependency name
-    ///  unique prefix is supported
-    #[arg(short = 'R', long, verbatim_doc_comment)]
+    /// Exclude dependency names matching the regex patterns
+    #[cfg(feature = "regex")]
+    #[arg(short = 'E', long)]
+    excludes: Vec<String>,
+
+    /// Exclude dependency names matching the prefixes
+    #[cfg(not(feature = "regex"))]
+    #[arg(short = 'E', long)]
+    excludes: Vec<String>,
+
+    /// Change root to the unique depndency name matching the regex pattern
+    #[cfg(feature = "regex")]
+    #[arg(short = 'R', long)]
+    root: Option<String>,
+
+    /// Change root to the unique depndency name matching the prefix
+    #[cfg(not(feature = "regex"))]
+    #[arg(short = 'R', long)]
     root: Option<String>,
 
     /// Add std standalone node
@@ -165,12 +180,12 @@ struct Args {
     node_tooltip_template: Option<String>,
 
     /// Custom edge label formatting template
-    #[arg(long)]
+    #[arg(long, verbatim_doc_comment)]
     edge_label_template: Option<String>,
 
     /// Custom edge tooltip formatting template
     ///  default: "{source} -> {target}"
-    #[arg(long)]
+    #[arg(long, verbatim_doc_comment)]
     edge_tooltip_template: Option<String>,
 
     /// Dot output file only
@@ -223,7 +238,7 @@ fn main() -> anyhow::Result<()> {
     let mut root_idx = petgraph::graph::NodeIndex::new(0);
 
     if let Some(root) = &args.root {
-        root_idx = change_root(&mut graph, root)?;
+        root_idx = change_root(&mut graph, root).context("failed to change root")?;
     }
 
     let std_idx = if args.std {
@@ -264,6 +279,11 @@ fn main() -> anyhow::Result<()> {
 
     if let Some(threshold) = args.threshold {
         remove_small_deps(&mut graph, &cum_sums_vec.0, threshold, std_idx);
+    }
+
+    if !args.excludes.is_empty() {
+        remove_excluded_deps(&mut graph, &args.excludes, root_idx, std_idx)
+            .context("failed to exclude dependencies")?;
     }
 
     if let Some(max_depth) = args.max_depth {

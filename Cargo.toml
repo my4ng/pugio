@@ -12,6 +12,7 @@ rust-version = "1.88"
 
 [dependencies]
 anyhow = "1"
+cfg-if = "1"
 clap = { version = "4.5", features = [
     "std",
     "help",
@@ -31,6 +32,14 @@ serde = { version = "1", features = ["derive"] }
 serde_json = "1"
 strum = { version = "0.27", features = ["derive"] }
 tinytemplate = "1.2"
+
+[dependencies.regex-lite]
+version = "0.1"
+optional = true
+
+[features]
+default = ["regex"]
+regex = ["dep:regex-lite"]
 
 [profile.release]
 lto = "thin"

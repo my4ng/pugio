@@ -1,5 +1,7 @@
 use std::collections::{HashMap, VecDeque};
 
+#[cfg(feature = "regex")]
+use anyhow::Context;
 use anyhow::bail;
 use petgraph::{
     graph::NodeIndex,
@@ -123,6 +125,36 @@ pub fn remove_deep_deps(
         }
     }
 
+    remove_not_visited(graph, &has_visited, std_idx);
+}
+
+fn get_matched_node_indices(
+    graph: &StableGraph<NodeWeight, ()>,
+    pattern: &str,
+) -> anyhow::Result<Vec<NodeIndex>> {
+    #[cfg(feature = "regex")]
+    let regex = regex_lite::Regex::new(pattern)
+        .with_context(|| format!("failed to parse pattern as regex: \"{pattern}\""))?;
+
+    let filter = |i: &NodeIndex| -> bool {
+        let name = &graph.node_weight(*i).unwrap().name;
+        cfg_if::cfg_if! {
+            if #[cfg(feature = "regex")] {
+                regex.is_match(name)
+            } else {
+                name.starts_with(pattern)
+            }
+        }
+    };
+
+    Ok(graph.node_indices().filter(filter).collect::<Vec<_>>())
+}
+
+fn remove_not_visited(
+    graph: &mut StableGraph<NodeWeight, ()>,
+    has_visited: &[bool],
+    std_idx: Option<NodeIndex>,
+) {
     for idx in has_visited.iter().enumerate().filter_map(|(i, b)| {
         if !b && Some(NodeIndex::new(i)) != std_idx {
             Some(i)
@@ -134,20 +166,41 @@ pub fn remove_deep_deps(
     }
 }
 
+pub fn remove_excluded_deps(
+    graph: &mut StableGraph<NodeWeight, ()>,
+    patterns: &[String],
+    root_idx: NodeIndex,
+    std_idx: Option<NodeIndex>,
+) -> anyhow::Result<()> {
+    let excludes = patterns
+        .iter()
+        .map(|p| get_matched_node_indices(graph, p))
+        .collect::<anyhow::Result<Vec<_>>>()?;
+
+    for exclude in excludes.iter().flatten() {
+        graph.remove_node(*exclude);
+    }
+
+    let mut has_visited = vec![false; graph.capacity().0];
+    for node_idx in Dfs::new(&*graph, root_idx).iter(&*graph) {
+        has_visited[node_idx.index()] = true;
+    }
+
+    remove_not_visited(graph, &has_visited, std_idx);
+    Ok(())
+}
+
 pub fn change_root(
     graph: &mut StableGraph<NodeWeight, ()>,
-    new_root: &str,
+    pattern: &str,
 ) -> anyhow::Result<NodeIndex> {
-    let new_roots = graph
-        .node_indices()
-        .filter(|i| graph.node_weight(*i).unwrap().name.starts_with(new_root))
-        .collect::<Vec<_>>();
+    let new_roots = get_matched_node_indices(graph, pattern)?;
 
-    let new_root = if new_roots.is_empty() {
-        bail!("new root name not found");
+    if new_roots.is_empty() {
+        bail!("dependency name pattern not found: \"{pattern}\"");
     } else if new_roots.len() > 1 {
         bail!(
-            "new root name not unique, possible full names: {}",
+            "dependency name pattern not unique: \"{pattern}\", possible full names: {}",
             new_roots
                 .iter()
                 .map(|n| format!(r#""{}""#, graph.node_weight(*n).unwrap().name))
@@ -155,21 +208,13 @@ pub fn change_root(
                 .join(", ")
         )
     } else {
-        new_roots[0]
-    };
+        let new_root = new_roots[0];
+        let mut has_visited = vec![false; graph.capacity().0];
+        for node_idx in Dfs::new(&*graph, new_root).iter(&*graph) {
+            has_visited[node_idx.index()] = true;
+        }
 
-    let mut is_reachable = vec![false; graph.capacity().0];
-    for node_idx in Dfs::new(&*graph, new_root).iter(&*graph) {
-        is_reachable[node_idx.index()] = true;
+        remove_not_visited(graph, &has_visited, None);
+        Ok(new_root)
     }
-
-    for idx in is_reachable
-        .iter()
-        .enumerate()
-        .filter_map(|(i, b)| if !b { Some(i) } else { None })
-    {
-        graph.remove_node(NodeIndex::new(idx));
-    }
-
-    Ok(new_root)
 }

@@ -20,10 +20,6 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ![hyperfine](images/hyperfine.svg)
 
-## Installation
-
-`cargo install --locked pugio`
-
 ## Dependencies
 
 - `cargo`: `cargo-tree` command is now part of the cargo binary
@@ -33,6 +29,14 @@ It is important to note that the sizes is and will always be only an *estimation
   - Debian, Ubuntu: `sudo apt install graphviz`
   - Fedora, RHEL-compatible: `sudo dnf install graphviz`
   - Others: [graphviz download](https://graphviz.org/download/)
+
+## Installation
+
+`cargo install --locked pugio`
+
+Or install binary directly from GitHub release assets via `cargo-binstall`:
+
+`cargo binstall --locked pugio`
 
 ## Planned Features
 
