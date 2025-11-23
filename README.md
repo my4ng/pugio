@@ -16,7 +16,7 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ![ripgrep](images/ripgrep.svg)
 
-`pugio --release --node-label-template "{short}\n{value_binary}" -g reds -t non-zero --dark-mode --std -o images/hyperfine.svg`
+`pugio --release --node-label-template "{short}\n{value_binary}" -E 'clap|rand' -g reds -t non-zero --dark-mode --std -o images/hyperfine.svg`
 
 ![hyperfine](images/hyperfine.svg)
 
@@ -37,6 +37,15 @@ It is important to note that the sizes is and will always be only an *estimation
 Or install binary directly from GitHub release assets via `cargo-binstall`:
 
 `cargo binstall --locked pugio`
+
+To customise enabled Cargo features, add the options:
+
+`--no-default-features --features="..."`
+
+## Feature flags
+
+- `default`: `regex`
+- `regex`: support regex pattern matching in options
 
 ## Planned Features
 
@@ -65,9 +74,10 @@ Options:
           Do not activate the `default` feature
       --release
           Build artifacts in release mode, with optimizations
+  -E, --excludes <EXCLUDES>
+          Exclude dependency names matching the regex patterns
   -R, --root <ROOT>
-          Change root to the specified dependency name
-           unique prefix is supported
+          Change root to the unique depndency name matching the regex pattern
       --std
           Add std standalone node
   -s, --scheme <SCHEME>
