@@ -1,27 +1,29 @@
 use serde::Serialize;
 use tinytemplate::TinyTemplate;
 
-use crate::{Args, NodeColoringScheme, graph::NodeWeight};
+use crate::{NodeColoringScheme, config::Config, graph::NodeWeight};
 
-pub fn get_templates(args: &Args) -> anyhow::Result<TinyTemplate<'_>> {
+pub fn get_templates(config: &Config) -> anyhow::Result<TinyTemplate<'_>> {
     let mut templates = TinyTemplate::new();
     templates.add_template(
         "node_label",
-        args.node_label_template.as_deref().unwrap_or("{short}"),
+        config.node_label_template.as_deref().unwrap_or("{short}"),
     )?;
     templates.add_template(
         "node_tooltip",
-        args.node_tooltip_template
+        config
+            .node_tooltip_template
             .as_deref()
             .unwrap_or("{full}\n{size_binary}"),
     )?;
     templates.add_template(
         "edge_label",
-        args.edge_label_template.as_deref().unwrap_or(""),
+        config.edge_label_template.as_deref().unwrap_or(""),
     )?;
     templates.add_template(
         "edge_tooltip",
-        args.edge_tooltip_template
+        config
+            .edge_tooltip_template
             .as_deref()
             .unwrap_or("{source} -> {target}"),
     )?;

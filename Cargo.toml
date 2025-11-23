@@ -37,9 +37,20 @@ tinytemplate = "1.2"
 version = "0.1"
 optional = true
 
+[dependencies.serde_with]
+version = "3.16"
+optional = true
+
+[dependencies.toml]
+version = "0.9"
+default-features = false
+features = ["std", "serde", "parse"]
+optional = true
+
 [features]
-default = ["regex"]
+default = ["regex", "config"]
 regex = ["dep:regex-lite"]
+config = ["dep:serde_with", "dep:toml"]
 
 [profile.release]
 lto = "thin"

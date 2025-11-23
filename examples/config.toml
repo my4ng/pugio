@@ -1,0 +1,6 @@
+release = true
+gradient = "blues"
+threshold = "non-zero"
+scale-factor = 1.2
+separation-factor = 0.8
+output = "examples/pugio.svg"

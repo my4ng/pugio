@@ -1,12 +1,12 @@
 mod cargo;
+mod config;
 mod dot;
 mod graph;
 mod template;
 
-use std::str::FromStr;
-
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
+    config::Config,
     dot::{output_dot, output_svg},
     graph::{
         NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_excluded_deps,
@@ -18,6 +18,7 @@ use anyhow::Context;
 use clap::Parser;
 use colorgrad::BasisGradient;
 
+#[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
 #[derive(Clone, Copy, strum::EnumString)]
 #[strum(serialize_all = "kebab-case")]
 enum NodeColoringScheme {
@@ -36,6 +37,7 @@ impl From<NodeColoringScheme> for &'static str {
     }
 }
 
+#[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
 #[derive(Default, Clone)]
 enum NodeColoringGradient {
     #[default]
@@ -79,150 +81,17 @@ impl From<NodeColoringGradient> for BasisGradient {
     }
 }
 
-type OptScheme = Option<NodeColoringScheme>;
-
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
 struct Args {
-    /// Package to inspect
-    #[arg(short, long)]
-    package: Option<String>,
+    /// Config TOML file path, "-" for stdin
+    ///  disables all other options
+    #[cfg(feature = "config")]
+    #[arg(short, long = "config", verbatim_doc_comment)]
+    config_file: Option<String>,
 
-    /// Binary to inspect
-    #[arg(long = "bin")]
-    binary: Option<String>,
-
-    /// Space or comma separated list of features to activate
-    #[arg(short = 'F', long)]
-    features: Option<String>,
-
-    /// Activate all available features
-    #[arg(long)]
-    all_features: bool,
-
-    /// Do not activate the `default` feature
-    #[arg(long)]
-    no_default_features: bool,
-
-    /// Build artifacts in release mode, with optimizations
-    #[arg(long)]
-    release: bool,
-
-    /// Exclude dependency names matching the regex patterns
-    #[cfg(feature = "regex")]
-    #[arg(short = 'E', long)]
-    excludes: Vec<String>,
-
-    /// Exclude dependency names matching the prefixes
-    #[cfg(not(feature = "regex"))]
-    #[arg(short = 'E', long)]
-    excludes: Vec<String>,
-
-    /// Change root to the unique depndency name matching the regex pattern
-    #[cfg(feature = "regex")]
-    #[arg(short = 'R', long)]
-    root: Option<String>,
-
-    /// Change root to the unique depndency name matching the prefix
-    #[cfg(not(feature = "regex"))]
-    #[arg(short = 'R', long)]
-    root: Option<String>,
-
-    /// Add std standalone node
-    #[arg(long)]
-    std: bool,
-
-    /// Color scheme of nodes
-    ///  - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
-    ///  - "dep-count": dependency count; number of transitive dependency relations from a node
-    ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
-    ///  - "none"
-    #[arg(short, long, default_value = "cum-sum", hide_default_value = true, value_parser = parse_scheme, verbatim_doc_comment)]
-    scheme: OptScheme,
-
-    /// Color gradient of nodes
-    ///  - "reds" (default), "oranges", "purples", "greens", "blues"
-    ///  - custom CSS gradient format, e.g. "#fff, 75%, #00f"
-    #[arg(short, long, verbatim_doc_comment)]
-    gradient: Option<NodeColoringGradient>,
-
-    /// Color gamma of nodes, between 0.0 and 1.0
-    ///  default is scheme-specific
-    #[arg(long, verbatim_doc_comment)]
-    gamma: Option<f32>,
-
-    /// Remove nodes that have cumulative sum below threshold
-    ///  - human readable byte format, e.g. "21KiB", "69 KB"
-    ///  - "non-zero"
-    #[arg(short, long, value_parser = parse_threshold, verbatim_doc_comment)]
-    threshold: Option<usize>,
-
-    /// Remove nodes that are more than max depth deep
-    #[arg(short = 'd', long)]
-    max_depth: Option<usize>,
-
-    /// Inverse color gradient
-    #[arg(long)]
-    inverse_gradient: bool,
-
-    /// Dark mode for output svg file
-    #[arg(long)]
-    dark_mode: bool,
-
-    /// Scale factor for output svg file
-    #[arg(long)]
-    scale_factor: Option<f32>,
-
-    /// Separation factor for output svg file
-    #[arg(long)]
-    separation_factor: Option<f32>,
-
-    /// Custom node label formatting template
-    ///  default: "{short}"
-    #[arg(long, verbatim_doc_comment)]
-    node_label_template: Option<String>,
-
-    /// Custom node tooltip formatting template
-    ///  default: "{full}\n{size_binary}"
-    #[arg(long, verbatim_doc_comment)]
-    node_tooltip_template: Option<String>,
-
-    /// Custom edge label formatting template
-    #[arg(long, verbatim_doc_comment)]
-    edge_label_template: Option<String>,
-
-    /// Custom edge tooltip formatting template
-    ///  default: "{source} -> {target}"
-    #[arg(long, verbatim_doc_comment)]
-    edge_tooltip_template: Option<String>,
-
-    /// Dot output file only
-    #[arg(long)]
-    dot_only: bool,
-
-    /// Output filename, default is output.*
-    #[arg(short, long)]
-    output: Option<String>,
-
-    /// Do not open output svg file
-    #[arg(long)]
-    no_open: bool,
-    // TODO: Add filter option
-}
-
-fn parse_scheme(s: &str) -> Result<Option<NodeColoringScheme>, strum::ParseError> {
-    match s {
-        "none" => Ok(None),
-        _ => Ok(Some(NodeColoringScheme::from_str(s)?)),
-    }
-}
-
-fn parse_threshold(t: &str) -> Result<usize, parse_size::Error> {
-    if t == "non-zero" {
-        Ok(1)
-    } else {
-        parse_size::parse_size(t).map(|b| b as usize)
-    }
+    #[command(flatten)]
+    config: Config,
 }
 
 struct NodeColoringValues {
@@ -235,7 +104,24 @@ struct NodeColoringValues {
 fn main() -> anyhow::Result<()> {
     let args = Args::parse();
 
-    let options = CargoOptions::from(&args);
+    cfg_if::cfg_if! {
+        if #[cfg(feature = "config")] {
+            let config = if let Some(config_file) = args.config_file {
+                let config = if config_file == "-" {
+                    std::io::read_to_string(std::io::stdin()).context("failed to read from stdin")?
+                } else {
+                    std::fs::read_to_string(config_file).context("failed to read config file")?
+                };
+                toml::from_str(&config).context("failed to parse config file")?
+            } else {
+                args.config
+            };
+        } else {
+            let config = args.config;
+        }
+    }
+
+    let options = CargoOptions::from(&config);
 
     let tree_output = cargo_tree_output(&options)?;
     let mut graph = get_dep_graph(&tree_output).context("failed to parse cargo-tree output")?;
@@ -245,11 +131,11 @@ fn main() -> anyhow::Result<()> {
 
     let mut root_idx = petgraph::graph::NodeIndex::new(0);
 
-    if let Some(root) = &args.root {
+    if let Some(root) = &config.root {
         root_idx = change_root(&mut graph, root).context("failed to change root")?;
     }
 
-    let std_idx = if args.std {
+    let std_idx = if config.std {
         Some(graph.add_node(NodeWeight {
             name: "std ".to_string(),
             short_end: 3,
@@ -260,7 +146,7 @@ fn main() -> anyhow::Result<()> {
 
     let cum_sums_vec = cum_sums(&graph, &size_map);
 
-    let node_colouring_values = match args.scheme {
+    let node_colouring_values = match config.scheme {
         None => None,
         Some(scheme) => {
             let (values, mut gamma) = match scheme {
@@ -269,12 +155,12 @@ fn main() -> anyhow::Result<()> {
                 NodeColoringScheme::RevDepCount => rev_dep_counts(&graph),
             };
 
-            if let Some(gamma_) = args.gamma {
+            if let Some(gamma_) = config.gamma {
                 gamma = gamma_.clamp(0.0, 1.0);
             }
 
             let max = values.iter().copied().max().unwrap();
-            let gradient = args.gradient.clone().unwrap_or_default().into();
+            let gradient = config.gradient.clone().unwrap_or_default().into();
 
             Some(NodeColoringValues {
                 values,
@@ -285,28 +171,39 @@ fn main() -> anyhow::Result<()> {
         }
     };
 
-    if let Some(threshold) = args.threshold {
+    if let Some(threshold) = config.threshold {
         remove_small_deps(&mut graph, &cum_sums_vec.0, threshold, std_idx);
     }
 
-    if !args.excludes.is_empty() {
-        remove_excluded_deps(&mut graph, &args.excludes, root_idx, std_idx)
+    if let Some(excludes) = &config.excludes {
+        remove_excluded_deps(&mut graph, excludes, root_idx, std_idx)
             .context("failed to exclude dependencies")?;
     }
 
-    if let Some(max_depth) = args.max_depth {
+    if let Some(max_depth) = config.max_depth {
         remove_deep_deps(&mut graph, root_idx, max_depth, std_idx);
     }
 
-    let output_filename = args.output.as_deref();
-    let templates = get_templates(&args).context("failed to parse templates")?;
-    let dot = output_dot(&graph, &size_map, &args, &templates, node_colouring_values);
+    let output_filename = config.output.as_deref();
+    let templates = get_templates(&config).context("failed to parse templates")?;
+    let dot = output_dot(
+        &graph,
+        &size_map,
+        &config,
+        &templates,
+        node_colouring_values,
+    );
 
-    if args.dot_only {
+    if config.dot_only {
         std::fs::write(output_filename.unwrap_or("output.gv"), dot)
             .context("failed to write output dot file")?;
     } else {
-        output_svg(&dot, &graph, output_filename.unwrap_or("output.svg"), &args)?;
+        output_svg(
+            &dot,
+            &graph,
+            output_filename.unwrap_or("output.svg"),
+            &config,
+        )?;
     }
 
     Ok(())

@@ -8,15 +8,15 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ## Examples
 
-`pugio --release --gradient blues -t non-zero --scale-factor 1.2 --separation-factor 0.8 -o images/pugio.svg`
+`pugio -c examples/config.toml`
 
 ![pugio](images/pugio.svg)
 
-`pugio --bin rg --release --scheme dep-count --gradient purples -R "grep v0.4.1" -d 2 -t 1KiB --gamma 0.5 --dark-mode --std -o images/ripgrep.svg`
+`pugio --bin rg --release --scheme dep-count --gradient purples -R "grep v0.4.1" -d 2 -t 1KiB --gamma 0.5 --dark-mode --std -o examples/ripgrep.svg`
 
 ![ripgrep](images/ripgrep.svg)
 
-`pugio --release --node-label-template "{short}\n{value_binary}" -E 'clap|rand' -g reds -t non-zero --dark-mode --std -o images/hyperfine.svg`
+`pugio --release --node-label-template "{short}\n{value_binary}" -E 'clap|rand' -g reds -t non-zero --dark-mode --std -o examples/hyperfine.svg`
 
 ![hyperfine](images/hyperfine.svg)
 
@@ -44,8 +44,9 @@ To customise enabled Cargo features, add the options:
 
 ## Feature flags
 
-- `default`: `regex`
-- `regex`: support regex pattern matching in options
+- `default`: `regex`, `config`
+- `regex`: support regex pattern matching in options: [regex-lite syntax](https://docs.rs/regex-lite/latest/regex_lite/index.html#syntax)
+- `config`: support TOML config file
 
 ## Planned Features
 
@@ -62,6 +63,9 @@ A command-line dependency binary size graph visualisation tool
 Usage: pugio [OPTIONS]
 
 Options:
+  -c, --config <CONFIG_FILE>
+          Config TOML file path, "-" for stdin
+           disables all other options
   -p, --package <PACKAGE>
           Package to inspect
       --bin <BINARY>

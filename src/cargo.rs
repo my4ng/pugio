@@ -7,7 +7,7 @@ use anyhow::{Context, bail};
 use petgraph::{graph::NodeIndex, prelude::StableGraph};
 use serde_json::Value;
 
-use crate::{Args, graph::NodeWeight};
+use crate::{config::Config, graph::NodeWeight};
 
 #[derive(Debug, Default)]
 pub struct CargoOptions {
@@ -19,8 +19,8 @@ pub struct CargoOptions {
     pub release: bool,
 }
 
-impl From<&Args> for CargoOptions {
-    fn from(value: &Args) -> Self {
+impl From<&Config> for CargoOptions {
+    fn from(value: &Config) -> Self {
         Self {
             package: value.package.clone(),
             binary: value.binary.clone(),
