@@ -91,7 +91,8 @@ Options:
   -g, --gradient <GRADIENT>
           Color gradient of nodes
            - "reds" (default), "oranges", "purples", "greens", "blues"
-           - custom CSS gradient format, e.g. "#fff, 75%, #00f"
+           - "bu-pu", "or-rd", "pu-rd", "rd-pu"
+           - "viridis", "cividis", "plasma"
       --gamma <GAMMA>
           Color gamma of nodes, between 0.0 and 1.0
            default is scheme-specific

@@ -49,7 +49,7 @@ pub fn normalize_sizes(graph: &StableGraph<NodeWeight, ()>, map: &mut HashMap<St
 pub fn cum_sums(
     graph: &StableGraph<NodeWeight, ()>,
     map: &HashMap<String, usize>,
-) -> (Vec<usize>, f32) {
+) -> (Vec<usize>, f64) {
     let mut cum_sums = vec![0; graph.capacity().0];
 
     for (idx, size) in graph.node_indices().filter_map(|i| {
@@ -73,7 +73,7 @@ pub fn cum_sums(
     (cum_sums, 0.25)
 }
 
-pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
+pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) {
     let mut dep_counts = vec![0; graph.capacity().0];
 
     let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
@@ -87,7 +87,7 @@ pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
     (dep_counts, 0.25)
 }
 
-pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
+pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) {
     let mut rev_dep_counts = vec![0; graph.capacity().0];
 
     for node in Topo::new(&graph).iter(&graph) {

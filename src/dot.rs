@@ -5,7 +5,6 @@ use std::{
 };
 
 use anyhow::Context;
-use colorgrad::Gradient;
 use petgraph::{
     dot::{Config, Dot},
     graph::NodeIndex,
@@ -135,28 +134,38 @@ pub fn output_dot(
         }) = &node_colouring_values
         {
             let value = values[i.index()];
-            let mut t = (value as f32 / *max as f32).powf(*gamma);
+            let mut t = (value as f64 / *max as f64).powf(*gamma);
             if config.inverse_gradient {
                 t = 1.0 - t;
             }
 
-            let mut node_color = gradient.at(t);
+            let mut node_color = gradient.eval_continuous(t);
             if config.dark_mode {
-                let mut hsla = node_color.to_hsla();
-                hsla[2] = 1.0 - hsla[2];
-                node_color = colorgrad::Color::from_hsla(hsla[0], hsla[1], hsla[2], hsla[3])
+                let mut hsl: colorsys::Hsl =
+                    colorsys::Rgb::from(&(node_color.r, node_color.g, node_color.b)).into();
+                hsl.set_lightness(100.0 - hsl.lightness());
+                let (r, g, b) = colorsys::Rgb::from(hsl).into();
+                node_color = colorous::Color { r, g, b };
             }
             (node_color, Some(value))
         } else {
             #[allow(clippy::collapsible_else_if)]
             let node_color = if config.dark_mode {
-                colorgrad::Color::new(0.0, 0.0, 0.0, 0.0)
+                colorous::Color {
+                    r: 0x00,
+                    g: 0x00,
+                    b: 0x00,
+                }
             } else {
-                colorgrad::Color::new(1.0, 1.0, 1.0, 1.0)
+                colorous::Color {
+                    r: 0xff,
+                    g: 0xff,
+                    b: 0xff,
+                }
             };
             (node_color, None)
         };
-        let node_color = node_color.to_css_hex();
+        let node_color = format!("#{node_color:X}");
 
         let node_context = NodeContext::new(n, size, value, config.scheme);
         let label = templates

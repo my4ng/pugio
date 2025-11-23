@@ -20,7 +20,8 @@ clap = { version = "4.5", features = [
     "error-context",
     "derive",
 ], default-features = false }
-colorgrad = { version = "0.8", features = ["preset"], default-features = false }
+colorous = "1.0"
+colorsys = "0.7"
 humansize = "2.1"
 open = "5.3"
 parse-size = "1.1"

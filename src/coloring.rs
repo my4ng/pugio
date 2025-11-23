@@ -1,4 +1,4 @@
-use colorgrad::BasisGradient;
+use colorous::Gradient;
 
 #[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
 #[derive(Clone, Copy, strum::EnumString)]
@@ -20,7 +20,8 @@ impl From<NodeColoringScheme> for &'static str {
 }
 
 #[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
-#[derive(Default, Clone)]
+#[derive(Default, Clone, strum::EnumString)]
+#[strum(serialize_all = "kebab-case")]
 pub enum NodeColoringGradient {
     #[default]
     Reds,
@@ -28,44 +29,38 @@ pub enum NodeColoringGradient {
     Purples,
     Greens,
     Blues,
-    Custom(BasisGradient),
+    BuPu,
+    OrRd,
+    PuRd,
+    RdPu,
+    Viridis,
+    Cividis,
+    Plasma,
 }
 
-impl std::str::FromStr for NodeColoringGradient {
-    type Err = colorgrad::GradientBuilderError;
-
-    fn from_str(s: &str) -> Result<NodeColoringGradient, Self::Err> {
-        match s {
-            "reds" => Ok(Self::Reds),
-            "oranges" => Ok(Self::Oranges),
-            "purples" => Ok(Self::Purples),
-            "greens" => Ok(Self::Greens),
-            "blues" => Ok(Self::Blues),
-            _ => colorgrad::GradientBuilder::new()
-                .css(s)
-                .build()
-                .map(Self::Custom),
-        }
-    }
-}
-
-impl From<NodeColoringGradient> for BasisGradient {
+impl From<NodeColoringGradient> for Gradient {
     fn from(value: NodeColoringGradient) -> Self {
-        use colorgrad::preset::*;
+        use colorous::*;
         match value {
-            NodeColoringGradient::Reds => reds(),
-            NodeColoringGradient::Oranges => oranges(),
-            NodeColoringGradient::Purples => purples(),
-            NodeColoringGradient::Greens => greens(),
-            NodeColoringGradient::Blues => blues(),
-            NodeColoringGradient::Custom(gradient) => gradient,
+            NodeColoringGradient::Reds => REDS,
+            NodeColoringGradient::Oranges => ORANGES,
+            NodeColoringGradient::Purples => PURPLES,
+            NodeColoringGradient::Greens => GREENS,
+            NodeColoringGradient::Blues => BLUES,
+            NodeColoringGradient::BuPu => BLUE_PURPLE,
+            NodeColoringGradient::OrRd => ORANGE_RED,
+            NodeColoringGradient::PuRd => PURPLE_RED,
+            NodeColoringGradient::RdPu => RED_PURPLE,
+            NodeColoringGradient::Viridis => VIRIDIS,
+            NodeColoringGradient::Cividis => CIVIDIS,
+            NodeColoringGradient::Plasma => PLASMA,
         }
     }
 }
 
 pub struct NodeColoringValues {
     pub values: Vec<usize>,
-    pub gamma: f32,
+    pub gamma: f64,
     pub max: usize,
-    pub gradient: BasisGradient,
+    pub gradient: Gradient,
 }

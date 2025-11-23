@@ -82,14 +82,15 @@ pub struct Config {
 
     /// Color gradient of nodes
     ///  - "reds" (default), "oranges", "purples", "greens", "blues"
-    ///  - custom CSS gradient format, e.g. "#fff, 75%, #00f"
+    ///  - "bu-pu", "or-rd", "pu-rd", "rd-pu"
+    ///  - "viridis", "cividis", "plasma"
     #[arg(short, long, verbatim_doc_comment)]
     pub gradient: Option<NodeColoringGradient>,
 
     /// Color gamma of nodes, between 0.0 and 1.0
     ///  default is scheme-specific
     #[arg(long, verbatim_doc_comment)]
-    pub gamma: Option<f32>,
+    pub gamma: Option<f64>,
 
     /// Remove nodes that have cumulative sum below threshold
     ///  - human readable byte format, e.g. "21KiB", "69 KB"
