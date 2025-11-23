@@ -28,12 +28,16 @@ pub fn output_svg(
     args: &Args,
 ) -> anyhow::Result<()> {
     let node_count_factor = (graph.node_count() as f32 / 32.0).floor();
-    let font_size = node_count_factor * 3.0 + 15.0;
-    let arrow_size = node_count_factor * 0.2 + 0.8;
-    let edge_width = node_count_factor * 0.4 + 1.2;
+    let scale_factor = args.scale_factor.unwrap_or(1.0);
+    let font_size = (node_count_factor * 3.0 + 15.0) * scale_factor;
+    let arrow_size = (node_count_factor * 0.2 + 0.8) * scale_factor;
+    let edge_width = (node_count_factor * 0.4 + 1.2) * scale_factor;
     let node_border_width = edge_width * 0.75;
 
-    // TODO: Customise style
+    let sep_factor = args.separation_factor.unwrap_or(1.0);
+    let node_sep = 0.35 * sep_factor;
+    let rank_sep = node_sep * 2.0;
+
     let mut command = Command::new("dot");
     command
         .stdin(Stdio::piped())
@@ -51,8 +55,8 @@ pub fn output_svg(
         .arg(format!("-Earrowsize={arrow_size}"))
         .arg("-Earrowhead=onormal")
         .arg(format!("-Epenwidth={edge_width}"))
-        .arg("-Gnodesep=0.35")
-        .arg("-Granksep=0.7");
+        .arg(format!("-Gnodesep={node_sep}"))
+        .arg(format!("-Granksep={rank_sep}"));
 
     if args.dark_mode {
         command

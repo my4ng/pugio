@@ -8,7 +8,7 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ## Examples
 
-`pugio --release --gradient blues -t non-zero -o images/pugio.svg`
+`pugio --release --gradient blues -t non-zero --scale-factor 1.2 --separation-factor 0.8 -o images/pugio.svg`
 
 ![pugio](images/pugio.svg)
 
@@ -103,6 +103,10 @@ Options:
           Inverse color gradient
       --dark-mode
           Dark mode for output svg file
+      --scale-factor <SCALE_FACTOR>
+          Scale factor for output svg file
+      --separation-factor <SEPARATION_FACTOR>
+          Separation factor for output svg file
       --node-label-template <NODE_LABEL_TEMPLATE>
           Custom node label formatting template
            default: "{short}"

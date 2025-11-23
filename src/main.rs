@@ -169,6 +169,14 @@ struct Args {
     #[arg(long)]
     dark_mode: bool,
 
+    /// Scale factor for output svg file
+    #[arg(long)]
+    scale_factor: Option<f32>,
+
+    /// Separation factor for output svg file
+    #[arg(long)]
+    separation_factor: Option<f32>,
+
     /// Custom node label formatting template
     ///  default: "{short}"
     #[arg(long, verbatim_doc_comment)]
