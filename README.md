@@ -114,6 +114,9 @@ Options:
            - "dep": all dependencies
            - "rev-dep": all reverse dependencies
              requires modern browser for `:has()` CSS pseudo-class support
+      --highlight-amount <HIGHLIGHT_AMOUNT>
+          Highlight amount for output svg file, between 0.0 and 1.0
+           default: 0.5
       --node-label-template <NODE_LABEL_TEMPLATE>
           Custom node label formatting template
            default: "{short}"

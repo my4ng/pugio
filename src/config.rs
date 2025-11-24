@@ -128,6 +128,11 @@ pub struct Config {
     #[cfg_attr(feature = "config", serde(deserialize_with = "de_highlight", default))]
     pub highlight: Option<bool>,
 
+    /// Highlight amount for output svg file, between 0.0 and 1.0
+    ///  default: 0.5
+    #[arg(long, verbatim_doc_comment)]
+    pub highlight_amount: Option<f32>,
+
     /// Custom node label formatting template
     ///  default: "{short}"
     #[arg(long, verbatim_doc_comment)]

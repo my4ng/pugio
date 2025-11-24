@@ -84,11 +84,14 @@ pub fn output_svg(
             .find("<g id=\"graph0\"")
             .context("failed to find graph start")?;
 
+        let highlight_amount = 1.0 - config.highlight_amount.unwrap_or(0.5).clamp(0.0, 1.0);
         let rules = graph
             .node_indices()
             .map(|i| {
                 let i = i.index();
-                format!(".graph:has(.node{i}:hover) > g:not(.node{i}) {{ opacity: 0.5 }}")
+                format!(
+                    ".graph:has(.node{i}:hover) > g:not(.node{i}) {{ opacity: {highlight_amount} }}"
+                )
             })
             .collect::<Vec<_>>()
             .join("\n");

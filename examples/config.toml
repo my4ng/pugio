@@ -4,4 +4,5 @@ threshold = "non-zero"
 scale-factor = 1.2
 separation-factor = 0.8
 highlight = "dep"
+highlight-amount = 0.6
 output = "examples/pugio.svg"
