@@ -17,7 +17,7 @@ use tinytemplate::TinyTemplate;
 
 use crate::{
     NodeColoringValues,
-    graph::NodeWeight,
+    graph::{NodeWeight, node_classes},
     template::{EdgeContext, NodeContext},
 };
 
@@ -76,7 +76,28 @@ pub fn output_svg(
         .context("failed to write into stdin")?;
 
     let output = child.wait_with_output().context("failed to wait on dot")?;
-    std::fs::write(output_filename, output.stdout).context("failed to write output svg file")?;
+    let mut svg =
+        String::from_utf8(output.stdout).context("failed to convert dot output to string")?;
+
+    if config.highlight.is_some() {
+        let idx = svg
+            .find("<g id=\"graph0\"")
+            .context("failed to find graph start")?;
+
+        let rules = graph
+            .node_indices()
+            .map(|i| {
+                let i = i.index();
+                format!(".graph:has(.node{i}:hover) > g:not(.node{i}) {{ opacity: 0.5 }}")
+            })
+            .collect::<Vec<_>>()
+            .join("\n");
+
+        let style = format!("<style>\n{rules}\n</style>\n");
+        svg.insert_str(idx, &style);
+    }
+
+    std::fs::write(output_filename, svg).context("failed to write output svg file")?;
     if !config.no_open {
         open::that_detached(output_filename).context("failed to open output svg")?;
     }
@@ -90,6 +111,10 @@ pub fn output_dot(
     templates: &TinyTemplate,
     node_colouring_values: Option<NodeColoringValues>,
 ) -> String {
+    let classes = config
+        .highlight
+        .map(|is_dir_down| node_classes(graph, is_dir_down));
+
     let node_binding = |_, (i, n): (NodeIndex, &NodeWeight)| {
         let mut size = size_map.get(n.short()).copied().unwrap_or_default();
         if let Some(bin) = config.binary.as_ref()
@@ -138,8 +163,18 @@ pub fn output_dot(
             .render("node_tooltip", &node_context)
             .unwrap_or_else(|e| e.to_string());
 
+        let classes = if let Some(classes) = &classes {
+            &classes[i.index()]
+                .iter()
+                .map(|i| format!("node{i}"))
+                .collect::<Vec<_>>()
+                .join(" ")
+        } else {
+            ""
+        };
+
         format!(
-            r#"label = "{label}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
+            r#"class = "{classes}" label = "{label}" tooltip = "{tooltip}" width = {width} fillcolor= "{node_color}""#,
         )
     };
 
@@ -155,7 +190,22 @@ pub fn output_dot(
             .render("edge_tooltip", &edge_context)
             .unwrap_or_else(|e| e.to_string());
 
-        format!(r#"label = "{label}" edgetooltip = "{tooltip}""#)
+        let classes = if let Some(classes) = &classes {
+            let i = if config.highlight.unwrap() {
+                e.source()
+            } else {
+                e.target()
+            };
+            &classes[i.index()]
+                .iter()
+                .map(|i| format!("node{i}"))
+                .collect::<Vec<_>>()
+                .join(" ")
+        } else {
+            ""
+        };
+
+        format!(r#"class = "{classes}" label = "{label}" edgetooltip = "{tooltip}""#)
     };
 
     let dot = Dot::with_attr_getters(

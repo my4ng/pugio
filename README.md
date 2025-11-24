@@ -109,6 +109,11 @@ Options:
           Scale factor for output svg file
       --separation-factor <SEPARATION_FACTOR>
           Separation factor for output svg file
+      --highlight <HIGHLIGHT>
+          Highlight parts of the graph when hovered for output svg file
+           - "dep": all dependencies
+           - "rev-dep": all reverse dependencies
+             requires modern browser for `:has()` CSS pseudo-class support
       --node-label-template <NODE_LABEL_TEMPLATE>
           Custom node label formatting template
            default: "{short}"

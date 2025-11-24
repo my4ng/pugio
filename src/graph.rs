@@ -48,12 +48,11 @@ pub fn cum_sums(
         cum_sums[idx] = size;
     }
 
-    let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
-    nodes.reverse();
+    let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
 
-    for node in nodes {
+    for node in nodes.iter().rev() {
         let sources: Vec<_> = graph
-            .neighbors_directed(node, petgraph::Direction::Incoming)
+            .neighbors_directed(*node, petgraph::Direction::Incoming)
             .collect();
         for source in &sources {
             cum_sums[source.index()] += cum_sums[node.index()] / sources.len();
@@ -66,11 +65,10 @@ pub fn cum_sums(
 pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) {
     let mut dep_counts = vec![0; graph.capacity().0];
 
-    let mut nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
-    nodes.reverse();
+    let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
 
-    for node in nodes {
-        for target in graph.neighbors(node) {
+    for node in nodes.iter().rev() {
+        for target in graph.neighbors(*node) {
             dep_counts[node.index()] += dep_counts[target.index()] + 1;
         }
     }
@@ -88,6 +86,37 @@ pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f32) 
     }
 
     (rev_dep_counts, 0.5)
+}
+
+pub fn node_classes(graph: &StableGraph<NodeWeight, ()>, is_dir_down: bool) -> Vec<Vec<usize>> {
+    let mut classes = vec![Vec::new(); graph.capacity().0];
+    let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
+
+    if is_dir_down {
+        for node in nodes.iter() {
+            classes[node.index()].push(node.index());
+            for target in graph.neighbors(*node) {
+                // SAFETY: graph is known to be DAG, hence no reflexive edge
+                let [source, target] = classes
+                    .get_disjoint_mut([node.index(), target.index()])
+                    .unwrap();
+                target.extend_from_slice(source);
+            }
+        }
+    } else {
+        for node in nodes.iter().rev() {
+            classes[node.index()].push(node.index());
+            for target in graph.neighbors(*node) {
+                // SAFETY: graph is known to be DAG, hence no reflexive edge
+                let [source, target] = classes
+                    .get_disjoint_mut([node.index(), target.index()])
+                    .unwrap();
+                source.extend_from_slice(target);
+            }
+        }
+    }
+
+    classes
 }
 
 pub fn remove_small_deps(

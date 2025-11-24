@@ -120,6 +120,14 @@ pub struct Config {
     #[arg(long)]
     pub separation_factor: Option<f32>,
 
+    /// Highlight parts of the graph when hovered for output svg file
+    ///  - "dep": all dependencies
+    ///  - "rev-dep": all reverse dependencies
+    ///    requires modern browser for `:has()` CSS pseudo-class support
+    #[arg(long, value_parser = parse_highlight, verbatim_doc_comment)]
+    #[cfg_attr(feature = "config", serde(deserialize_with = "de_highlight", default))]
+    pub highlight: Option<bool>,
+
     /// Custom node label formatting template
     ///  default: "{short}"
     #[arg(long, verbatim_doc_comment)]
@@ -166,6 +174,14 @@ fn de_scheme<'de, D: de::Deserializer<'de>>(d: D) -> Result<Option<NodeColoringS
 }
 
 #[cfg(feature = "config")]
+fn de_highlight<'de, D: de::Deserializer<'de>>(d: D) -> Result<Option<bool>, D::Error> {
+    let str: String = de::Deserialize::deserialize(d)?;
+    parse_highlight(&str)
+        .map(Option::Some)
+        .map_err(de::Error::custom)
+}
+
+#[cfg(feature = "config")]
 fn de_threshold<'de, D: de::Deserializer<'de>>(d: D) -> Result<Option<usize>, D::Error> {
     #[derive(serde::Deserialize)]
     #[serde(untagged)]
@@ -177,9 +193,8 @@ fn de_threshold<'de, D: de::Deserializer<'de>>(d: D) -> Result<Option<usize>, D:
     let threshold: Threshold = de::Deserialize::deserialize(d)?;
     match threshold {
         Threshold::Usize(u) => Ok(Some(u)),
-        Threshold::String(s) if s == "non-zero" => Ok(Some(1)),
-        Threshold::String(s) => parse_size::parse_size(s)
-            .map(|b| Some(b as usize))
+        Threshold::String(s) => parse_threshold(&s)
+            .map(Option::Some)
             .map_err(de::Error::custom),
     }
 }
@@ -188,6 +203,14 @@ fn parse_scheme(s: &str) -> Result<Option<NodeColoringScheme>, strum::ParseError
     match s {
         "none" => Ok(None),
         _ => Ok(Some(NodeColoringScheme::from_str(s)?)),
+    }
+}
+
+fn parse_highlight(h: &str) -> Result<bool, &'static str> {
+    match h {
+        "dep" => Ok(true),
+        "rev-dep" => Ok(false),
+        _ => Err("invalid highlight value"),
     }
 }
 

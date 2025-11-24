@@ -3,4 +3,5 @@ gradient = "blues"
 threshold = "non-zero"
 scale-factor = 1.2
 separation-factor = 0.8
+highlight = "dep"
 output = "examples/pugio.svg"
