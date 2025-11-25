@@ -1,4 +1,5 @@
 mod cargo;
+mod coloring;
 mod config;
 mod dot;
 mod graph;
@@ -6,6 +7,7 @@ mod template;
 
 use crate::{
     cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
+    coloring::{NodeColoringScheme, NodeColoringValues},
     config::Config,
     dot::{output_dot, output_svg},
     graph::{
@@ -16,70 +18,6 @@ use crate::{
 };
 use anyhow::Context;
 use clap::Parser;
-use colorgrad::BasisGradient;
-
-#[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
-#[derive(Clone, Copy, strum::EnumString)]
-#[strum(serialize_all = "kebab-case")]
-enum NodeColoringScheme {
-    CumSum,
-    DepCount,
-    RevDepCount,
-}
-
-impl From<NodeColoringScheme> for &'static str {
-    fn from(value: NodeColoringScheme) -> Self {
-        match value {
-            NodeColoringScheme::CumSum => "cumulative sum",
-            NodeColoringScheme::DepCount => "dependency count",
-            NodeColoringScheme::RevDepCount => "reverse dependency count",
-        }
-    }
-}
-
-#[cfg_attr(feature = "config", derive(serde_with::DeserializeFromStr))]
-#[derive(Default, Clone)]
-enum NodeColoringGradient {
-    #[default]
-    Reds,
-    Oranges,
-    Purples,
-    Greens,
-    Blues,
-    Custom(BasisGradient),
-}
-
-impl std::str::FromStr for NodeColoringGradient {
-    type Err = colorgrad::GradientBuilderError;
-
-    fn from_str(s: &str) -> Result<NodeColoringGradient, Self::Err> {
-        match s {
-            "reds" => Ok(Self::Reds),
-            "oranges" => Ok(Self::Oranges),
-            "purples" => Ok(Self::Purples),
-            "greens" => Ok(Self::Greens),
-            "blues" => Ok(Self::Blues),
-            _ => colorgrad::GradientBuilder::new()
-                .css(s)
-                .build()
-                .map(Self::Custom),
-        }
-    }
-}
-
-impl From<NodeColoringGradient> for BasisGradient {
-    fn from(value: NodeColoringGradient) -> Self {
-        use colorgrad::preset::*;
-        match value {
-            NodeColoringGradient::Reds => reds(),
-            NodeColoringGradient::Oranges => oranges(),
-            NodeColoringGradient::Purples => purples(),
-            NodeColoringGradient::Greens => greens(),
-            NodeColoringGradient::Blues => blues(),
-            NodeColoringGradient::Custom(gradient) => gradient,
-        }
-    }
-}
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -92,13 +30,6 @@ struct Args {
 
     #[command(flatten)]
     config: Config,
-}
-
-struct NodeColoringValues {
-    values: Vec<usize>,
-    gamma: f32,
-    max: usize,
-    gradient: BasisGradient,
 }
 
 fn main() -> anyhow::Result<()> {

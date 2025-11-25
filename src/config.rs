@@ -4,7 +4,7 @@ use clap::Args;
 #[cfg(feature = "config")]
 use serde::de;
 
-use crate::{NodeColoringGradient, NodeColoringScheme};
+use crate::coloring::{NodeColoringGradient, NodeColoringScheme};
 
 // Obfuscate type for clap
 type OptScheme = Option<NodeColoringScheme>;
