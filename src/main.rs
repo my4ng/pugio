@@ -9,8 +9,8 @@ use crate::{
     config::Config,
     dot::{output_dot, output_svg},
     graph::{
-        NodeWeight, change_root, cum_sums, dep_counts, remove_deep_deps, remove_excluded_deps,
-        remove_small_deps, rev_dep_counts,
+        NodeWeight, change_root, cum_sums, dep_counts, normalize_sizes, remove_deep_deps,
+        remove_excluded_deps, remove_small_deps, rev_dep_counts,
     },
     template::get_templates,
 };
@@ -127,7 +127,9 @@ fn main() -> anyhow::Result<()> {
     let mut graph = get_dep_graph(&tree_output).context("failed to parse cargo-tree output")?;
 
     let bloat_output = cargo_bloat_output(&options)?;
-    let size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
+    let mut size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
+
+    normalize_sizes(&graph, &mut size_map);
 
     let mut root_idx = petgraph::graph::NodeIndex::new(0);
 

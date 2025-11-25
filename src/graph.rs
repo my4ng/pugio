@@ -34,11 +34,22 @@ impl NodeWeight {
     }
 }
 
+pub fn normalize_sizes(graph: &StableGraph<NodeWeight, ()>, map: &mut HashMap<String, usize>) {
+    let mut counts = HashMap::with_capacity(graph.node_count());
+    for node in graph.node_weights() {
+        *counts.entry(node.short()).or_default() += 1;
+    }
+
+    for (name, size) in map.iter_mut() {
+        let count = counts.get(name.as_str()).copied().unwrap_or(1);
+        *size /= count;
+    }
+}
+
 pub fn cum_sums(
     graph: &StableGraph<NodeWeight, ()>,
     map: &HashMap<String, usize>,
 ) -> (Vec<usize>, f32) {
-    // TODO: currently the same size is used for all nodes with the same name, change?
     let mut cum_sums = vec![0; graph.capacity().0];
 
     for (idx, size) in graph.node_indices().filter_map(|i| {
