@@ -12,11 +12,11 @@ It is important to note that the sizes is and will always be only an *estimation
 
 ![pugio](examples/pugio.svg)
 
-`pugio --bin rg --release --scheme dep-count --gradient purples -R "grep v0.4.1" -d 2 -t 1KiB --gamma 0.5 --dark-mode --std -o examples/ripgrep.svg`
+`pugio --bin rg --release --scheme dep-count --gradient purples -R "grep v0.4.1" -d 2 -t 1KiB --dark-mode --highlight rev-dep -o examples/ripgrep.svg`
 
 ![ripgrep](examples/ripgrep.svg)
 
-`pugio --release --node-label-template "{short}\n{value_binary}" -E 'clap|rand' -g reds -t non-zero --dark-mode --std -o examples/hyperfine.svg`
+`pugio --release --node-label-template "{short}\n{value_binary}" -E 'clap' -g rd-pu -t non-zero --dark-mode --std -o examples/hyperfine.svg`
 
 ![hyperfine](examples/hyperfine.svg)
 
