@@ -72,6 +72,7 @@ fn main() -> anyhow::Result<()> {
         Some(graph.add_node(NodeWeight {
             name: "std ".to_string(),
             short_end: 3,
+            features: std::collections::BTreeMap::new(),
         }))
     } else {
         None

@@ -8,7 +8,6 @@ use anyhow::Context;
 use petgraph::{
     dot::{Config, Dot},
     graph::NodeIndex,
-    prelude::StableGraph,
     stable_graph::EdgeReference,
     visit::EdgeRef,
 };
@@ -16,21 +15,22 @@ use tinytemplate::TinyTemplate;
 
 use crate::{
     NodeColoringValues,
-    graph::{NodeWeight, node_classes},
+    graph::{EdgeWeight, Graph, NodeWeight, node_classes},
     template::{EdgeContext, NodeContext},
 };
 
 pub fn output_svg(
     dot_output: &str,
-    graph: &StableGraph<NodeWeight, ()>,
+    graph: &Graph,
     output_filename: &str,
     config: &crate::config::Config,
 ) -> anyhow::Result<()> {
     let node_count_factor = (graph.node_count() as f32 / 32.0).floor();
     let scale_factor = config.scale_factor.unwrap_or(1.0);
-    let font_size = (node_count_factor * 3.0 + 15.0) * scale_factor;
-    let arrow_size = (node_count_factor * 0.2 + 0.8) * scale_factor;
-    let edge_width = (node_count_factor * 0.4 + 1.2) * scale_factor;
+    let node_font_size = (node_count_factor * 3.0 + 15.0) * scale_factor;
+    let edge_font_size = node_font_size * 0.75;
+    let arrow_size = (node_count_factor * 0.2 + 0.6) * scale_factor;
+    let edge_width = arrow_size * 2.0;
     let node_border_width = edge_width * 0.75;
 
     let sep_factor = config.separation_factor.unwrap_or(1.0);
@@ -48,9 +48,9 @@ pub fn output_svg(
         .arg("-Nstyle=filled")
         .arg("-Nfixedsize=shape")
         .arg("-Nfontname=monospace")
-        .arg(format!("-Nfontsize={font_size}"))
+        .arg(format!("-Nfontsize={node_font_size}"))
         .arg("-Efontname=monospace")
-        .arg(format!("-Efontsize={font_size}"))
+        .arg(format!("-Efontsize={edge_font_size}"))
         .arg(format!("-Earrowsize={arrow_size}"))
         .arg("-Earrowhead=onormal")
         .arg(format!("-Epenwidth={edge_width}"))
@@ -59,12 +59,17 @@ pub fn output_svg(
 
     if config.dark_mode {
         command
-            .arg("-Ncolor=#FFFFFF9F")
-            .arg("-Ecolor=#FFFFFF9F")
             .arg("-Gbgcolor=#000000")
+            .arg("-Ncolor=#FFFFFF")
+            .arg("-Ecolor=#FFFFFF9F")
+            .arg("-Efontcolor=#FFFFFFFF")
             .arg("-Nfontcolor=#FFFFFF");
     } else {
-        command.arg("-Ncolor=#0000009F").arg("-Ecolor=#0000009F");
+        command
+            .arg("-Ncolor=#000000")
+            .arg("-Nfontcolor=#000000")
+            .arg("-Ecolor=#0000009F")
+            .arg("-Efontcolor=#000000");
     }
 
     let mut child = command.spawn().context("failed to execute dot")?;
@@ -107,7 +112,7 @@ pub fn output_svg(
 }
 
 pub fn output_dot(
-    graph: &StableGraph<NodeWeight, ()>,
+    graph: &Graph,
     size_map: &HashMap<String, usize>,
     config: &crate::config::Config,
     templates: &TinyTemplate,
@@ -190,11 +195,11 @@ pub fn output_dot(
         )
     };
 
-    let edge_binding = |g: &&StableGraph<NodeWeight, ()>, e: EdgeReference<'_, ()>| {
+    let edge_binding = |g: &&Graph, e: EdgeReference<'_, EdgeWeight>| {
         let source = g.node_weight(e.source()).unwrap();
         let target = g.node_weight(e.target()).unwrap();
 
-        let edge_context = EdgeContext::new(source, target);
+        let edge_context = EdgeContext::new(e.weight(), source, target);
         let label = templates
             .render("edge_label", &edge_context)
             .unwrap_or_else(|e| e.to_string());
@@ -217,7 +222,9 @@ pub fn output_dot(
             ""
         };
 
-        format!(r#"class = "{classes}" label = "{label}" edgetooltip = "{tooltip}""#)
+        format!(
+            r#"class = "{classes}" label = "{label}" edgetooltip = "{tooltip}" labeltooltip = "{tooltip}""#
+        )
     };
 
     let dot = Dot::with_attr_getters(

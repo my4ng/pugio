@@ -1,22 +1,27 @@
-use std::collections::{HashMap, VecDeque};
+use std::collections::{BTreeMap, BTreeSet, HashMap, VecDeque};
 
 #[cfg(feature = "regex")]
 use anyhow::Context;
 use anyhow::bail;
 use petgraph::{
     graph::NodeIndex,
-    prelude::StableGraph,
     visit::{Dfs, Topo, Walker},
 };
+
+pub type Graph = petgraph::stable_graph::StableGraph<NodeWeight, EdgeWeight>;
 
 pub struct NodeWeight {
     pub name: String,
     pub short_end: usize,
+    pub features: BTreeMap<String, Vec<String>>,
 }
 
 impl std::fmt::Debug for NodeWeight {
     fn fmt(&self, f: &mut std::fmt::Formatter<'_>) -> std::fmt::Result {
-        self.name.fmt(f)
+        f.debug_struct("NodeWeight")
+            .field("name", &self.name)
+            .field("features", &self.features)
+            .finish()
     }
 }
 
@@ -34,7 +39,12 @@ impl NodeWeight {
     }
 }
 
-pub fn normalize_sizes(graph: &StableGraph<NodeWeight, ()>, map: &mut HashMap<String, usize>) {
+#[derive(Debug)]
+pub struct EdgeWeight {
+    pub features: BTreeSet<String>,
+}
+
+pub fn normalize_sizes(graph: &Graph, map: &mut HashMap<String, usize>) {
     let mut counts = HashMap::with_capacity(graph.node_count());
     for node in graph.node_weights() {
         *counts.entry(node.short()).or_default() += 1;
@@ -46,10 +56,7 @@ pub fn normalize_sizes(graph: &StableGraph<NodeWeight, ()>, map: &mut HashMap<St
     }
 }
 
-pub fn cum_sums(
-    graph: &StableGraph<NodeWeight, ()>,
-    map: &HashMap<String, usize>,
-) -> (Vec<usize>, f64) {
+pub fn cum_sums(graph: &Graph, map: &HashMap<String, usize>) -> (Vec<usize>, f64) {
     let mut cum_sums = vec![0; graph.capacity().0];
 
     for (idx, size) in graph.node_indices().filter_map(|i| {
@@ -73,7 +80,7 @@ pub fn cum_sums(
     (cum_sums, 0.25)
 }
 
-pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) {
+pub fn dep_counts(graph: &Graph) -> (Vec<usize>, f64) {
     let mut dep_counts = vec![0; graph.capacity().0];
 
     let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
@@ -87,7 +94,7 @@ pub fn dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) {
     (dep_counts, 0.25)
 }
 
-pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) {
+pub fn rev_dep_counts(graph: &Graph) -> (Vec<usize>, f64) {
     let mut rev_dep_counts = vec![0; graph.capacity().0];
 
     for node in Topo::new(&graph).iter(&graph) {
@@ -99,7 +106,7 @@ pub fn rev_dep_counts(graph: &StableGraph<NodeWeight, ()>) -> (Vec<usize>, f64) 
     (rev_dep_counts, 0.5)
 }
 
-pub fn node_classes(graph: &StableGraph<NodeWeight, ()>, is_dir_down: bool) -> Vec<Vec<usize>> {
+pub fn node_classes(graph: &Graph, is_dir_down: bool) -> Vec<Vec<usize>> {
     let mut classes = vec![Vec::new(); graph.capacity().0];
     let nodes = Topo::new(&graph).iter(&graph).collect::<Vec<_>>();
 
@@ -131,7 +138,7 @@ pub fn node_classes(graph: &StableGraph<NodeWeight, ()>, is_dir_down: bool) -> V
 }
 
 pub fn remove_small_deps(
-    graph: &mut StableGraph<NodeWeight, ()>,
+    graph: &mut Graph,
     cum_sums: &[usize],
     threshold: usize,
     std_idx: Option<NodeIndex>,
@@ -144,7 +151,7 @@ pub fn remove_small_deps(
 }
 
 pub fn remove_deep_deps(
-    graph: &mut StableGraph<NodeWeight, ()>,
+    graph: &mut Graph,
     root_idx: NodeIndex,
     max_depth: usize,
     std_idx: Option<NodeIndex>,
@@ -168,10 +175,7 @@ pub fn remove_deep_deps(
     remove_not_visited(graph, &has_visited, std_idx);
 }
 
-fn get_matched_node_indices(
-    graph: &StableGraph<NodeWeight, ()>,
-    pattern: &str,
-) -> anyhow::Result<Vec<NodeIndex>> {
+fn get_matched_node_indices(graph: &Graph, pattern: &str) -> anyhow::Result<Vec<NodeIndex>> {
     #[cfg(feature = "regex")]
     let regex = regex_lite::Regex::new(pattern)
         .with_context(|| format!("failed to parse pattern as regex: \"{pattern}\""))?;
@@ -190,11 +194,7 @@ fn get_matched_node_indices(
     Ok(graph.node_indices().filter(filter).collect::<Vec<_>>())
 }
 
-fn remove_not_visited(
-    graph: &mut StableGraph<NodeWeight, ()>,
-    has_visited: &[bool],
-    std_idx: Option<NodeIndex>,
-) {
+fn remove_not_visited(graph: &mut Graph, has_visited: &[bool], std_idx: Option<NodeIndex>) {
     for idx in has_visited.iter().enumerate().filter_map(|(i, b)| {
         if !b && Some(NodeIndex::new(i)) != std_idx {
             Some(i)
@@ -207,7 +207,7 @@ fn remove_not_visited(
 }
 
 pub fn remove_excluded_deps(
-    graph: &mut StableGraph<NodeWeight, ()>,
+    graph: &mut Graph,
     patterns: &[String],
     root_idx: NodeIndex,
     std_idx: Option<NodeIndex>,
@@ -230,10 +230,7 @@ pub fn remove_excluded_deps(
     Ok(())
 }
 
-pub fn change_root(
-    graph: &mut StableGraph<NodeWeight, ()>,
-    pattern: &str,
-) -> anyhow::Result<NodeIndex> {
+pub fn change_root(graph: &mut Graph, pattern: &str) -> anyhow::Result<NodeIndex> {
     let new_roots = get_matched_node_indices(graph, pattern)?;
 
     if new_roots.is_empty() {

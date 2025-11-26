@@ -1,6 +1,5 @@
 release = true
-gradient = "blues"
-threshold = "non-zero"
+gradient = "plasma"
 separation-factor = 0.8
 highlight = "dep"
 dark-mode = true

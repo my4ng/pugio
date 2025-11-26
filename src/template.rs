@@ -1,7 +1,11 @@
 use serde::Serialize;
 use tinytemplate::TinyTemplate;
 
-use crate::{NodeColoringScheme, config::Config, graph::NodeWeight};
+use crate::{
+    NodeColoringScheme,
+    config::Config,
+    graph::{EdgeWeight, NodeWeight},
+};
 
 pub fn get_templates(config: &Config) -> anyhow::Result<TinyTemplate<'_>> {
     let mut templates = TinyTemplate::new();
@@ -14,11 +18,14 @@ pub fn get_templates(config: &Config) -> anyhow::Result<TinyTemplate<'_>> {
         config
             .node_tooltip_template
             .as_deref()
-            .unwrap_or("{full}\n{size_binary}"),
+            .unwrap_or("{full}\n{size_binary}\n{features}"),
     )?;
     templates.add_template(
         "edge_label",
-        config.edge_label_template.as_deref().unwrap_or(""),
+        config
+            .edge_label_template
+            .as_deref()
+            .unwrap_or("{features}"),
     )?;
     templates.add_template(
         "edge_tooltip",
@@ -42,6 +49,7 @@ pub struct NodeContext<'a> {
     value_binary: Option<String>,
     value_decimal: Option<String>,
     scheme: Option<&'static str>,
+    features: String,
 }
 
 impl<'a> NodeContext<'a> {
@@ -62,6 +70,7 @@ impl<'a> NodeContext<'a> {
             value_binary: value.map(|v| humansize::format_size(v, humansize::BINARY)),
             value_decimal: value.map(|v| humansize::format_size(v, humansize::DECIMAL)),
             scheme: scheme.map(NodeColoringScheme::into),
+            features: node_features(weight),
         }
     }
 }
@@ -70,13 +79,39 @@ impl<'a> NodeContext<'a> {
 pub struct EdgeContext<'a> {
     source: &'a str,
     target: &'a str,
+    features: String,
 }
 
 impl<'a> EdgeContext<'a> {
-    pub fn new(source: &'a NodeWeight, target: &'a NodeWeight) -> Self {
+    pub fn new(edge: &EdgeWeight, source: &'a NodeWeight, target: &'a NodeWeight) -> Self {
         Self {
             source: source.short(),
             target: target.short(),
+            features: edge_features(edge),
         }
     }
+}
+
+fn node_features(node_weight: &NodeWeight) -> String {
+    node_weight
+        .features
+        .iter()
+        .map(|(f, d)| {
+            if d.is_empty() {
+                f.clone()
+            } else {
+                format!("{f}({})", d.join(","))
+            }
+        })
+        .collect::<Vec<String>>()
+        .join(",")
+}
+
+fn edge_features(edge_weight: &EdgeWeight) -> String {
+    edge_weight
+        .features
+        .iter()
+        .cloned()
+        .collect::<Vec<String>>()
+        .join(",")
 }
