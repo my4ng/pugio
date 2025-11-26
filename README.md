@@ -56,7 +56,7 @@ To customise enabled Cargo features, add the options:
 ## Usage
 
 ```plain
-A command-line dependency binary size graph visualisation tool
+A command-line dependency binary size graph visualisation tool for Rust
 
 Usage: pugio [OPTIONS]
 

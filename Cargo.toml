@@ -1,8 +1,8 @@
 [package]
 name = "pugio"
 authors = ["Michael Yang"]
-description = "A command-line dependency binary size graph visualisation tool"
-version = "0.1.5"
+description = "A command-line dependency binary size graph visualisation tool for Rust"
+version = "0.2.0"
 edition = "2024"
 license = "BSD-2-Clause-Patent"
 repository = "https://github.com/my4ng/pugio"
