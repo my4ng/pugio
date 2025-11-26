@@ -36,13 +36,14 @@ pub fn output_svg(
     let sep_factor = config.separation_factor.unwrap_or(1.0);
     let node_sep = 0.35 * sep_factor;
     let rank_sep = node_sep * 2.0;
+    let padding = config.padding.unwrap_or(1.0);
 
     let mut command = Command::new("dot");
     command
         .stdin(Stdio::piped())
         .stdout(Stdio::piped())
         .arg("-Tsvg")
-        .arg("-Gpad=1.0")
+        .arg(format!("-Gpad={padding}"))
         .arg("-Nshape=circle")
         .arg(format!("-Npenwidth={node_border_width}"))
         .arg("-Nstyle=filled")

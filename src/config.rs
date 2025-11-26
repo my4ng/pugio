@@ -21,7 +21,7 @@ pub struct Config {
     pub package: Option<String>,
 
     /// Binary to inspect
-    #[arg(long)]
+    #[arg(long, value_name = "BINARY")]
     pub bin: Option<String>,
 
     /// Space or comma separated list of features to activate
@@ -53,12 +53,12 @@ pub struct Config {
     #[arg(short = 'E', long)]
     pub excludes: Option<Vec<String>>,
 
-    /// Change root to the unique depndency name matching the regex pattern
+    /// Change root to the unique dependency name matching the regex pattern
     #[cfg(feature = "regex")]
     #[arg(short = 'R', long)]
     pub root: Option<String>,
 
-    /// Change root to the unique depndency name matching the prefix
+    /// Change root to the unique dependency name matching the prefix
     #[cfg(not(feature = "regex"))]
     #[arg(short = 'R', long)]
     pub root: Option<String>,
@@ -100,7 +100,7 @@ pub struct Config {
     pub threshold: Option<usize>,
 
     /// Remove nodes that are more than max depth deep
-    #[arg(short = 'd', long = "depth")]
+    #[arg(short = 'd', long = "depth", value_name = "MAX_DEPTH")]
     pub depth: Option<usize>,
 
     /// Inverse color gradient
@@ -112,6 +112,11 @@ pub struct Config {
     #[arg(long)]
     #[cfg_attr(feature = "config", serde(default))]
     pub dark_mode: bool,
+
+    /// Padding for output svg file
+    ///  default: 1.0
+    #[arg(long)]
+    pub padding: Option<f32>,
 
     /// Scale factor for output svg file
     #[arg(long)]

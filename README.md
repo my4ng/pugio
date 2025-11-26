@@ -79,7 +79,7 @@ Options:
   -E, --excludes <EXCLUDES>
           Exclude dependency names matching the regex patterns
   -R, --root <ROOT>
-          Change root to the unique depndency name matching the regex pattern
+          Change root to the unique dependency name matching the regex pattern
       --std
           Add std standalone node
   -s, --scheme <SCHEME>
@@ -106,6 +106,8 @@ Options:
           Inverse color gradient
       --dark-mode
           Dark mode for output svg file
+      --padding <PADDING>
+          Padding for output svg file default: 1.0
       --scale-factor <SCALE_FACTOR>
           Scale factor for output svg file
       --separation-factor <SEPARATION_FACTOR>
@@ -150,12 +152,14 @@ Options:
 {size}, {size_binary}, {size_decimal}
 {value}, {value_binary}, {value_decimal}
 {scheme}
+{features}
 ```
 
 ### Edge
 
 ```plain
 {source}, {target}
+{features}
 ```
 
 ## License
