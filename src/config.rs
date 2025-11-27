@@ -145,11 +145,12 @@ pub struct Config {
     pub node_label_template: Option<String>,
 
     /// Custom node tooltip formatting template
-    ///  default: "{full}\n{size_binary}"
+    ///  default: "{full}\n{size_binary}\n{features}"
     #[arg(long, verbatim_doc_comment)]
     pub node_tooltip_template: Option<String>,
 
     /// Custom edge label formatting template
+    ///  default: "{features}"
     #[arg(long, verbatim_doc_comment)]
     pub edge_label_template: Option<String>,
 

@@ -48,13 +48,13 @@
 .graph:has(.node38:hover) > g:not(.node38) { opacity: 0.5 }
 .graph:has(.node39:hover) > g:not(.node39) { opacity: 0.5 }
 </style>
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 657.21)">
-<polygon fill="#000000" stroke="none" points="-36,36 -36,-657.21 2242,-657.21 2242,36 -36,36"/>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 657.22)">
+<polygon fill="#000000" stroke="none" points="-36,36 -36,-657.22 2242,-657.22 2242,36 -36,36"/>
 <!-- 0 -->
 <g id="node1" class="node node0">
 <title>0</title>
-<g id="a_node1"><a xlink:title="pugio v0.1.5 (/home/my4ng/Programming/pugio)&#10;130.89 KiB&#10;">
-<ellipse fill="#d4dd06" stroke="#ffffff" stroke-width="1.2" cx="891.75" cy="-566.2" rx="55.01" ry="55.01"/>
+<g id="a_node1"><a xlink:title="pugio v0.2.0 (/home/my4ng/Programming/pugio)&#10;130.93 KiB&#10;">
+<ellipse fill="#d4dd06" stroke="#ffffff" stroke-width="1.2" cx="891.75" cy="-566.21" rx="55.01" ry="55.01"/>
 <text xml:space="preserve" text-anchor="middle" x="891.75" y="-559.98" font-family="monospace" font-size="18.00" fill="#ffffff">pugio</text>
 </a>
 </g>
@@ -126,7 +126,7 @@
 <g id="edge7" class="edge node0">
 <title>0&#45;&gt;7</title>
 <g id="a_edge7"><a xlink:title="pugio &#45;&gt; colorous">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M837.06,-561.78C744.7,-554.45 553.32,-532.44 404.75,-470.2 385.65,-462.2 366.4,-447.89 354.3,-437.95"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M837.06,-561.79C744.7,-554.45 553.32,-532.44 404.75,-470.2 385.65,-462.2 366.4,-447.89 354.3,-437.95"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="356.32,-435.98 348.41,-432.94 352.69,-440.25 356.32,-435.98"/>
 </a>
 </g>
@@ -153,7 +153,7 @@
 <g id="node10" class="node node0 node9">
 <title>9</title>
 <g id="a_node10"><a xlink:title="humansize v2.1.3&#10;1.23 KiB&#10;default">
-<ellipse fill="#c558fe" stroke="#ffffff" stroke-width="1.2" cx="599.75" cy="-426.02" rx="4.18" ry="4.18"/>
+<ellipse fill="#c557ff" stroke="#ffffff" stroke-width="1.2" cx="599.75" cy="-426.02" rx="4.18" ry="4.18"/>
 <text xml:space="preserve" text-anchor="middle" x="599.75" y="-419.8" font-family="monospace" font-size="18.00" fill="#ffffff">humansize</text>
 </a>
 </g>
@@ -162,7 +162,7 @@
 <g id="edge9" class="edge node0">
 <title>0&#45;&gt;9</title>
 <g id="a_edge9"><a xlink:title="pugio &#45;&gt; humansize">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M840.84,-546.38C794.71,-528.67 725.35,-500.44 667.75,-470.2 646.84,-459.22 623.93,-443.94 610.76,-434.81"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M840.84,-546.38C794.71,-528.68 725.35,-500.44 667.75,-470.2 646.84,-459.22 623.93,-443.94 610.76,-434.81"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="612.64,-432.71 604.48,-430.4 609.41,-437.29 612.64,-432.71"/>
 </a>
 </g>
@@ -180,7 +180,7 @@
 <g id="edge11" class="edge node0">
 <title>0&#45;&gt;11</title>
 <g id="a_edge11"><a xlink:title="pugio &#45;&gt; open">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M845.15,-537.69C816.5,-519.9 779.68,-495.43 749.75,-470.2 740.62,-462.5 731.38,-452.96 723.99,-444.81"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M845.15,-537.69C816.5,-519.91 779.69,-495.44 749.75,-470.2 740.62,-462.5 731.38,-452.96 723.99,-444.81"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="726.3,-443.18 718.9,-439.05 722.1,-446.9 726.3,-443.18"/>
 </a>
 </g>
@@ -198,7 +198,7 @@
 <g id="edge18" class="edge node0">
 <title>0&#45;&gt;17</title>
 <g id="a_edge18"><a xlink:title="pugio &#45;&gt; parse_size">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M867.97,-516.87C854.22,-488.93 838.01,-456 829.55,-438.81"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M867.97,-516.88C854.22,-488.94 838.01,-456 829.55,-438.81"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="832.1,-437.64 826.05,-431.7 827.07,-440.11 832.1,-437.64"/>
 </a>
 </g>
@@ -216,7 +216,7 @@
 <g id="edge19" class="edge node0">
 <title>0&#45;&gt;18</title>
 <g id="a_edge19"><a xlink:title="pugio &#45;&gt; petgraph">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M915.88,-516.87C927.43,-493.76 940.67,-467.23 949.77,-449.02"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M915.88,-516.88C927.43,-493.76 940.67,-467.23 949.77,-449.02"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="952.2,-450.41 953.27,-442 947.19,-447.91 952.2,-450.41"/>
 </a>
 </g>
@@ -235,7 +235,7 @@
 <title>0&#45;&gt;25</title>
 <g id="a_edge26"><a xlink:title="pugio &#45;&gt; regex_lite">
 <path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M936.96,-534.88C972.77,-510.86 1022.36,-477.59 1056.97,-454.38"/>
-<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1058.33,-456.83 1063.42,-450.05 1055.21,-452.18 1058.33,-456.83"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1058.33,-456.84 1063.42,-450.05 1055.21,-452.18 1058.33,-456.84"/>
 </a>
 </g>
 </g>
@@ -252,7 +252,7 @@
 <g id="edge27" class="edge node0">
 <title>0&#45;&gt;26</title>
 <g id="a_edge27"><a xlink:title="pugio &#45;&gt; serde">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.52,-562.7C1062.61,-556.19 1327.59,-534.47 1385.75,-470.2 1441.69,-408.39 1417.3,-293.13 1408.45,-259.08"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.52,-562.71C1062.61,-556.19 1327.59,-534.47 1385.75,-470.2 1441.69,-408.39 1417.3,-293.13 1408.45,-259.08"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1411.28,-258.77 1406.43,-251.82 1405.88,-260.27 1411.28,-258.77"/>
 </a>
 </g>
@@ -270,7 +270,7 @@
 <g id="edge29" class="edge node0">
 <title>0&#45;&gt;28</title>
 <g id="a_edge29"><a xlink:title="pugio &#45;&gt; serde_json">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.25,-559.44C1007.76,-550.32 1107.61,-527.26 1171.75,-470.2 1204.23,-441.3 1194.03,-420.59 1213.75,-381.85 1231.91,-346.16 1254.08,-305.83 1268.97,-279.14"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.25,-559.44C1007.76,-550.32 1107.61,-527.27 1171.75,-470.2 1204.23,-441.3 1194.03,-420.59 1213.75,-381.85 1231.91,-346.16 1254.08,-305.83 1268.97,-279.14"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1271.28,-280.76 1272.74,-272.41 1266.39,-278.02 1271.28,-280.76"/>
 </a>
 </g>
@@ -306,7 +306,7 @@
 <g id="edge36" class="edge node0">
 <title>0&#45;&gt;33</title>
 <g id="a_edge36"><a xlink:title="pugio &#45;&gt; strum">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.59,-562.68C1065.38,-556.42 1342.23,-537.18 1422.75,-491.2 1445.5,-478.21 1461.9,-450.72 1469.32,-436.3"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.59,-562.69C1065.38,-556.42 1342.23,-537.18 1422.75,-491.2 1445.5,-478.21 1461.9,-450.72 1469.32,-436.3"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1471.72,-437.77 1472.65,-429.34 1466.67,-435.35 1471.72,-437.77"/>
 </a>
 </g>
@@ -324,7 +324,7 @@
 <g id="edge37" class="edge node0">
 <title>0&#45;&gt;34</title>
 <g id="a_edge37"><a xlink:title="pugio &#45;&gt; tinytemplate">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.22,-558.96C1011.05,-550.08 1121.48,-530.36 1208.75,-491.2 1228.73,-482.23 1248.84,-468.64 1265.06,-456.27"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M946.22,-558.96C1011.05,-550.09 1121.48,-530.36 1208.75,-491.2 1228.73,-482.23 1248.84,-468.64 1265.06,-456.27"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1266.67,-458.56 1271.25,-451.43 1263.22,-454.15 1266.67,-458.56"/>
 </a>
 </g>
@@ -373,7 +373,7 @@
 <g id="node6" class="node node0 node3 node4 node5">
 <title>5</title>
 <g id="a_node6"><a xlink:title="anstyle v1.0.13&#10;2.06 KiB&#10;default(std),std">
-<ellipse fill="#cf58fe" stroke="#ffffff" stroke-width="1.2" cx="146.75" cy="-99.08" rx="6.5" ry="6.5"/>
+<ellipse fill="#cf57fe" stroke="#ffffff" stroke-width="1.2" cx="146.75" cy="-99.08" rx="6.5" ry="6.5"/>
 <text xml:space="preserve" text-anchor="middle" x="146.75" y="-92.85" font-family="monospace" font-size="18.00" fill="#ffffff">anstyle</text>
 </a>
 </g>
@@ -485,7 +485,7 @@
 <g id="node14" class="node node0 node11 node12 node13">
 <title>13</title>
 <g id="a_node14"><a xlink:title="is_docker v0.2.0&#10;0 B&#10;default">
-<ellipse fill="#cd58fe" stroke="#ffffff" stroke-width="1.2" cx="450.75" cy="-99.08" rx="0.36" ry="0.36"/>
+<ellipse fill="#cb57fe" stroke="#ffffff" stroke-width="1.2" cx="450.75" cy="-99.08" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="450.75" y="-92.85" font-family="monospace" font-size="18.00" fill="#ffffff">is_docker</text>
 </a>
 </g>
@@ -503,7 +503,7 @@
 <g id="node15" class="node node0 node11 node12 node0 node11 node12 node13 node14">
 <title>14</title>
 <g id="a_node15"><a xlink:title="once_cell v1.21.3&#10;3.68 KiB&#10;alloc(race),default(std),race,std(alloc)">
-<ellipse fill="#d95af8" stroke="#ffffff" stroke-width="1.2" cx="495.75" cy="-14.88" rx="10.21" ry="10.21"/>
+<ellipse fill="#d858f8" stroke="#ffffff" stroke-width="1.2" cx="495.75" cy="-14.88" rx="10.21" ry="10.21"/>
 <text xml:space="preserve" text-anchor="middle" x="495.75" y="-8.65" font-family="monospace" font-size="18.00" fill="#ffffff">once_cell</text>
 </a>
 </g>
@@ -778,7 +778,7 @@
 <!-- 36 -->
 <g id="node37" class="node node0 node35 node0 node35 node39 node36">
 <title>36</title>
-<g id="a_node37"><a xlink:title="winnow v0.7.13&#10;349 B&#10;">
+<g id="a_node37"><a xlink:title="winnow v0.7.14&#10;349 B&#10;">
 <ellipse fill="#b05afe" stroke="#ffffff" stroke-width="1.2" cx="2029.75" cy="-99.08" rx="1.28" ry="1.28"/>
 <text xml:space="preserve" text-anchor="middle" x="2029.75" y="-92.85" font-family="monospace" font-size="18.00" fill="#ffffff">winnow</text>
 </a>

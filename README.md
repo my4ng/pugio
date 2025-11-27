@@ -125,9 +125,10 @@ Options:
            default: "{short}"
       --node-tooltip-template <NODE_TOOLTIP_TEMPLATE>
           Custom node tooltip formatting template
-           default: "{full}\n{size_binary}"
+           default: "{full}\n{size_binary}\n{features}"
       --edge-label-template <EDGE_LABEL_TEMPLATE>
           Custom edge label formatting template
+           default: "{features}"
       --edge-tooltip-template <EDGE_TOOLTIP_TEMPLATE>
           Custom edge tooltip formatting template
            default: "{source} -> {target}"
