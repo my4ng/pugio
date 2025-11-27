@@ -111,7 +111,13 @@ fn edge_features(edge_weight: &EdgeWeight) -> String {
     edge_weight
         .features
         .iter()
-        .cloned()
+        .map(|(f, d)| {
+            if d.is_empty() {
+                f.clone()
+            } else {
+                format!("{f}({})", d.join(","))
+            }
+        })
         .collect::<Vec<String>>()
-        .join(",")
+        .join(",\n")
 }

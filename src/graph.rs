@@ -1,4 +1,4 @@
-use std::collections::{BTreeMap, BTreeSet, HashMap, VecDeque};
+use std::collections::{BTreeMap, HashMap, VecDeque};
 
 #[cfg(feature = "regex")]
 use anyhow::Context;
@@ -41,7 +41,7 @@ impl NodeWeight {
 
 #[derive(Debug)]
 pub struct EdgeWeight {
-    pub features: BTreeSet<String>,
+    pub features: BTreeMap<String, Vec<String>>,
 }
 
 pub fn normalize_sizes(graph: &Graph, map: &mut HashMap<String, usize>) {

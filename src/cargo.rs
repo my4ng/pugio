@@ -1,5 +1,5 @@
 use std::{
-    collections::{BTreeMap, BTreeSet, HashMap, VecDeque},
+    collections::{BTreeMap, HashMap, VecDeque},
     process::{Command, Stdio},
 };
 
@@ -129,6 +129,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
         stack: &VecDeque<(NodeIndex, Option<&str>)>,
         graph: &mut Graph,
         node_index: NodeIndex,
+        feat: Option<&str>,
     ) {
         if let Some((back_index, back_feat)) = stack.back().copied()
             && back_index != node_index
@@ -138,17 +139,24 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                     back_index,
                     node_index,
                     EdgeWeight {
-                        features: BTreeSet::new(),
+                        features: BTreeMap::new(),
                     },
                 )
             });
 
+            // A feature "i"
+            // |- A
+            // |- B feature "j"
+            //    |- B
+            // Insert [i(j)] to edge A -> B, i.e. feature "i" of A enables feature "j" of B.
             if let Some(back_feat) = back_feat {
-                graph
+                let sub_feats = graph
                     .edge_weight_mut(edge_index)
                     .unwrap()
                     .features
-                    .insert(back_feat.to_string());
+                    .entry(back_feat.to_string())
+                    .or_default();
+                sub_feats.push(feat.unwrap().to_string());
             }
         }
     }
@@ -189,7 +197,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                 // |- A feature (*)
                 let short = &lib[..lib.find(' ').unwrap()];
                 let node_index = *feat_lib_map.get(&(short, feat)).unwrap();
-                add_edge(&stack, &mut graph, node_index);
+                add_edge(&stack, &mut graph, node_index, last.1);
             } else {
                 is_feat_first = true;
             }
@@ -243,7 +251,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                 last.1 = None;
             }
 
-            add_edge(&stack, &mut graph, node_index);
+            add_edge(&stack, &mut graph, node_index, last.1);
 
             last.0 = node_index;
             if is_feat_first {

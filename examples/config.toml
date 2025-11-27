@@ -1,6 +1,5 @@
 release = true
 gradient = "plasma"
-separation-factor = 0.8
 highlight = "dep"
 dark-mode = true
 padding = 0.5
