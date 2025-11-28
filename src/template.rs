@@ -104,7 +104,7 @@ fn node_features(node_weight: &NodeWeight) -> String {
             }
         })
         .collect::<Vec<String>>()
-        .join(",")
+        .join(",\n")
 }
 
 fn edge_features(edge_weight: &EdgeWeight) -> String {

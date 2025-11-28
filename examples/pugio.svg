@@ -62,7 +62,7 @@
 <!-- 1 -->
 <g id="node2" class="node node0 node1">
 <title>1</title>
-<g id="a_node2"><a xlink:title="anyhow v1.0.100&#10;10.54 KiB&#10;default(std),std">
+<g id="a_node2"><a xlink:title="anyhow v1.0.100&#10;10.54 KiB&#10;default(std),&#10;std">
 <ellipse fill="#e05cd6" stroke="#ffffff" stroke-width="1.2" cx="41.75" cy="-512.52" rx="20.18" ry="20.18"/>
 <text xml:space="preserve" text-anchor="middle" x="41.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">anyhow</text>
 </a>
@@ -98,7 +98,7 @@
 <!-- 3 -->
 <g id="node4" class="node node0 node3">
 <title>3</title>
-<g id="a_node4"><a xlink:title="clap v4.5.53&#10;0 B&#10;derive,error&#45;context,help,std,usage">
+<g id="a_node4"><a xlink:title="clap v4.5.53&#10;0 B&#10;derive,&#10;error&#45;context,&#10;help,&#10;std,&#10;usage">
 <ellipse fill="#c56905" stroke="#ffffff" stroke-width="1.2" cx="247.75" cy="-512.52" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="247.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">clap</text>
 </a>
@@ -116,7 +116,7 @@
 <!-- 7 -->
 <g id="node8" class="node node0 node7">
 <title>7</title>
-<g id="a_node8"><a xlink:title="colorous v1.0.16&#10;2.44 KiB&#10;default(std),std">
+<g id="a_node8"><a xlink:title="colorous v1.0.16&#10;2.44 KiB&#10;default(std),&#10;std">
 <ellipse fill="#d258fd" stroke="#ffffff" stroke-width="1.2" cx="356.75" cy="-512.52" rx="7.45" ry="7.45"/>
 <text xml:space="preserve" text-anchor="middle" x="356.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">colorous</text>
 </a>
@@ -134,7 +134,7 @@
 <!-- 8 -->
 <g id="node9" class="node node0 node8">
 <title>8</title>
-<g id="a_node9"><a xlink:title="colorsys v0.7.3&#10;2.09 KiB&#10;default(std),std">
+<g id="a_node9"><a xlink:title="colorsys v0.7.3&#10;2.09 KiB&#10;default(std),&#10;std">
 <ellipse fill="#cf57fe" stroke="#ffffff" stroke-width="1.2" cx="487.75" cy="-512.52" rx="6.57" ry="6.57"/>
 <text xml:space="preserve" text-anchor="middle" x="487.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">colorsys</text>
 </a>
@@ -206,7 +206,7 @@
 <!-- 18 -->
 <g id="node19" class="node node0 node18">
 <title>18</title>
-<g id="a_node19"><a xlink:title="petgraph v0.8.3&#10;6.82 KiB&#10;stable_graph,std">
+<g id="a_node19"><a xlink:title="petgraph v0.8.3&#10;6.82 KiB&#10;stable_graph,&#10;std">
 <ellipse fill="#db55c5" stroke="#ffffff" stroke-width="1.2" cx="1000.75" cy="-512.52" rx="15.56" ry="15.56"/>
 <text xml:space="preserve" text-anchor="middle" x="1000.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">petgraph</text>
 </a>
@@ -224,7 +224,7 @@
 <!-- 25 -->
 <g id="node26" class="node node0 node25">
 <title>25</title>
-<g id="a_node26"><a xlink:title="regex_lite v0.1.8&#10;46.25 KiB&#10;default(std,string),std,string">
+<g id="a_node26"><a xlink:title="regex_lite v0.1.8&#10;46.25 KiB&#10;default(std,string),&#10;std,&#10;string">
 <ellipse fill="#b23057" stroke="#ffffff" stroke-width="1.2" cx="1142.75" cy="-512.52" rx="39.57" ry="39.57"/>
 <text xml:space="preserve" text-anchor="middle" x="1142.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">regex_lite</text>
 </a>
@@ -242,7 +242,7 @@
 <!-- 26 -->
 <g id="node27" class="node node0 node0 node34 node26">
 <title>26</title>
-<g id="a_node27"><a xlink:title="serde v1.0.228&#10;318 B&#10;default(std),derive(serde_derive),serde_derive,std">
+<g id="a_node27"><a xlink:title="serde v1.0.228&#10;318 B&#10;default(std),&#10;derive(serde_derive),&#10;serde_derive,&#10;std">
 <ellipse fill="#d95af8" stroke="#ffffff" stroke-width="1.2" cx="1472.75" cy="-285.63" rx="1.17" ry="1.17"/>
 <text xml:space="preserve" text-anchor="middle" x="1472.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">serde</text>
 </a>
@@ -260,7 +260,7 @@
 <!-- 28 -->
 <g id="node29" class="node node0 node0 node34 node28">
 <title>28</title>
-<g id="a_node29"><a xlink:title="serde_json v1.0.145&#10;15.99 KiB&#10;default(std),std">
+<g id="a_node29"><a xlink:title="serde_json v1.0.145&#10;15.99 KiB&#10;default(std),&#10;std">
 <ellipse fill="#c6408a" stroke="#ffffff" stroke-width="1.2" cx="1347.75" cy="-285.63" rx="25.16" ry="25.16"/>
 <text xml:space="preserve" text-anchor="middle" x="1347.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">serde_json</text>
 </a>
@@ -278,7 +278,7 @@
 <!-- 32 -->
 <g id="node33" class="node node0 node32">
 <title>32</title>
-<g id="a_node33"><a xlink:title="serde_with v3.16.0&#10;0 B&#10;alloc,default(macros,std),macros,std(alloc)">
+<g id="a_node33"><a xlink:title="serde_with v3.16.0&#10;0 B&#10;alloc,&#10;default(macros,std),&#10;macros,&#10;std(alloc)">
 <ellipse fill="#d858fa" stroke="#ffffff" stroke-width="1.2" cx="2283.75" cy="-408.85" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="2283.75" y="-402.62" font-family="monospace" font-size="18.00" fill="#ffffff">serde_with</text>
 </a>
@@ -296,7 +296,7 @@
 <!-- 33 -->
 <g id="node34" class="node node0 node33">
 <title>33</title>
-<g id="a_node34"><a xlink:title="strum v0.27.2&#10;63 B&#10;default(std),derive(strum_macros),std,strum_macros">
+<g id="a_node34"><a xlink:title="strum v0.27.2&#10;63 B&#10;default(std),&#10;derive(strum_macros),&#10;std,&#10;strum_macros">
 <ellipse fill="#a061fc" stroke="#ffffff" stroke-width="1.2" cx="1546.75" cy="-512.52" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="1546.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">strum</text>
 </a>
@@ -332,7 +332,7 @@
 <!-- 35 -->
 <g id="node36" class="node node0 node35">
 <title>35</title>
-<g id="a_node36"><a xlink:title="toml v0.9.8&#10;63.48 KiB&#10;parse,serde,std">
+<g id="a_node36"><a xlink:title="toml v0.9.8&#10;63.48 KiB&#10;parse,&#10;serde,&#10;std">
 <ellipse fill="#ac3612" stroke="#ffffff" stroke-width="1.2" cx="1835.75" cy="-512.52" rx="44.18" ry="44.18"/>
 <text xml:space="preserve" text-anchor="middle" x="1835.75" y="-506.3" font-family="monospace" font-size="18.00" fill="#ffffff">toml</text>
 </a>
@@ -350,7 +350,7 @@
 <!-- 4 -->
 <g id="node5" class="node node0 node3 node4">
 <title>4</title>
-<g id="a_node5"><a xlink:title="clap_builder v4.5.53&#10;231.56 KiB&#10;error&#45;context,help,std,usage">
+<g id="a_node5"><a xlink:title="clap_builder v4.5.53&#10;231.56 KiB&#10;error&#45;context,&#10;help,&#10;std,&#10;usage">
 <ellipse fill="#c56905" stroke="#ffffff" stroke-width="1.2" cx="213.75" cy="-285.63" rx="63.72" ry="63.72"/>
 <text xml:space="preserve" text-anchor="middle" x="213.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">clap_builder</text>
 </a>
@@ -375,7 +375,7 @@
 <!-- 5 -->
 <g id="node6" class="node node0 node3 node4 node5">
 <title>5</title>
-<g id="a_node6"><a xlink:title="anstyle v1.0.13&#10;2.06 KiB&#10;default(std),std">
+<g id="a_node6"><a xlink:title="anstyle v1.0.13&#10;2.06 KiB&#10;default(std),&#10;std">
 <ellipse fill="#cf58fe" stroke="#ffffff" stroke-width="1.2" cx="151.75" cy="-109.08" rx="6.5" ry="6.5"/>
 <text xml:space="preserve" text-anchor="middle" x="151.75" y="-102.85" font-family="monospace" font-size="18.00" fill="#ffffff">anstyle</text>
 </a>
@@ -415,7 +415,7 @@
 <!-- 10 -->
 <g id="node11" class="node node0 node9 node10">
 <title>10</title>
-<g id="a_node11"><a xlink:title="libm v0.2.15&#10;0 B&#10;arch,default(arch)">
+<g id="a_node11"><a xlink:title="libm v0.2.15&#10;0 B&#10;arch,&#10;default(arch)">
 <ellipse fill="#7d78f7" stroke="#ffffff" stroke-width="1.2" cx="435.75" cy="-285.63" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="435.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">libm</text>
 </a>
@@ -451,7 +451,7 @@
 <!-- 15 -->
 <g id="node16" class="node node0 node11 node15">
 <title>15</title>
-<g id="a_node16"><a xlink:title="libc v0.2.177&#10;0 B&#10;default(std),std">
+<g id="a_node16"><a xlink:title="libc v0.2.177&#10;0 B&#10;default(std),&#10;std">
 <ellipse fill="#7d78f7" stroke="#ffffff" stroke-width="1.2" cx="629.75" cy="-285.63" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="629.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">libc</text>
 </a>
@@ -505,7 +505,7 @@
 <!-- 14 -->
 <g id="node15" class="node node0 node11 node12 node0 node11 node12 node13 node14">
 <title>14</title>
-<g id="a_node15"><a xlink:title="once_cell v1.21.3&#10;3.68 KiB&#10;alloc(race),default(std),race,std(alloc)">
+<g id="a_node15"><a xlink:title="once_cell v1.21.3&#10;3.68 KiB&#10;alloc(race),&#10;default(std),&#10;race,&#10;std(alloc)">
 <ellipse fill="#d95af8" stroke="#ffffff" stroke-width="1.2" cx="517.75" cy="-14.88" rx="10.21" ry="10.21"/>
 <text xml:space="preserve" text-anchor="middle" x="517.75" y="-8.65" font-family="monospace" font-size="18.00" fill="#ffffff">once_cell</text>
 </a>
@@ -572,7 +572,7 @@
 <!-- 23 -->
 <g id="node24" class="node node0 node18 node23">
 <title>23</title>
-<g id="a_node24"><a xlink:title="hashbrown v0.15.5&#10;3.20 KiB&#10;default&#45;hasher,inline&#45;more">
+<g id="a_node24"><a xlink:title="hashbrown v0.15.5&#10;3.20 KiB&#10;default&#45;hasher,&#10;inline&#45;more">
 <ellipse fill="#d658fa" stroke="#ffffff" stroke-width="1.2" cx="1171.75" cy="-285.63" rx="9.19" ry="9.19"/>
 <text xml:space="preserve" text-anchor="middle" x="1171.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">hashbrown</text>
 </a>
@@ -644,7 +644,7 @@
 <!-- 27 -->
 <g id="node28" class="node node0 node32 node0 node0 node34 node26 node0 node0 node34 node28 node0 node35 node0 node35 node37 node0 node35 node38 node27">
 <title>27</title>
-<g id="a_node28"><a xlink:title="serde_core v1.0.228&#10;20.49 KiB&#10;alloc,result,std">
+<g id="a_node28"><a xlink:title="serde_core v1.0.228&#10;20.49 KiB&#10;alloc,&#10;result,&#10;std">
 <ellipse fill="#cf48a2" stroke="#ffffff" stroke-width="1.2" cx="1684.75" cy="-109.08" rx="28.33" ry="28.33"/>
 <text xml:space="preserve" text-anchor="middle" x="1684.75" y="-102.85" font-family="monospace" font-size="18.00" fill="#ffffff">serde_core</text>
 </a>
@@ -679,7 +679,7 @@
 <!-- 29 -->
 <g id="node30" class="node node0 node0 node34 node28 node29">
 <title>29</title>
-<g id="a_node30"><a xlink:title="memchr v2.7.6&#10;5.31 KiB&#10;alloc,std(alloc)">
+<g id="a_node30"><a xlink:title="memchr v2.7.6&#10;5.31 KiB&#10;alloc,&#10;std(alloc)">
 <ellipse fill="#de5cf2" stroke="#ffffff" stroke-width="1.2" cx="1356.75" cy="-109.08" rx="13.21" ry="13.21"/>
 <text xml:space="preserve" text-anchor="middle" x="1356.75" y="-102.85" font-family="monospace" font-size="18.00" fill="#ffffff">memchr</text>
 </a>
@@ -800,7 +800,7 @@
 <!-- 37 -->
 <g id="node38" class="node node0 node35 node37">
 <title>37</title>
-<g id="a_node38"><a xlink:title="serde_spanned v1.0.3&#10;0 B&#10;alloc,serde,std">
+<g id="a_node38"><a xlink:title="serde_spanned v1.0.3&#10;0 B&#10;alloc,&#10;serde,&#10;std">
 <ellipse fill="#d858fa" stroke="#ffffff" stroke-width="1.2" cx="1730.75" cy="-285.63" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="1730.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">serde_spanned</text>
 </a>
@@ -823,7 +823,7 @@
 <!-- 38 -->
 <g id="node39" class="node node0 node35 node38">
 <title>38</title>
-<g id="a_node39"><a xlink:title="toml_datetime v0.7.3&#10;5.74 KiB&#10;alloc,serde,std">
+<g id="a_node39"><a xlink:title="toml_datetime v0.7.3&#10;5.74 KiB&#10;alloc,&#10;serde,&#10;std">
 <ellipse fill="#e45fdf" stroke="#ffffff" stroke-width="1.2" cx="1917.75" cy="-285.63" rx="13.91" ry="13.91"/>
 <text xml:space="preserve" text-anchor="middle" x="1917.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">toml_datetime</text>
 </a>
@@ -846,7 +846,7 @@
 <!-- 39 -->
 <g id="node40" class="node node0 node35 node39">
 <title>39</title>
-<g id="a_node40"><a xlink:title="toml_parser v1.0.4&#10;44.80 KiB&#10;alloc,std">
+<g id="a_node40"><a xlink:title="toml_parser v1.0.4&#10;44.80 KiB&#10;alloc,&#10;std">
 <ellipse fill="#b33059" stroke="#ffffff" stroke-width="1.2" cx="2093.75" cy="-285.63" rx="39.11" ry="39.11"/>
 <text xml:space="preserve" text-anchor="middle" x="2093.75" y="-279.4" font-family="monospace" font-size="18.00" fill="#ffffff">toml_parser</text>
 </a>
