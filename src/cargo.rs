@@ -1,5 +1,5 @@
 use std::{
-    collections::{BTreeMap, HashMap, VecDeque},
+    collections::{BTreeMap, HashMap},
     process::{Command, Stdio},
 };
 
@@ -126,12 +126,12 @@ pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
 
 pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
     fn add_edge(
-        stack: &VecDeque<(NodeIndex, Option<&str>)>,
+        stack: &Vec<(NodeIndex, Option<&str>)>,
         graph: &mut Graph,
         node_index: NodeIndex,
         feat: Option<&str>,
     ) {
-        if let Some((back_index, back_feat)) = stack.back().copied()
+        if let Some((back_index, back_feat)) = stack.last().copied()
             && back_index != node_index
         {
             let edge_index = graph.find_edge(back_index, node_index).unwrap_or_else(|| {
@@ -166,7 +166,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
 
     let mut feat_lib_map: HashMap<(&str, &str), NodeIndex> = HashMap::new();
 
-    let mut stack: VecDeque<(NodeIndex, Option<&str>)> = VecDeque::new();
+    let mut stack: Vec<(NodeIndex, Option<&str>)> = Vec::new();
     let mut last: (NodeIndex, Option<&str>) = (NodeIndex::new(0), None);
     let mut is_feat_first = false;
 
@@ -186,7 +186,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
         if depth < stack.len() {
             stack.truncate(depth);
         } else if depth == stack.len() + 1 && !is_feat_first {
-            stack.push_back(last);
+            stack.push(last);
         }
 
         if let Some(feat_idx) = lib.find(" feature \"") {
@@ -229,7 +229,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                     .features
                     .insert(last.1.unwrap().to_string(), Vec::new());
 
-                if let Some((back_index, back_feat)) = stack.back().copied() {
+                if let Some((back_index, back_feat)) = stack.last().copied() {
                     // A feature "i"
                     // |- A
                     // |- A feature "j"
@@ -255,7 +255,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
 
             last.0 = node_index;
             if is_feat_first {
-                stack.push_back(last);
+                stack.push(last);
                 last.1 = None;
             }
             is_feat_first = false;
