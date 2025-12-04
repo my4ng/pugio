@@ -1,23 +1,19 @@
-mod cargo;
-mod coloring;
+mod command;
 mod config;
-mod dot;
-mod graph;
-mod template;
 
-use crate::{
-    cargo::{CargoOptions, cargo_bloat_output, cargo_tree_output, get_dep_graph, get_size_map},
-    coloring::{NodeColoringScheme, NodeColoringValues},
-    config::Config,
-    dot::{output_dot, output_svg},
-    graph::{
-        NodeWeight, change_root, cum_sums, dep_counts, normalize_sizes, remove_deep_deps,
-        remove_excluded_deps, remove_small_deps, rev_dep_counts,
-    },
-    template::get_templates,
-};
-use anyhow::Context;
+use command::{cargo_bloat_output, cargo_tree_output};
+
+use anyhow::{Context, bail};
 use clap::Parser;
+use pugio_lib::{
+    coloring::{NodeColoringScheme, NodeColoringValues},
+    dot::{DotOptions, output_dot},
+    graph::Graph,
+    template::{Template, TemplateOptions},
+};
+
+use crate::command::{CargoOptions, SvgOptions, output_svg};
+use crate::config::Config;
 
 #[derive(Parser)]
 #[command(version, about, long_about = None)]
@@ -30,6 +26,24 @@ struct Args {
 
     #[command(flatten)]
     config: Config,
+}
+
+fn get_matched_node_indices(graph: &Graph, pattern: &str) -> anyhow::Result<Vec<usize>> {
+    #[cfg(feature = "regex")]
+    let regex = regex_lite::Regex::new(pattern)?;
+
+    let filter = |i: &usize| -> bool {
+        let name = graph.node_weight(*i).unwrap().full();
+        cfg_if::cfg_if! {
+            if #[cfg(feature = "regex")] {
+                regex.is_match(name)
+            } else {
+                name.starts_with(pattern)
+            }
+        }
+    };
+
+    Ok(graph.node_indices().filter(filter).collect::<Vec<_>>())
 }
 
 fn main() -> anyhow::Result<()> {
@@ -52,91 +66,122 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
-    let options = CargoOptions::from(&config);
-
-    let tree_output = cargo_tree_output(&options)?;
-    let mut graph = get_dep_graph(&tree_output).context("failed to parse cargo-tree output")?;
-
-    let bloat_output = cargo_bloat_output(&options)?;
-    let mut size_map = get_size_map(&bloat_output).context("failed to parse cargo-bloat output")?;
-
-    normalize_sizes(&graph, &mut size_map);
-
-    let mut root_idx = petgraph::graph::NodeIndex::new(0);
-
-    if let Some(root) = &config.root {
-        root_idx = change_root(&mut graph, root).context("failed to change root")?;
-    }
-
-    let std_idx = if config.std {
-        Some(graph.add_node(NodeWeight {
-            name: "std ".to_string(),
-            short_end: 3,
-            features: std::collections::BTreeMap::new(),
-        }))
-    } else {
-        None
+    let options = CargoOptions {
+        package: config.package.clone(),
+        bin: config.bin.clone(),
+        features: config.features.clone(),
+        all_features: config.all_features,
+        no_default_features: config.no_default_features,
+        release: config.release,
     };
 
-    let cum_sums_vec = cum_sums(&graph, &size_map);
+    let cargo_tree_output = cargo_tree_output(&options)?;
+    if cargo_tree_output.contains("\n\n") || cargo_tree_output.contains("\r\n\r\n") {
+        bail!("one and only one package must be specified");
+    }
+    let cargo_bloat_output = cargo_bloat_output(&options)?;
 
-    let node_colouring_values = match config.scheme {
+    let mut graph = Graph::new(&cargo_tree_output, &cargo_bloat_output);
+
+    if let Some(root) = &config.root {
+        let indices = get_matched_node_indices(&graph, root)?;
+        if indices.is_empty() {
+            bail!("dependency name pattern not found");
+        } else if indices.len() > 1 {
+            bail!("dependency name pattern not unique");
+        } else {
+            graph.change_root(indices[0]);
+        }
+    }
+
+    if config.std {
+        graph.add_std();
+    }
+
+    let gradient = config.gradient.unwrap_or_default();
+    let node_values = match config.scheme {
         None => None,
         Some(scheme) => {
-            let (values, mut gamma) = match scheme {
-                NodeColoringScheme::CumSum => cum_sums_vec.clone(),
-                NodeColoringScheme::DepCount => dep_counts(&graph),
-                NodeColoringScheme::RevDepCount => rev_dep_counts(&graph),
+            let mut node_values = match scheme {
+                NodeColoringScheme::CumSum => NodeColoringValues::cum_sums(&graph),
+                NodeColoringScheme::DepCount => NodeColoringValues::dep_counts(&graph),
+                NodeColoringScheme::RevDepCount => NodeColoringValues::rev_dep_counts(&graph),
             };
 
-            if let Some(gamma_) = config.gamma {
-                gamma = gamma_.clamp(0.0, 1.0);
+            if let Some(gamma) = config.gamma {
+                node_values.set_gamma(gamma);
             }
 
-            let max = values.iter().copied().max().unwrap();
-            let gradient = config.gradient.clone().unwrap_or_default().into();
-
-            Some(NodeColoringValues {
-                values,
-                gamma,
-                max,
-                gradient,
-            })
+            Some(node_values)
         }
     };
 
     if let Some(threshold) = config.threshold {
-        remove_small_deps(&mut graph, &cum_sums_vec.0, threshold, std_idx);
+        let cum_sums = NodeColoringValues::cum_sums(&graph);
+        let std = graph.std();
+
+        let iter = cum_sums
+            .values()
+            .iter()
+            .copied()
+            .enumerate()
+            .filter(|(i, s)| *s < threshold && Some(*i) != std)
+            .map(|(i, _)| i);
+
+        graph.remove_indices(iter);
     }
 
     if let Some(excludes) = &config.excludes {
-        remove_excluded_deps(&mut graph, excludes, root_idx, std_idx)
-            .context("failed to exclude dependencies")?;
+        let indices = excludes.iter().try_fold(Vec::new(), |mut v, e| {
+            let indices = get_matched_node_indices(&graph, e)?;
+            v.extend(indices);
+            Ok::<_, anyhow::Error>(v)
+        })?;
+        graph.remove_indices(indices.into_iter());
     }
 
     if let Some(depth) = config.depth {
-        remove_deep_deps(&mut graph, root_idx, depth, std_idx);
+        graph.remove_deep_deps(depth);
     }
 
     let output_filename = config.output.as_deref();
-    let templates = get_templates(&config).context("failed to parse templates")?;
-    let dot = output_dot(
-        &graph,
-        &size_map,
-        &config,
-        &templates,
-        node_colouring_values,
-    );
+
+    let template_options = TemplateOptions {
+        node_label_template: config.node_label_template,
+        node_tooltip_template: config.node_tooltip_template,
+        edge_label_template: config.edge_label_template,
+        edge_tooltip_template: config.edge_tooltip_template,
+    };
+    let template = Template::new(&template_options).context("failed to parse templates")?;
+
+    let dot_options = DotOptions {
+        highlight: config.highlight,
+        bin: config.bin,
+        inverse_gradient: config.inverse_gradient,
+        dark_mode: config.dark_mode,
+    };
+
+    let dot = output_dot(&graph, &dot_options, &template, &node_values, &gradient);
 
     if config.dot_only {
         std::fs::write(output_filename.unwrap_or("output.gv"), dot)
             .context("failed to write output dot file")?;
     } else {
+        let svg_options = SvgOptions {
+            scale_factor: config.scale_factor,
+            separation_factor: config.separation_factor,
+            padding: config.padding,
+            dark_mode: config.dark_mode,
+            highlight: config.highlight,
+            highlight_amount: config.highlight_amount,
+            no_open: config.no_open,
+        };
+
         output_svg(
             &dot,
             &graph,
             output_filename.unwrap_or("output.svg"),
-            &config,
+            &svg_options,
         )?;
     }
 

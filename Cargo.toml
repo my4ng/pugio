@@ -1,14 +1,41 @@
-[package]
-name = "pugio"
+[workspace]
+members = [".", "pugio-lib"]
+
+[workspace.package]
 authors = ["Michael Yang"]
-description = "A command-line dependency binary size graph visualisation tool for Rust"
 version = "0.2.0"
 edition = "2024"
 license = "BSD-2-Clause-Patent"
 repository = "https://github.com/my4ng/pugio"
 keywords = ["bloat", "perf", "dot"]
-categories = ["command-line-utilities", "development-tools", "visualization"]
 rust-version = "1.88"
+
+[workspace.dependencies]
+
+[workspace.lints.rust]
+unsafe_code = "forbid"
+
+[profile.release]
+lto = "thin"
+strip = "debuginfo"
+codegen-units = 1
+
+# ==================================================================================================
+
+[package]
+name = "pugio"
+authors.workspace = true
+description = "A command-line dependency binary size graph visualisation tool for Rust"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+categories = ["command-line-utilities", "development-tools", "visualization"]
+rust-version.workspace = true
+
+[dependencies.pugio-lib]
+path = "pugio-lib"
 
 [dependencies]
 anyhow = "1"
@@ -20,26 +47,12 @@ clap = { version = "4.5", features = [
     "error-context",
     "derive",
 ], default-features = false }
-colorous = "1.0"
-colorsys = "0.7"
-humansize = "2.1"
 open = "5.3"
 parse-size = "1.1"
-petgraph = { version = "0.8", features = [
-    "std",
-    "stable_graph",
-], default-features = false }
-serde = { version = "1", features = ["derive"] }
-serde_json = "1"
-strum = { version = "0.27", features = ["derive"] }
-tinytemplate = "1.2"
+serde = { version = "1", features = ["derive"], optional = true }
 
 [dependencies.regex-lite]
 version = "0.1"
-optional = true
-
-[dependencies.serde_with]
-version = "3.16"
 optional = true
 
 [dependencies.toml]
@@ -51,12 +64,7 @@ optional = true
 [features]
 default = ["regex", "config"]
 regex = ["dep:regex-lite"]
-config = ["dep:serde_with", "dep:toml"]
+config = ["dep:serde", "dep:toml"]
 
-[profile.release]
-lto = "thin"
-strip = "debuginfo"
-codegen-units = 1
-
-[lints.rust]
-unsafe_code = "forbid"
+[lints]
+workspace = true

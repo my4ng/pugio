@@ -1,0 +1,28 @@
+[package]
+name = "pugio-lib"
+authors.workspace = true
+description = "Library for the graph visualisation tool Pugio"
+version.workspace = true
+edition.workspace = true
+license.workspace = true
+repository.workspace = true
+keywords.workspace = true
+categories = ["development-tools", "visualization"]
+rust-version.workspace = true
+
+[dependencies]
+colorous = "1.0"
+colorsys = "0.7"
+humansize = "2.1"
+petgraph = { version = "0.8", features = [
+    "std",
+    "stable_graph",
+], default-features = false }
+serde = { version = "1", features = ["derive"] }
+serde_json = "1"
+strum = { version = "0.27", features = ["derive"] }
+tinytemplate = "1.2"
+thiserror = "2"
+
+[lints]
+workspace = true

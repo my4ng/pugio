@@ -1,117 +1,12 @@
-use std::{
-    collections::{BTreeMap, HashMap},
-    process::{Command, Stdio},
-};
+use std::collections::{BTreeMap, HashMap};
 
-use anyhow::{Context, bail};
-use petgraph::graph::NodeIndex;
+use petgraph::{graph::NodeIndex, stable_graph::StableGraph};
 use serde_json::Value;
 
-use crate::{
-    config::Config,
-    graph::{EdgeWeight, Graph, NodeWeight},
-};
+use crate::graph::{EdgeWeight, Graph, NodeWeight};
 
-#[derive(Debug, Default)]
-pub struct CargoOptions {
-    pub package: Option<String>,
-    pub bin: Option<String>,
-    pub features: Option<String>,
-    pub all_features: bool,
-    pub no_default_features: bool,
-    pub release: bool,
-}
-
-impl From<&Config> for CargoOptions {
-    fn from(value: &Config) -> Self {
-        Self {
-            package: value.package.clone(),
-            bin: value.bin.clone(),
-            features: value.features.clone(),
-            all_features: value.all_features,
-            no_default_features: value.no_default_features,
-            release: value.release,
-        }
-    }
-}
-
-// TODO: Add features support
-pub fn cargo_tree_output(options: &CargoOptions) -> anyhow::Result<String> {
-    let mut command = Command::new("cargo");
-    command
-        .stdout(Stdio::piped())
-        .arg("tree")
-        .arg("--edges=no-build,no-proc-macro,no-dev,features")
-        .arg("--prefix=depth")
-        .arg("--color=never");
-
-    if let Some(package) = &options.package {
-        command.arg(format!("--package={package}"));
-    }
-
-    if let Some(features) = &options.features {
-        command.arg(format!("--features={features}"));
-    }
-
-    if options.all_features {
-        command.arg("--all-features");
-    }
-
-    if options.no_default_features {
-        command.arg("--no-default-features");
-    }
-
-    command
-        .spawn()
-        .context("failed to execute cargo-tree")?
-        .wait_with_output()
-        .map(|o| String::from_utf8(o.stdout).unwrap())
-        .context("failed to wait on cargo-tree")
-}
-
-pub fn cargo_bloat_output(options: &CargoOptions) -> anyhow::Result<String> {
-    let mut command = Command::new("cargo");
-    command
-        .stdout(Stdio::piped())
-        .arg("bloat")
-        .arg("-n0")
-        .arg("--message-format=json")
-        .arg("--crates");
-
-    if let Some(package) = &options.package {
-        command.arg(format!("--package={package}"));
-    }
-
-    if let Some(binary) = &options.bin {
-        command.arg(format!("--bin={binary}"));
-    }
-
-    if let Some(features) = &options.features {
-        command.arg(format!("--features={features}"));
-    }
-
-    if options.all_features {
-        command.arg("--all-features");
-    }
-
-    if options.no_default_features {
-        command.arg("--no-default-features");
-    }
-
-    if options.release {
-        command.arg("--release");
-    }
-
-    command
-        .spawn()
-        .context("failed to execute cargo-bloat")?
-        .wait_with_output()
-        .map(|o| String::from_utf8(o.stdout).unwrap())
-        .context("failed to wait on cargo-bloat")
-}
-
-pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
-    let json: Value = serde_json::from_str(json)?;
+pub(crate) fn get_size_map(cargo_bloat_output: &str) -> HashMap<String, usize> {
+    let json: Value = serde_json::from_str(cargo_bloat_output).unwrap();
     let pairs: &Vec<Value> = json["crates"].as_array().unwrap();
     let map: HashMap<_, _> = pairs
         .iter()
@@ -121,13 +16,13 @@ pub fn get_size_map(json: &str) -> anyhow::Result<HashMap<String, usize>> {
             (name, size)
         })
         .collect();
-    Ok(map)
+    map
 }
 
-pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
+pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
     fn add_edge(
         stack: &Vec<(NodeIndex, Option<&str>)>,
-        graph: &mut Graph,
+        graph: &mut StableGraph<NodeWeight, EdgeWeight>,
         node_index: NodeIndex,
         feat: Option<&str>,
     ) {
@@ -161,7 +56,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
         }
     }
 
-    let mut graph = Graph::new();
+    let mut graph = Graph::default();
     let mut map: HashMap<&str, NodeIndex> = HashMap::new();
 
     let mut feat_lib_map: HashMap<(&str, &str), NodeIndex> = HashMap::new();
@@ -170,10 +65,8 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
     let mut last: (NodeIndex, Option<&str>) = (NodeIndex::new(0), None);
     let mut is_feat_first = false;
 
-    for line in output.lines() {
-        if line.is_empty() {
-            bail!("one and only one package must be specified");
-        }
+    for line in cargo_tree_output.lines() {
+        let graph = &mut graph.inner;
 
         // "2is-wsl v0.4.0 (*)" / "2is-wsl feature "default""
         let split_at = line.find(char::is_alphabetic).unwrap();
@@ -189,15 +82,15 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
             stack.push(last);
         }
 
-        if let Some(feat_idx) = lib.find(" feature \"") {
+        if let Some(feat_index) = lib.find(" feature \"") {
             // "default"
-            let feat = &lib[feat_idx + 10..lib.len() - 1];
+            let feat = &lib[feat_index + 10..lib.len() - 1];
             last.1 = Some(feat);
             if rest.ends_with("(*)") {
                 // |- A feature (*)
                 let short = &lib[..lib.find(' ').unwrap()];
                 let node_index = *feat_lib_map.get(&(short, feat)).unwrap();
-                add_edge(&stack, &mut graph, node_index, last.1);
+                add_edge(&stack, graph, node_index, last.1);
             } else {
                 is_feat_first = true;
             }
@@ -207,11 +100,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                 let (short, extra) = lib.split_at(short_end);
                 let name = short.replace('-', "_") + extra;
 
-                let node_index = graph.add_node(NodeWeight {
-                    name,
-                    short_end,
-                    features: BTreeMap::new(),
-                });
+                let node_index = graph.add_node(NodeWeight::new(name, short_end, BTreeMap::new()));
                 map.insert(lib, node_index);
                 node_index
             });
@@ -251,7 +140,7 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
                 last.1 = None;
             }
 
-            add_edge(&stack, &mut graph, node_index, last.1);
+            add_edge(&stack, graph, node_index, last.1);
 
             last.0 = node_index;
             if is_feat_first {
@@ -262,5 +151,5 @@ pub fn get_dep_graph(output: &str) -> anyhow::Result<Graph> {
         }
     }
 
-    Ok(graph)
+    graph
 }

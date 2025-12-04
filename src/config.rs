@@ -4,7 +4,7 @@ use clap::Args;
 #[cfg(feature = "config")]
 use serde::de;
 
-use crate::coloring::{NodeColoringGradient, NodeColoringScheme};
+use pugio_lib::coloring::{NodeColoringGradient, NodeColoringScheme};
 
 // Obfuscate type for clap
 type OptScheme = Option<NodeColoringScheme>;
@@ -211,7 +211,9 @@ fn de_threshold<'de, D: de::Deserializer<'de>>(d: D) -> Result<Option<usize>, D:
     }
 }
 
-fn parse_scheme(s: &str) -> Result<Option<NodeColoringScheme>, strum::ParseError> {
+fn parse_scheme(
+    s: &str,
+) -> Result<Option<NodeColoringScheme>, <NodeColoringScheme as FromStr>::Err> {
     match s {
         "none" => Ok(None),
         _ => Ok(Some(NodeColoringScheme::from_str(s)?)),
