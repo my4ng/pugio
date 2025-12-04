@@ -19,7 +19,7 @@ pub struct DotOptions {
     pub dark_mode: bool,
 }
 
-pub fn output_dot<T, V, C, R, S, G>(
+pub fn output_dot<C, V, T, R, S, G>(
     graph: &Graph,
     dot_options: &DotOptions,
     templating: &R,
@@ -50,7 +50,7 @@ where
         let context = values.context();
         let value = values.value(index);
         let output = values.output(index);
-        let color = gradient.color(output, dot_options.dark_mode);
+        let color = gradient.color(output, dot_options.dark_mode, dot_options.inverse_gradient);
         let color = format!("#{color:X}");
 
         let (label, tooltip) = templating.node(n, size, value, context);

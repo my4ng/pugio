@@ -8,7 +8,7 @@ pub use colorous::Color;
 pub trait Gradient {
     type Input;
 
-    fn color(&self, input: Self::Input, dark_mode: bool) -> Color;
+    fn color(&self, input: Self::Input, dark_mode: bool, inverse: bool) -> Color;
 }
 
 pub trait Values {
@@ -82,9 +82,11 @@ impl From<NodeColoringGradient> for colorous::Gradient {
 impl Gradient for NodeColoringGradient {
     type Input = Option<f64>;
 
-    fn color(&self, input: Self::Input, dark_mode: bool) -> Color {
+    fn color(&self, input: Self::Input, dark_mode: bool, inverse: bool) -> Color {
         if let Some(input) = input {
-            let mut color = colorous::Gradient::from(*self).eval_continuous(input.clamp(0.0, 1.0));
+            let input = input.clamp(0.0, 1.0);
+            let input = if inverse { 1.0 - input } else { input };
+            let mut color = colorous::Gradient::from(*self).eval_continuous(input);
 
             if dark_mode {
                 let mut hsl: colorsys::Hsl =
