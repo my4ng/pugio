@@ -7,8 +7,7 @@ use anyhow::{Context, bail};
 use clap::Parser;
 use pugio_lib::{
     coloring::{NodeColoringScheme, NodeColoringValues},
-    dot::{DotOptions, output_dot},
-    graph::Graph,
+    graph::{DotOptions, Graph},
     template::{Template, TemplateOptions},
 };
 
@@ -33,7 +32,7 @@ fn get_matched_node_indices(graph: &Graph, pattern: &str) -> anyhow::Result<Vec<
     let regex = regex_lite::Regex::new(pattern)?;
 
     let filter = |i: &usize| -> bool {
-        let name = graph.node_weight(*i).unwrap().full();
+        let name = graph.node_weight(*i).full();
         cfg_if::cfg_if! {
             if #[cfg(feature = "regex")] {
                 regex.is_match(name)
@@ -81,7 +80,12 @@ fn main() -> anyhow::Result<()> {
     }
     let cargo_bloat_output = cargo_bloat_output(&options)?;
 
-    let mut graph = Graph::new(&cargo_tree_output, &cargo_bloat_output);
+    let mut graph = Graph::new(
+        &cargo_tree_output,
+        &cargo_bloat_output,
+        config.std,
+        config.bin.as_deref(),
+    );
 
     if let Some(root) = &config.root {
         let indices = get_matched_node_indices(&graph, root)?;
@@ -94,19 +98,11 @@ fn main() -> anyhow::Result<()> {
         }
     }
 
-    if config.std {
-        graph.add_std();
-    }
-
     let gradient = config.gradient.unwrap_or_default();
     let node_values = match config.scheme {
         None => None,
         Some(scheme) => {
-            let mut node_values = match scheme {
-                NodeColoringScheme::CumSum => NodeColoringValues::cum_sums(&graph),
-                NodeColoringScheme::DepCount => NodeColoringValues::dep_counts(&graph),
-                NodeColoringScheme::RevDepCount => NodeColoringValues::rev_dep_counts(&graph),
-            };
+            let mut node_values = NodeColoringValues::new(&graph, scheme);
 
             if let Some(gamma) = config.gamma {
                 node_values.set_gamma(gamma);
@@ -117,14 +113,11 @@ fn main() -> anyhow::Result<()> {
     };
 
     if let Some(threshold) = config.threshold {
-        let cum_sums = NodeColoringValues::cum_sums(&graph);
+        let cum_sums = NodeColoringValues::new(&graph, NodeColoringScheme::CumSum);
         let std = graph.std();
 
         let iter = cum_sums
-            .values()
-            .iter()
-            .copied()
-            .enumerate()
+            .indices_values()
             .filter(|(i, s)| *s < threshold && Some(*i) != std)
             .map(|(i, _)| i);
 
@@ -161,7 +154,7 @@ fn main() -> anyhow::Result<()> {
         dark_mode: config.dark_mode,
     };
 
-    let dot = output_dot(&graph, &dot_options, &template, &node_values, &gradient);
+    let dot = graph.output_dot(&dot_options, &template, &node_values, &gradient);
 
     if config.dot_only {
         std::fs::write(output_filename.unwrap_or("output.gv"), dot)

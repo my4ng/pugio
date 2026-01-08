@@ -70,7 +70,7 @@ pub struct Config {
 
     /// Color scheme of nodes
     ///  - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
-    ///  - "dep-count": dependency count; number of transitive dependency relations from a node
+    ///  - "dep-count": dependency count; number of transitive dependencies from a node
     ///  - "rev-dep-count": reverse dependency count; number of paths from the root to a node
     ///  - "none"
     #[cfg_attr(

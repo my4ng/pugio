@@ -3,8 +3,9 @@ use std::collections::{BTreeMap, HashMap};
 use petgraph::{graph::NodeIndex, stable_graph::StableGraph};
 use serde_json::Value;
 
-use crate::graph::{EdgeWeight, Graph, NodeWeight};
+use crate::graph::{EdgeWeight, NodeWeight};
 
+/// Parse the cargo bloat output into a map from crate name to size in bytes.
 pub(crate) fn get_size_map(cargo_bloat_output: &str) -> HashMap<String, usize> {
     let json: Value = serde_json::from_str(cargo_bloat_output).unwrap();
     let pairs: &Vec<Value> = json["crates"].as_array().unwrap();
@@ -19,7 +20,8 @@ pub(crate) fn get_size_map(cargo_bloat_output: &str) -> HashMap<String, usize> {
     map
 }
 
-pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
+/// Parse the cargo tree output into a dependency DAG.
+pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> StableGraph<NodeWeight, EdgeWeight> {
     fn add_edge(
         stack: &Vec<(NodeIndex, Option<&str>)>,
         graph: &mut StableGraph<NodeWeight, EdgeWeight>,
@@ -56,7 +58,7 @@ pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
         }
     }
 
-    let mut graph = Graph::default();
+    let mut graph = StableGraph::<NodeWeight, EdgeWeight>::default();
     let mut map: HashMap<&str, NodeIndex> = HashMap::new();
 
     let mut feat_lib_map: HashMap<(&str, &str), NodeIndex> = HashMap::new();
@@ -66,8 +68,6 @@ pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
     let mut is_feat_first = false;
 
     for line in cargo_tree_output.lines() {
-        let graph = &mut graph.inner;
-
         // "2is-wsl v0.4.0 (*)" / "2is-wsl feature "default""
         let split_at = line.find(char::is_alphabetic).unwrap();
         // ("2", "is-wsl v0.4.0 (*)") / ("2", "is-wsl feature "default"")
@@ -90,7 +90,7 @@ pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
                 // |- A feature (*)
                 let short = &lib[..lib.find(' ').unwrap()];
                 let node_index = *feat_lib_map.get(&(short, feat)).unwrap();
-                add_edge(&stack, graph, node_index, last.1);
+                add_edge(&stack, &mut graph, node_index, last.1);
             } else {
                 is_feat_first = true;
             }
@@ -140,7 +140,7 @@ pub(crate) fn get_dep_graph(cargo_tree_output: &str) -> Graph {
                 last.1 = None;
             }
 
-            add_edge(&stack, graph, node_index, last.1);
+            add_edge(&stack, &mut graph, node_index, last.1);
 
             last.0 = node_index;
             if is_feat_first {
