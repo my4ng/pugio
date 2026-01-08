@@ -6,7 +6,7 @@ use std::{
 use anyhow::Context;
 use pugio_lib::graph::Graph;
 
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct CargoOptions {
     pub package: Option<String>,
     pub bin: Option<String>,
@@ -90,7 +90,7 @@ pub fn cargo_bloat_output(options: &CargoOptions) -> anyhow::Result<String> {
         .context("failed to wait on cargo-bloat")
 }
 
-#[derive(Debug)]
+#[derive(Debug, Default)]
 pub struct SvgOptions {
     pub scale_factor: Option<f32>,
     pub separation_factor: Option<f32>,

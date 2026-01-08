@@ -49,14 +49,14 @@
 .graph:has(.node39:hover) > g:not(.node39) { opacity: 0.5 }
 .graph:has(.node40:hover) > g:not(.node40) { opacity: 0.5 }
 </style>
-<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 816.42)">
-<polygon fill="#000000" stroke="none" points="-36,36 -36,-816.42 2289.25,-816.42 2289.25,36 -36,36"/>
+<g id="graph0" class="graph" transform="scale(1 1) rotate(0) translate(36 816.37)">
+<polygon fill="#000000" stroke="none" points="-36,36 -36,-816.37 2289.25,-816.37 2289.25,36 -36,36"/>
 <!-- 0 -->
 <g id="node1" class="node node0">
 <title>0</title>
-<g id="a_node1"><a xlink:title="pugio v0.2.0 (/home/my4ng/Programming/pugio)&#10;95.72 KiB&#10;">
-<ellipse fill="#d4dd06" stroke="#ffffff" stroke-width="1.2" cx="822.38" cy="-730.13" rx="50.28" ry="50.28"/>
-<text xml:space="preserve" text-anchor="middle" x="822.38" y="-723.91" font-family="monospace" font-size="18.00" fill="#ffffff">pugio</text>
+<g id="a_node1"><a xlink:title="pugio v0.2.0 (/home/my4ng/Programming/pugio)&#10;95.58 KiB&#10;">
+<ellipse fill="#d4dd06" stroke="#ffffff" stroke-width="1.2" cx="822.38" cy="-730.11" rx="50.26" ry="50.26"/>
+<text xml:space="preserve" text-anchor="middle" x="822.38" y="-723.89" font-family="monospace" font-size="18.00" fill="#ffffff">pugio</text>
 </a>
 </g>
 </g>
@@ -64,7 +64,7 @@
 <g id="node2" class="node node0 node1">
 <title>1</title>
 <g id="a_node2"><a xlink:title="anyhow v1.0.100&#10;8.97 KiB&#10;default(std),&#10;std">
-<ellipse fill="#e560e2" stroke="#ffffff" stroke-width="1.2" cx="290.38" cy="-589.28" rx="18.39" ry="18.39"/>
+<ellipse fill="#e661e4" stroke="#ffffff" stroke-width="1.2" cx="290.38" cy="-589.28" rx="18.39" ry="18.39"/>
 <text xml:space="preserve" text-anchor="middle" x="290.38" y="-583.06" font-family="monospace" font-size="18.00" fill="#ffffff">anyhow</text>
 </a>
 </g>
@@ -73,7 +73,7 @@
 <g id="edge1" class="edge node0">
 <title>0&#45;&gt;1</title>
 <g id="a_edge1"><a xlink:title="pugio &#45;&gt; anyhow">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M772.67,-725.3C683.68,-717.03 492.68,-692.77 345.38,-628.85 333.29,-623.61 321.17,-615.49 311.39,-608.05"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M772.67,-725.28C683.68,-717.01 492.68,-692.76 345.38,-628.85 333.29,-623.61 321.17,-615.49 311.39,-608.05"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="313.37,-606.04 305.36,-603.28 309.9,-610.44 313.37,-606.04"/>
 </a>
 </g>
@@ -91,7 +91,7 @@
 <g id="edge2" class="edge node0">
 <title>0&#45;&gt;2</title>
 <g id="a_edge2"><a xlink:title="pugio &#45;&gt; cfg_if">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M772.97,-721.46C700.3,-708.91 561.5,-680.12 453.38,-628.85 435.43,-620.34 417.16,-605.8 407.14,-597.21"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M772.97,-721.44C700.3,-708.89 561.5,-680.12 453.38,-628.85 435.42,-620.34 417.16,-605.8 407.14,-597.21"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="409.1,-595.2 401.26,-591.97 405.37,-599.38 409.1,-595.2"/>
 </a>
 </g>
@@ -100,7 +100,7 @@
 <g id="node4" class="node node0 node3">
 <title>3</title>
 <g id="a_node4"><a xlink:title="clap v4.5.53&#10;0 B&#10;derive,&#10;error&#45;context,&#10;help,&#10;std,&#10;usage">
-<ellipse fill="#c56805" stroke="#ffffff" stroke-width="1.2" cx="496.38" cy="-589.28" rx="0.36" ry="0.36"/>
+<ellipse fill="#c46705" stroke="#ffffff" stroke-width="1.2" cx="496.38" cy="-589.28" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="496.38" y="-583.06" font-family="monospace" font-size="18.00" fill="#ffffff">clap</text>
 </a>
 </g>
@@ -109,7 +109,7 @@
 <g id="edge3" class="edge node0">
 <title>0&#45;&gt;3</title>
 <g id="a_edge3"><a xlink:title="pugio &#45;&gt; clap">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M773.82,-718.1C715.36,-703.47 615.57,-674.09 539.38,-628.85 525.01,-620.32 511.13,-606.56 503.19,-597.98"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M773.82,-718.09C715.36,-703.46 615.57,-674.09 539.38,-628.85 525.01,-620.32 511.13,-606.56 503.19,-597.98"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="505.44,-596.31 498.04,-592.17 501.25,-600.02 505.44,-596.31"/>
 </a>
 </g>
@@ -127,7 +127,7 @@
 <g id="edge7" class="edge node0">
 <title>0&#45;&gt;7</title>
 <g id="a_edge7"><a xlink:title="pugio &#45;&gt; open">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M779.47,-704.31C727.51,-674.25 642.12,-624.85 603.05,-602.25"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M779.47,-704.29C727.51,-674.24 642.12,-624.84 603.05,-602.24"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="604.59,-599.9 596.26,-598.32 601.79,-604.75 604.59,-599.9"/>
 </a>
 </g>
@@ -145,7 +145,7 @@
 <g id="edge14" class="edge node0">
 <title>0&#45;&gt;13</title>
 <g id="a_edge14"><a xlink:title="pugio &#45;&gt; parse_size">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M822.38,-680.18C822.38,-652.8 822.38,-620.76 822.38,-603.29"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M822.38,-680.17C822.38,-652.79 822.38,-620.76 822.38,-603.29"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="825.18,-603.5 822.38,-595.5 819.58,-603.5 825.18,-603.5"/>
 </a>
 </g>
@@ -153,8 +153,8 @@
 <!-- 14 -->
 <g id="node15" class="node node0 node14">
 <title>14</title>
-<g id="a_node15"><a xlink:title="pugio_lib v0.2.0 (/home/my4ng/Programming/pugio/pugio&#45;lib)&#10;40.83 KiB&#10;default">
-<ellipse fill="#aa3414" stroke="#ffffff" stroke-width="1.2" cx="1030.38" cy="-589.28" rx="37.78" ry="37.78"/>
+<g id="a_node15"><a xlink:title="pugio_lib v0.2.0 (/home/my4ng/Programming/pugio/pugio&#45;lib)&#10;42.87 KiB&#10;default">
+<ellipse fill="#ab3614" stroke="#ffffff" stroke-width="1.2" cx="1030.38" cy="-589.28" rx="38.48" ry="38.48"/>
 <text xml:space="preserve" text-anchor="middle" x="1030.38" y="-583.06" font-family="monospace" font-size="18.00" fill="#ffffff">pugio_lib</text>
 </a>
 </g>
@@ -163,8 +163,8 @@
 <g id="edge15" class="edge node0">
 <title>0&#45;&gt;14</title>
 <g id="a_edge15"><a xlink:title="pugio &#45;&gt; pugio_lib">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M863.47,-701.7C900.52,-676.97 954.62,-640.85 991.1,-616.5"/>
-<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="992.4,-619 997.5,-612.23 989.29,-614.34 992.4,-619"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M863.47,-701.68C900.3,-677.1 953.98,-641.27 990.45,-616.93"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="991.76,-619.43 996.85,-612.66 988.65,-614.77 991.76,-619.43"/>
 </a>
 </g>
 </g>
@@ -172,7 +172,7 @@
 <g id="node27" class="node node0 node0 node14 node0 node14 node34 node26">
 <title>26</title>
 <g id="a_node27"><a xlink:title="serde v1.0.228&#10;318 B&#10;default(std),&#10;derive(serde_derive),&#10;serde_derive,&#10;std">
-<ellipse fill="#db59f6" stroke="#ffffff" stroke-width="1.2" cx="1511.38" cy="-179.67" rx="1.17" ry="1.17"/>
+<ellipse fill="#da59f6" stroke="#ffffff" stroke-width="1.2" cx="1511.38" cy="-179.67" rx="1.17" ry="1.17"/>
 <text xml:space="preserve" text-anchor="middle" x="1511.38" y="-173.44" font-family="monospace" font-size="18.00" fill="#ffffff">serde</text>
 </a>
 </g>
@@ -181,7 +181,7 @@
 <g id="edge39" class="edge node0">
 <title>0&#45;&gt;26</title>
 <g id="a_edge39"><a xlink:title="pugio &#45;&gt; serde">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M871.36,-719.64C1033.63,-686.97 1547.32,-573.27 1616.38,-430.72 1653.03,-355.05 1639.3,-309.9 1587.38,-243.77 1582.03,-236.97 1537.89,-201.68 1519.43,-187.04"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M871.36,-719.62C1033.63,-686.95 1547.32,-573.27 1616.38,-430.72 1653.03,-355.05 1639.3,-309.9 1587.38,-243.77 1582.03,-236.97 1537.89,-201.68 1519.43,-187.04"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1521.34,-184.97 1513.32,-182.21 1517.86,-189.37 1521.34,-184.97"/>
 </a>
 </g>
@@ -199,7 +199,7 @@
 <g id="edge40" class="edge node0">
 <title>0&#45;&gt;35</title>
 <g id="a_edge40"><a xlink:title="pugio &#45;&gt; regex_lite">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M872.62,-728.53C1033.75,-726.01 1535.65,-713.53 1685.38,-654.85 1702.85,-648 1719.68,-636.24 1733.56,-624.61"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M872.34,-728.51C1033.16,-726.01 1535.56,-713.56 1685.38,-654.85 1702.85,-648 1719.68,-636.24 1733.56,-624.61"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1735.34,-626.77 1739.55,-619.41 1731.67,-622.55 1735.34,-626.77"/>
 </a>
 </g>
@@ -217,7 +217,7 @@
 <g id="edge41" class="edge node0">
 <title>0&#45;&gt;36</title>
 <g id="a_edge41"><a xlink:title="pugio &#45;&gt; toml">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M872.56,-727.47C1067.81,-720.56 1769.75,-691.5 1845.38,-628.85 1908.12,-576.87 1932.01,-480.96 1941.01,-421.05"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M872.56,-727.45C1067.81,-720.54 1769.75,-691.5 1845.38,-628.85 1908.12,-576.87 1932.01,-480.96 1941.01,-421.05"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1943.74,-421.73 1942.09,-413.42 1938.2,-420.95 1943.74,-421.73"/>
 </a>
 </g>
@@ -226,7 +226,7 @@
 <g id="node5" class="node node0 node3 node4">
 <title>4</title>
 <g id="a_node5"><a xlink:title="clap_builder v4.5.53&#10;231.56 KiB&#10;error&#45;context,&#10;help,&#10;std,&#10;usage">
-<ellipse fill="#c56805" stroke="#ffffff" stroke-width="1.2" cx="149.38" cy="-367" rx="63.72" ry="63.72"/>
+<ellipse fill="#c46705" stroke="#ffffff" stroke-width="1.2" cx="149.38" cy="-367" rx="63.72" ry="63.72"/>
 <text xml:space="preserve" text-anchor="middle" x="149.38" y="-360.77" font-family="monospace" font-size="18.00" fill="#ffffff">clap_builder</text>
 </a>
 </g>
@@ -273,7 +273,7 @@
 <g id="node7" class="node node0 node3 node4 node6">
 <title>6</title>
 <g id="a_node7"><a xlink:title="clap_lex v0.7.6&#10;1.08 KiB&#10;default">
-<ellipse fill="#c257ff" stroke="#ffffff" stroke-width="1.2" cx="172.38" cy="-179.67" rx="3.72" ry="3.72"/>
+<ellipse fill="#c258fe" stroke="#ffffff" stroke-width="1.2" cx="172.38" cy="-179.67" rx="3.72" ry="3.72"/>
 <text xml:space="preserve" text-anchor="middle" x="172.38" y="-173.44" font-family="monospace" font-size="18.00" fill="#ffffff">clap_lex</text>
 </a>
 </g>
@@ -291,7 +291,7 @@
 <g id="node9" class="node node0 node7 node8">
 <title>8</title>
 <g id="a_node9"><a xlink:title="is_wsl v0.4.0&#10;0 B&#10;default">
-<ellipse fill="#d95af8" stroke="#ffffff" stroke-width="1.2" cx="315.38" cy="-367" rx="0.36" ry="0.36"/>
+<ellipse fill="#d858f8" stroke="#ffffff" stroke-width="1.2" cx="315.38" cy="-367" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="315.38" y="-360.77" font-family="monospace" font-size="18.00" fill="#ffffff">is_wsl</text>
 </a>
 </g>
@@ -308,7 +308,7 @@
 <!-- 11 -->
 <g id="node12" class="node node0 node7 node11">
 <title>11</title>
-<g id="a_node12"><a xlink:title="libc v0.2.177&#10;0 B&#10;default(std),&#10;std">
+<g id="a_node12"><a xlink:title="libc v0.2.178&#10;0 B&#10;default(std),&#10;std">
 <ellipse fill="#7d78f7" stroke="#ffffff" stroke-width="1.2" cx="412.38" cy="-367" rx="0.36" ry="0.36"/>
 <text xml:space="preserve" text-anchor="middle" x="412.38" y="-360.77" font-family="monospace" font-size="18.00" fill="#ffffff">libc</text>
 </a>
@@ -399,7 +399,7 @@
 <g id="edge16" class="edge node0 node14">
 <title>14&#45;&gt;15</title>
 <g id="a_edge16"><a xlink:title="pugio_lib &#45;&gt; colorous">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M995.13,-576.56C961.76,-564.97 910.63,-545.94 868.38,-524.72 797.73,-489.24 779.72,-479.32 717.38,-430.72 697.08,-414.9 676.1,-393.59 663.65,-380.33"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M994.49,-576.33C961.11,-564.72 910.36,-545.8 868.38,-524.72 797.73,-489.24 779.72,-479.32 717.38,-430.72 697.08,-414.9 676.1,-393.59 663.65,-380.33"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="665.93,-378.67 658.44,-374.7 661.82,-382.47 665.93,-378.67"/>
 </a>
 </g>
@@ -417,7 +417,7 @@
 <g id="edge17" class="edge node0 node14">
 <title>14&#45;&gt;16</title>
 <g id="a_edge17"><a xlink:title="pugio_lib &#45;&gt; colorsys">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1000.17,-566.75C983.88,-554.81 963.63,-539.43 946.38,-524.72 900.46,-485.55 891.87,-472.56 848.38,-430.72 829.64,-412.7 807.92,-391.72 794.93,-379.17"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M999.77,-566.46C983.55,-554.56 963.49,-539.31 946.38,-524.72 900.46,-485.55 891.87,-472.56 848.38,-430.72 829.64,-412.7 807.92,-391.72 794.93,-379.17"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="796.92,-377.19 789.22,-373.65 793.03,-381.22 796.92,-377.19"/>
 </a>
 </g>
@@ -435,16 +435,16 @@
 <g id="edge18" class="edge node0 node14">
 <title>14&#45;&gt;17</title>
 <g id="a_edge18"><a xlink:title="pugio_lib &#45;&gt; humansize">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1041.78,-553.38C1058.17,-503.25 1087.56,-413.31 1098.3,-380.45"/>
-<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1100.94,-381.39 1100.77,-372.91 1095.62,-379.65 1100.94,-381.39"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1041.94,-552.89C1058.37,-502.64 1087.64,-413.09 1098.32,-380.39"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1100.95,-381.37 1100.77,-372.9 1095.63,-379.63 1100.95,-381.37"/>
 </a>
 </g>
 </g>
 <!-- 19 -->
 <g id="node20" class="node node0 node14 node19">
 <title>19</title>
-<g id="a_node20"><a xlink:title="petgraph v0.8.3&#10;6.57 KiB&#10;stable_graph,&#10;std">
-<ellipse fill="#e561ea" stroke="#ffffff" stroke-width="1.2" cx="914.38" cy="-367" rx="15.19" ry="15.19"/>
+<g id="a_node20"><a xlink:title="petgraph v0.8.3&#10;6.65 KiB&#10;stable_graph,&#10;std">
+<ellipse fill="#e561ea" stroke="#ffffff" stroke-width="1.2" cx="914.38" cy="-367" rx="15.3" ry="15.3"/>
 <text xml:space="preserve" text-anchor="middle" x="914.38" y="-360.77" font-family="monospace" font-size="18.00" fill="#ffffff">petgraph</text>
 </a>
 </g>
@@ -453,7 +453,7 @@
 <g id="edge20" class="edge node0 node14">
 <title>14&#45;&gt;19</title>
 <g id="a_edge20"><a xlink:title="pugio_lib &#45;&gt; petgraph">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1008.45,-558.91C1001.03,-548.38 992.95,-536.26 986.38,-524.72 960.13,-478.67 935.76,-421.38 923.22,-390.41"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1008,-558.27C1000.7,-547.89 992.82,-536.03 986.38,-524.72 960.13,-478.67 935.76,-421.38 923.22,-390.41"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="925.91,-389.6 920.33,-383.21 920.71,-391.68 925.91,-389.6"/>
 </a>
 </g>
@@ -462,7 +462,7 @@
 <g id="edge27" class="edge node0 node14">
 <title>14&#45;&gt;26</title>
 <g id="a_edge27"><a xlink:title="pugio_lib &#45;&gt; serde">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1067.74,-583.94C1183.14,-569.66 1529.71,-519.85 1589.38,-430.72 1645.4,-347.02 1546.1,-220.98 1518.3,-188.51"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1068.15,-583.89C1183.96,-569.54 1529.78,-519.74 1589.38,-430.72 1645.4,-347.02 1546.1,-220.98 1518.3,-188.51"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1520.47,-186.74 1513.08,-182.59 1516.27,-190.44 1520.47,-186.74"/>
 </a>
 </g>
@@ -480,7 +480,7 @@
 <g id="edge29" class="edge node0 node14">
 <title>14&#45;&gt;28</title>
 <g id="a_edge29"><a xlink:title="pugio_lib &#45;&gt; serde_json">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1019.78,-553.23C1004.76,-496.22 984,-381.89 1031.38,-303.27 1053.73,-266.18 1171.25,-216 1229.12,-193.05"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1019.66,-552.77C1004.65,-495.61 984.13,-381.68 1031.38,-303.27 1053.73,-266.18 1171.25,-216 1229.12,-193.05"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1229.86,-195.77 1236.28,-190.24 1227.81,-190.56 1229.86,-195.77"/>
 </a>
 </g>
@@ -498,7 +498,7 @@
 <g id="edge34" class="edge node0 node14">
 <title>14&#45;&gt;32</title>
 <g id="a_edge34"><a xlink:title="pugio_lib &#45;&gt; strum">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1065.88,-576.7C1128.11,-555.18 1258.83,-504.41 1349.38,-430.72 1368.69,-415 1385.09,-390.33 1393.11,-377.1"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1066.38,-576.53C1128.8,-554.91 1259.07,-504.22 1349.38,-430.72 1368.69,-415 1385.09,-390.33 1393.11,-377.1"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1395.52,-378.53 1397.1,-370.21 1390.67,-375.73 1395.52,-378.53"/>
 </a>
 </g>
@@ -516,7 +516,7 @@
 <g id="edge35" class="edge node0 node14">
 <title>14&#45;&gt;33</title>
 <g id="a_edge35"><a xlink:title="pugio_lib &#45;&gt; thiserror">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1067.22,-581.59C1115.77,-572.13 1203.33,-552.79 1274.38,-524.72 1355.76,-492.56 1375.68,-480.89 1447.38,-430.72 1472.7,-412.99 1499.11,-387.49 1511.36,-375.18"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1067.64,-581.51C1116.27,-572.01 1203.54,-552.71 1274.38,-524.72 1355.76,-492.56 1375.68,-480.89 1447.38,-430.72 1472.7,-412.99 1499.11,-387.49 1511.36,-375.18"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1512.99,-377.52 1516.58,-369.84 1508.98,-373.6 1512.99,-377.52"/>
 </a>
 </g>
@@ -534,8 +534,8 @@
 <g id="edge36" class="edge node0 node14">
 <title>14&#45;&gt;34</title>
 <g id="a_edge36"><a xlink:title="pugio_lib &#45;&gt; tinytemplate">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1056.87,-563.01C1099.31,-522.55 1182.41,-443.3 1228.54,-399.31"/>
-<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1230.28,-401.52 1234.14,-393.97 1226.41,-397.47 1230.28,-401.52"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M1057.33,-562.58C1099.94,-521.94 1182.75,-442.98 1228.69,-399.17"/>
+<polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="1230.4,-401.41 1234.25,-393.86 1226.53,-397.35 1230.4,-401.41"/>
 </a>
 </g>
 </g>
@@ -588,7 +588,7 @@
 <g id="edge22" class="edge node0 node14 node19">
 <title>19&#45;&gt;21</title>
 <g id="a_edge22"><a xlink:title="petgraph &#45;&gt; indexmap">
-<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M905.57,-355.32C893.78,-341.62 871.66,-317.91 848.38,-303.27 821.82,-286.59 808.69,-295.34 782.38,-278.27 742.32,-252.3 705.69,-207.4 691.55,-188.95"/>
+<path fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" d="M905.16,-354.84C893.28,-341.08 871.4,-317.74 848.38,-303.27 821.82,-286.59 808.69,-295.34 782.38,-278.27 742.32,-252.3 705.69,-207.4 691.55,-188.95"/>
 <polygon fill="none" stroke="#ffffff" stroke-width="1.6" stroke-opacity="0.623529" points="693.88,-187.39 686.86,-182.65 689.39,-190.74 693.88,-187.39"/>
 </a>
 </g>
@@ -673,7 +673,7 @@
 <g id="node28" class="node node0 node0 node14 node0 node14 node34 node26 node0 node14 node0 node14 node34 node28 node0 node36 node0 node36 node38 node0 node36 node39 node27">
 <title>27</title>
 <g id="a_node28"><a xlink:title="serde_core v1.0.228&#10;20.02 KiB&#10;alloc,&#10;result,&#10;std">
-<ellipse fill="#cf48a2" stroke="#ffffff" stroke-width="1.2" cx="1653.38" cy="-28.03" rx="28.03" ry="28.03"/>
+<ellipse fill="#d049a5" stroke="#ffffff" stroke-width="1.2" cx="1653.38" cy="-28.03" rx="28.03" ry="28.03"/>
 <text xml:space="preserve" text-anchor="middle" x="1653.38" y="-21.8" font-family="monospace" font-size="18.00" fill="#ffffff">serde_core</text>
 </a>
 </g>
@@ -861,7 +861,7 @@
 <g id="node41" class="node node0 node36 node40">
 <title>40</title>
 <g id="a_node41"><a xlink:title="toml_parser v1.0.4&#10;44.80 KiB&#10;alloc,&#10;std">
-<ellipse fill="#b33059" stroke="#ffffff" stroke-width="1.2" cx="2183.38" cy="-179.67" rx="39.11" ry="39.11"/>
+<ellipse fill="#b4315c" stroke="#ffffff" stroke-width="1.2" cx="2183.38" cy="-179.67" rx="39.11" ry="39.11"/>
 <text xml:space="preserve" text-anchor="middle" x="2183.38" y="-173.44" font-family="monospace" font-size="18.00" fill="#ffffff">toml_parser</text>
 </a>
 </g>

@@ -1,7 +1,7 @@
 [package]
 name = "pugio-lib"
 authors.workspace = true
-description = "Library for the graph visualisation tool Pugio"
+description = "Library for the dependency graph visualisation tool Pugio"
 version.workspace = true
 edition.workspace = true
 license.workspace = true
