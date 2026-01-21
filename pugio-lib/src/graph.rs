@@ -100,8 +100,12 @@ impl Graph {
         let mut size_map = get_size_map(cargo_bloat_output);
         if let Some(bin) = bin {
             let size = size_map.get(bin).copied().unwrap_or_default();
-            let root_name = inner.node_weight(NodeIndex::new(0)).unwrap().short();
-            *size_map.get_mut(root_name).unwrap() += size;
+            let root_name = inner
+                .node_weight(NodeIndex::new(0))
+                .unwrap()
+                .short()
+                .to_string();
+            *size_map.entry(root_name).or_default() += size;
         }
         let std = std.then(|| {
             let weight = NodeWeight {
