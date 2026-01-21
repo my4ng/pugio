@@ -3,7 +3,7 @@ members = [".", "pugio-lib"]
 
 [workspace.package]
 authors = ["Michael Yang"]
-version = "0.2.0"
+version = "0.3.0"
 edition = "2024"
 license = "BSD-2-Clause-Patent"
 repository = "https://github.com/my4ng/pugio"
@@ -35,6 +35,7 @@ categories = ["command-line-utilities", "development-tools", "visualization"]
 rust-version.workspace = true
 
 [dependencies.pugio-lib]
+version = "0.3.0"
 path = "pugio-lib"
 
 [dependencies]
