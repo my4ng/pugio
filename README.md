@@ -1,10 +1,12 @@
 # Pugio
 
-[![Crates.io Version](https://img.shields.io/crates/v/pugio)](https://crates.io/crates/pugio) ![Crates.io MSRV](https://img.shields.io/crates/msrv/pugio) [![GitHub License](https://img.shields.io/github/license/my4ng/pugio)](https://github.com/my4ng/pugio/blob/main/LICENSE)
+[![Crates.io Version](https://img.shields.io/crates/v/pugio)](https://crates.io/crates/pugio) [![docs.rs](https://img.shields.io/docsrs/pugio-lib?label=docs%20pugio-lib)](https://docs.rs/pugio-lib/latest/pugio_lib) ![Crates.io MSRV](https://img.shields.io/crates/msrv/pugio) [![GitHub License](https://img.shields.io/github/license/my4ng/pugio)](https://github.com/my4ng/pugio/blob/main/LICENSE)
 
 *Pugio* is a graph visualisation tool for Rust to estimate and present the binary size contributions of a crate and its dependencies. It uses `cargo-tree` and `cargo-bloat` to build the dependency graph where the diameter of each crate node is logarithmic to its size. The resulting graph can then be either exported with `graphviz` and opened as an SVG file, or as a DOT graph file for additional processing.
 
 It is important to note that the sizes is and will always be only an *estimation*. Some information is irrevocably lost during compilation and linkage. In addition, calls to the standard library is not included in the caller's size (although the total size of the standard library can be shown with the `--std` flag). Multiple versions of a dependency is also not distinguishable in the final binary.
+
+*Pugio-lib* is the underlying library for *Pugio* and can be used as a dependency in other Rust projects. See the [documentation](https://docs.rs/pugio-lib/latest/pugio_lib) for more details.
 
 ## Examples
 
@@ -42,16 +44,15 @@ To customise enabled Cargo features, add the options:
 
 `--no-default-features --features="..."`
 
+To use the `pugio-lib` library in your own Rust project, add the dependency to your `Cargo.toml`:
+
+`cargo add pugio-lib`
+
 ## Feature flags
 
 - `default`: `regex`, `config`
 - `regex`: support regex pattern matching in options: [regex-lite syntax](https://docs.rs/regex-lite/latest/regex_lite/index.html#syntax)
 - `config`: support TOML config file
-
-## Planned Features
-
-- Edge label by dependency features
-- Interactive SVG support (function breakdown)
 
 ## Usage
 
@@ -85,7 +86,7 @@ Options:
   -s, --scheme <SCHEME>
           Color scheme of nodes
            - "cum-sum": cumulative sum of the size of a node and its dependencies (default)
-           - "dep-count": dependency count; number of transitive dependency relations from a node
+           - "dep-count": dependency count; number of transitive dependencies from a node
            - "rev-dep-count": reverse dependency count; number of paths from the root to a node
            - "none"
   -g, --gradient <GRADIENT>
@@ -165,6 +166,6 @@ Options:
 
 ## License
 
-Pugio is licensed under the BSD-2-Clause Plus Patent license, see [LICENSE](LICENSE) for more details.
+The Pugio project is licensed under the BSD-2-Clause Plus Patent license, see [LICENSE](LICENSE) for more details.
 
 *Note: This license is designed to provide: a) a simple permissive license; b) that is compatible with the GNU General Public License (GPL), version 2; and c) which also has an express patent grant included.*
